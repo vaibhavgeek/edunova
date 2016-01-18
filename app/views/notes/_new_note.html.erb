@@ -1,0 +1,259 @@
+<script type="text/javascript">
+var ready;
+ready = function() {
+
+  learnpam = $('#learnparams');
+  learnpam.detach();
+
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+function changetoinsight(){
+  learnpam.detach();
+}
+function changetolnote(){
+  
+  learnpam.appendTo('#coverlearn');
+}
+
+$('#myModal').on('show.bs.modal', function (event) {
+  var j=1;
+  var stringhtml = simplemde.value();
+            var count = (stringhtml.match(/........................................................New_Level................................................/g) || []).length + 1;
+          
+  var modal = $(this);
+  switch(count)
+  {
+    case 1:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 1 }  %>")
+    break;
+
+    case 2:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 2 }  %>")
+    break;
+
+    case 3:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 3 }  %>")
+    break;
+
+    case 4:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 4 }  %>")
+    break;
+
+    case 5:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 5 }  %>")
+    break;
+
+    case 6:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 6 }  %>")
+    break;
+
+    default:
+  }
+ 
+});
+
+
+
+
+
+
+function insert_level(){
+            var stringhtml = simplemde.value();
+            var count = (stringhtml.match(/........................................................New_Level................................................/g) || []).length + 2;
+            if(count <= 6)
+            {
+              simplemde.value( simplemde.value() + '\n........................................................New_Level................................................\n');
+            }
+            else
+            {
+                alert('As of now you can only have 6 levels');
+            }
+
+}
+function customMarkdownParser (plainText) {
+  
+    plainText = simplemde.markdown(plainText);
+    plainText = plainText.replace(/\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_New_Level\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_/g, '<hr />');
+
+    return plainText
+ 
+}
+ 
+
+
+var simplemde = new SimpleMDE({
+ element: document.getElementById("content-slide"),
+  previewRender: function(plainText) {
+        return customMarkdownParser(plainText); // Returns HTML from a custom parser
+    }
+});
+
+
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    
+});
+$(function () {
+  $('[data-toggle="popover"]').popover()
+});
+</script>
+<center><h1>create new note</h1></center>
+
+ <%= form_for @note  do |naw| %>
+         
+<div style="padding-left:15px; padding-right:15px;" class="row">
+<% if @note.errors.any? %>
+    <div id="error_explanation" class="alert alert-error" >
+      <h4>
+       <%=  pluralize(@note.errors.count, "error")  %> has been incurred
+        
+      </h4>
+      <ul>
+        <% @note.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+             Title
+        <%= naw.text_field :name ,:class => "form-control"  %>
+         Note from author <br>
+    <%= naw.text_area :note_from_author , :class => "form-control" , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell users wether the note requires any prerequisites and what is purpose for creating this note." %>
+              
+   <br/> Type of note : 
+<center>
+   <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-default active">
+      <%= naw.radio_button :description, "insight" , :checked => true, :id=>"first", :style=>"display:none;" , :onchange => 'changetoinsight()' %>
+
+    <input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fa fa-bolt"></i>
+  Insight Note
+  </label>
+  <label class="btn btn-default">
+     <%= naw.radio_button :description, "learning", :id=>"first", :style=>"display:none;" , :onchange =>'changetolnote()' %>
+    <input type="radio" name="options" id="option2" autocomplete="off">  
+    <i class="glyphicon glyphicon-list-alt"> </i> Learning Note
+  </label>
+  <button class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" data-content="<b><i>Insight Note: </i></b><br/> These notes are simple ideas or exciting insights you want to share. You cannot create questions and neither the game is embedded. <br/> <br/> <b><i> Learning Note: </i> </b> <br/> These notes help you learn something properly. They have embedded questions to clear your concepts regarding the topic. ">
+     
+    <i class="fa fa-question-circle"></i>
+
+  </button>
+</div></center> <br/>
+    
+              Labels <br>
+
+    <%= naw.text_field :prereq , :class => "form-control" ,  :rows => "7" , :id => 'prerequisites' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell the branch, this note belongs to. example maths, programming, history etc " %><br>
+            Content
+<br/>
+<center>
+    
+</div>
+                       
+
+    </div> </center>
+
+<br/>
+
+<script type="text/javascript">
+var engine = new Bloodhound({
+  
+  datumTokenizer: function(d) {
+    return Bloodhound.tokenizers.obj.whitespace(d.value);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+   remote: {
+    url: '/profiles/intrests/%QUERY.json',
+     filter: function (engine) {
+            // Map the remote source JSON array to a JavaScript object array
+            return $.map(engine, function (intrest) {
+                return {
+                    value: intrest.value
+                };
+            });
+        }
+  }
+
+});
+
+engine.initialize();
+$('#prerequisites').tokenfield({
+  typeahead: [null, { displayKey: 'value', source: engine.ttAdapter() }]
+});
+
+$('#prerequisites').on('tokenfield:createtoken', function (event) {
+    var existingTokens = $(this).tokenfield('getTokens');
+    $.each(existingTokens, function(index, token) {
+        if (token.value === event.attrs.value)
+            event.preventDefault();
+    });
+});
+</script>
+
+    <div id="coverlearn">  
+     <div id="learnparams"> 
+ 
+  <div class="btn-group pull-right"  role="group" aria-label="...">
+     
+
+  <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default" onclick="numberlevels()"><span class="fa fa-fw"><strong>Q</strong></span>
+ Insert Quiz</button>
+  <button type="button" onclick="insert_level()" class="btn btn-default"><span class="fa fa-minus"> </span> New Level</button>
+</div>
+<br/><br/>
+</div>
+</div>
+    <%= naw.text_area :file, :id=>'content-slide' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "Write a note. A good note has following properites. <br/> <ul> <li> Make it concise and clear </li> <li> Think from learner's point of view </li> <li> Tell the application of what you are teaching </li> </ul> "  %>
+       
+    <br/>
+
+        <%= naw.submit "Create" , {:class => 'btn btn-primary btn-lg pull-right'} %>
+
+  <% end %>
+ </div>
+ <%= form_for new_note_question_path(:note_id => 26)  do |f| %>
+
+<div class="row"> 
+
+  <h4> Question 1 </h4>
+<div class="col-md-6"> 
+<%= f.text_field :question_text , :class => 'form-control' , :placeholder => 'Question Title' %> <br/> 
+Enter Options :- (Check one with the correct answer) <br/>
+ <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
+<%= f.text_field :answer %>
+  <br/>
+   <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
+<%= f.text_field :answer %>
+  <br/>
+   <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
+  <%= f.text_field :answer %>
+  <br/>
+  <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
+
+<%= f.text_field :answer %>
+
+</div>
+<div class="col-md-6"> 
+<%= f.text_area :answer , :class => 'form-control' , :placeholder => 'Enter description of the question' %> <br/> 
+ <%= f.text_area :solution , :class => "form-control" ,  :rows => "4"  , :placeholder => 'Explain your solution' %>
+
+
+</div>
+</div>
+<% end %>
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div id="loadquestion" class="modal-content">
+      
+
+
+    </div>
+  </div>
+</div>

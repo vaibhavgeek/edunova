@@ -1,0 +1,2 @@
+$('.unreadnotif').removeClass('unreadnotif');
+$('#unread_count').html('<%= Notification.where(:to_id => current_user.id , :read => 0).count %>');

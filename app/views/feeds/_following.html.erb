@@ -1,0 +1,53 @@
+<div class="row">
+	<% if @allfollowing.count > 1 %>	
+		<center> <h3> people you are following   </h3></center>
+	<% end %>
+<% @allfollowing.each do |fol| %> 
+			<% if fol.follower.id != current_user.id %>
+					<div class="col-md-4">
+					<%= link_to '@'+fol.follower.username , profile_path(fol.follower) %> 
+					<b><%= fol.follower.name %></b>	<br/>
+					<table>
+					<tr>
+					<td>
+						<%= attachment_image_tag(fol.follower, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
+
+					</td>
+					<td style="padding-left:10px;" valign="top">
+					<% if fol.follower.dob != nil %>
+ 					<b> age: </b> <%=
+  					birthday=fol.follower.dob.to_date
+  					now = Time.now.utc.to_date
+ 			 		now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0) %>
+ 			  		 <br/>
+ 		 			<% end %> 
+ 
+					<% if fol.follower.gender != ''  and fol.follower.gender != nil %>
+					<b> gender: </b>
+ 					<%=fol.follower.gender %> <br/>
+ 					<% end %>
+
+ 					<% if fol.follower.intrested_in != '' and fol.follower.intrested_in != nil %>
+ 					<b>intrested_in: </b>
+					<%= fol.follower.intrested_in %>
+					<% end %>
+	</td>
+</tr>
+</table>
+	<center>
+		<div id="<%= fol.follower.id %>">
+		<%= button_to "unfollow" , destroy_follow_user_feed_path(fol.follower)   , {class: 'btn btn-danger' ,:method => :put , :id => 'unfollowi' , remote: true} %>
+	   </div>
+	</center>
+
+ </div>
+<% end %>
+
+
+<% end %>
+
+</div>
+
+<% if @allfollowing.count <= 1 %> 
+<h3>you are following no one right now. </h3>
+<% end %>	

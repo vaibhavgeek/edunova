@@ -1,0 +1,39 @@
+
+<div class="list-group">
+ 
+
+
+
+
+<% @notes_filter.each do |note| %>
+ <a style="cursor:pointer;" class="list-group-item" type="button" data-toggle="collapse" data-target="#<%= note.id %>" aria-expanded="false" aria-controls="collapseExample">
+    <h4 class="list-group-item-heading"><%= note.name %></h4>
+    <p class="list-group-item-text">
+    	 by <b> @<%= note.user.username %> </b> <span class="pull-right"> <span class="badge"><%= note.get_upvotes.size %> votes </span>
+
+<span class="badge"><%= note.comments.count %> 
+    	  posts </span> </span>
+
+
+    </p>
+  </a>
+
+<div class="collapse " id="<%= note.id %>">
+   <% if !note.prereq || note.prereq != '' %>
+lables: <% labelss = note.prereq.split(",") %>
+<% labelss.each do |la| %>
+<span class="label label-primary"> <%= la.strip %>  </span>&nbsp;
+<% end %>
+ <br/>
+   <% end %>
+<%= note.note_from_author %> <br/>
+<center><%= link_to note_path(note) , :class => 'btn btn-success' do %> 
+<span class="glyphicon glyphicon-play-circle"></span>
+ play note <% end %> </center>
+
+  
+</div>
+<% end %>
+<%= js_will_paginate @notes_filter %>  
+
+</div>

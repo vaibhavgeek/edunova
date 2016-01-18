@@ -1,0 +1,8 @@
+
+<% if @passion.errors.any? %>
+<ul>
+  <% @passion.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>

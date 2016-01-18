@@ -1,0 +1,53 @@
+	<% if @allfollowing.count > 1 %>	
+		<center> <h3> people @<%= @user.username %> is following   </h3></center>
+	<% end %>
+	<% @allfollowing.in_groups_of(3, false).each do |group| %>
+  <div class='row'>
+<br/>
+		
+		
+    <% group.each do |fol| %>
+          <div class='col-md-4'>
+
+			<% if fol.follower.id != @user.id %>
+				
+					<%= link_to '@'+fol.follower.username , profile_path(fol.follower) %> <br/>
+					<b><%= fol.follower.name %></b>	<br/>
+					<table>
+					<tr>
+					<td>
+						<%= attachment_image_tag(fol.follower, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
+
+					</td>
+					<td style="padding-left:10px;" valign="top">
+					<% if fol.follower.dob != nil %>
+ 					<b> age: </b> <%=
+  					birthday=fol.follower.dob.to_date
+  					now = Time.now.utc.to_date
+ 			 		now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0) %>
+ 			  		 <br/>
+ 		 			<% end %> 
+ 
+					<% if fol.follower.gender != ''  and fol.follower.gender != nil %>
+					<b> gender: </b>
+ 					<%=fol.follower.gender %> <br/>
+ 					<% end %>
+
+ 					<% if fol.follower.intrested_in != '' and fol.follower.intrested_in != nil %>
+ 					<b>intrested_in: </b>
+					<%= fol.follower.intrested_in %>
+					<% end %>
+	</td>
+</tr>
+</table>
+	
+<% end %>
+</div>
+	
+<% end %>
+
+</div>
+<% end %>
+<% if @allfollowing.count <= 1 %> 
+<center><h3>@<%= @user.username %> is following no one. </h3></center>
+<% end %>	

@@ -1,0 +1,111 @@
+<div id ="editprodiv">
+<%= form_for @profile,:url => profile_path(@profile) , :authenticity_token => true , :html => { :multipart => true } do |f| %>
+ 
+  <% if @profile.errors.any? %>
+    <div id="error_explanation" class="alert alert-error" >
+      <h4>
+       <%=  pluralize(@profile.errors.count, "error")  %> has been incurred
+        
+      </h4>
+      <ul>
+        <% @profile.errors.full_messages.each do |msg| %>
+         <li><% if msg == "Username is invalid" %>
+          <%= "Username must consist of only letters and no spaces are allowed." %>
+          <% else %>
+          <%= msg %>
+        <% end %>
+         </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+   <center><h1>edit your profile</h1></center> 
+
+    <div class="row eq-height">
+        <div class="col-xs-3 row-it-equal">
+           <%= attachment_image_tag(@profile, :image, :fill, 200, 170 ,fallback: "deafult-pic.png" , :class => "img-rounded img-responsive")  %>
+           <%= f.label :image, "profile image" %>
+  <%= f.attachment_field :image %>
+
+     <%= f.check_box  :remove_image %>
+  <%= f.label :remove_profile_image %> 
+
+        </div>
+         <div class="col-xs-4 row-it-equal" style="padding-left:8px">
+           <%= f.label :name %>
+    <%= f.text_field :name , :class => 'form-control' %>
+  
+  
+    <%= f.label :username %>
+    <%= f.text_field :username , :class => 'form-control' %>
+  
+ 
+
+
+
+  
+  
+  <%= f.label :dob, 'date of birth' %> <br/>
+ <%= f.date_select :dob, :start_year=>1915,:end_year=>2005 , :class =>'date-select' , :class =>'form-control' %>
+ <br/>
+    <%= f.label :gender %><br/>
+
+    <%= f.select :gender, options_for_select(%w[male female other], current_user.gender) %>
+
+          </div>
+         <div class="col-xs-5 row-it-equal">
+           <%= f.label :intrested_in %>
+    <br/>
+    <%= f.text_field :intrested_in ,:class => 'form-control tt-input' ,:id => 'typeahead' , :type => 'text' %>
+        
+
+          </div>
+
+
+         
+ 
+
+   
+   
+ 
+</div>
+    <%= f.submit  'Save Profile' ,:class => 'btn btn-primary btn-large pull-right' , id: 'click' %>
+<% end %>
+
+</div>
+<script type="text/javascript">
+var engine = new Bloodhound({
+  
+  datumTokenizer: function(d) {
+    return Bloodhound.tokenizers.obj.whitespace(d.value);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+   remote: {
+    url: '../profiles/intrests/%QUERY.json',
+     filter: function (engine) {
+            // Map the remote source JSON array to a JavaScript object array
+            return $.map(engine, function (intrest) {
+                return {
+                    value: intrest.value
+                };
+            });
+        }
+  }
+
+});
+
+engine.initialize();
+$('#typeahead').tokenfield({
+  typeahead: [null, { displayKey: 'value', source: engine.ttAdapter() }]
+});
+
+$('#typeahead').on('tokenfield:createtoken', function (event) {
+    var existingTokens = $(this).tokenfield('getTokens');
+    $.each(existingTokens, function(index, token) {
+        if (token.value === event.attrs.value)
+            event.preventDefault();
+    });
+});
+</script>

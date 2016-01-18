@@ -1,0 +1,118 @@
+<script type="text/javascript">
+
+function exampleAction(){
+            var stringhtml = simplemde.value();
+            var count = (stringhtml.match(/\*\*\*/g) || []).length + 2;
+            if(count <= 6)
+            {
+              simplemde.value( simplemde.value() + '*** \n');
+            }
+            else
+            {
+                alert('As of now you can only have 6 levels');
+            }
+}
+ 
+
+var simplemde = new SimpleMDE({ element: document.getElementById("content-slide") ,  toolbar: ["bold", "italic" , "heading" , "|", "link" , "image" , "|" , "preview" , "side-by-side" , "fullscreen" , "guide" , {
+            name: "new_level",
+            action: exampleAction,
+            className: "fa fa-minus",
+            title: "New Level",
+        } ]});
+
+
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    
+});
+
+</script>
+
+
+<div class="panel-body panel">
+
+ <%= form_for @note  do |naw| %>
+
+<center><h1>edit note: <%= @note.name %></h1></center>
+
+
+         
+<div style="padding-left:15px; padding-right:15px;" class="row">
+<% if @note.errors.any? %>
+    <div id="error_explanation" class="alert alert-error" >
+      <h4>
+       <%=  pluralize(@note.errors.count, "error")  %> has been incurred
+        
+      </h4>
+      <ul>
+        <% @note.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+             Title
+        <%= naw.text_field :name ,:class => "form-control"  %>
+         Note from author <br>
+    <%= naw.text_area :note_from_author , :class => "form-control" %>
+              Labels <br>
+
+    <%= naw.text_field :prereq , :class => "form-control" ,  :rows => "7" , :id => 'prerequisites' %><br>
+            Content
+
+   
+<br/><br/>
+<script type="text/javascript">
+var engine = new Bloodhound({
+  
+  datumTokenizer: function(d) {
+    return Bloodhound.tokenizers.obj.whitespace(d.value);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+   remote: {
+    url: '/profiles/intrests/%QUERY.json',
+     filter: function (engine) {
+            // Map the remote source JSON array to a JavaScript object array
+            return $.map(engine, function (intrest) {
+                return {
+                    value: intrest.value
+                };
+            });
+        }
+  }
+
+});
+
+engine.initialize();
+$('#prerequisites').tokenfield({
+  typeahead: [null, { displayKey: 'value', source: engine.ttAdapter() }]
+});
+
+$('#prerequisites').on('tokenfield:createtoken', function (event) {
+    var existingTokens = $(this).tokenfield('getTokens');
+    $.each(existingTokens, function(index, token) {
+        if (token.value === event.attrs.value)
+            event.preventDefault();
+    });
+});
+</script>
+
+ </div>
+        
+         
+       
+      
+    <%= naw.text_area :file, :id=>'content-slide'  %>
+    <br/>
+
+        <%= naw.submit "Update Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
+
+  <% end %>
+
+
+         

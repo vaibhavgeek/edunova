@@ -1,0 +1,66 @@
+
+<div id="new-edit">
+
+  <div class="row eq-height">
+        <div class="col-xs-3">
+ <%= attachment_image_tag(@user, :image, :fill, 200, 170 ,fallback: "deafult-pic.png" , :class => "img-rounded img-responsive")  %>
+</div>
+ <div class="col-xs-4 row-it-equal" style="padding-left:8px">
+    <h3 style="margin:0px; padding:0px;">
+                        <% if @user.username != '' and @user.username != nil%>
+                        @<%= @user.username %>
+                        <% end %>
+                        </h3>
+
+
+                        <% if @user.name == nil && current_user == @user %>
+                         <button class="btn btn-large" type="button">complete profile</button>
+                         <% else %>
+
+                         <p style="margin:0px; padding:0px;" class="lead">  
+                         <%=@user.name %>
+                         </br>
+                         <% if @user.dob != nil %>
+                         <% birthday=@user.dob.to_date
+                          now = Time.now.utc.to_date
+                          age = now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0) %>
+                            <% if age != 100 %>
+                            <%=age %>
+                            <% end %>
+                          <% end %>
+                        <% if @user.gender != ''  and @user.gender != nil %>
+                         <%=@user.gender %>
+                        <% end %>
+                        </p>
+
+                        <p style="margin:0px; padding:0px;" class="lead">
+                        created: <span style="font-size:19px;  color:green"> <%= Note.where(:user_id => @user.id).count %>  </span> notes
+                          </p>
+
+                            
+
+                            
+                           
+
+
+                        <%end%>
+                      </div>
+        <div class="col-xs-5 row-it-equal">
+<% if @user.intrested_in != ''  and @user.intrested_in != nil %>
+     <br/>
+                                <p style="margin:0px; padding:0px;" class="lead">intrested in :<%=  %>
+                        </p>
+                        <% @alllabels =  @user.intrested_in.split(",") %>
+                        <% @alllabels.each do |lab| %>
+                              <span class="badge intrest_in"> <%= lab %>  </span>
+                              &nbsp;&nbsp;
+
+                        <% end %>
+
+                       
+                        <% end %>
+        </div>
+   </div>
+
+		</div>
+

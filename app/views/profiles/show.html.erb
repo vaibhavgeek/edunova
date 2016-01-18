@@ -1,0 +1,97 @@
+              <div class="row no-gutter eq-height">
+
+
+<div id="toappend">
+	<div class="row eq-height panel">
+        <div class="col-xs-9 row-it-equal">
+	<div id="uppar">
+	<%= render 'profile' %>
+	</div>
+        </div>
+        <div class="col-xs-3 row-it-equal border-side-profile">
+<% if current_user == @user %>
+	<%= link_to "edit my profile" ,edit_profile_path(current_user) ,id: 'edit-link' , remote: true , :class => "btn btn-success btn-block"  %>
+	<div class="stackpoints">
+	 <center> 245 </center>
+	</div><center><span class="low">edunova credits </span></center>
+
+	<br/>
+
+	<% else %>
+	<div id="appendfl">
+		<% if @boolrel == 1 %>
+		 <%= render 'destroy_follow_user' %>
+		<% elsif @boolrel == 0 %>
+		<%= render 'follow_user' %>
+		<% end %>
+	</div>
+	<div class="stackpoints">
+	 <center> 245 </center>
+	</div><center><span class="low">edunova credits </span></center>
+
+	<br/>
+	<% end %>
+
+       
+      </div>
+</div>
+	
+		</div>
+		
+
+
+
+<div class="row eq-height panel">
+
+
+
+
+ <div class="col-xs-9 row-it-equal">
+
+<div id="section_profile" class="panel-default main-feed-profile">
+	<%= render("all_activity") %>
+</div>
+</div>
+
+
+        <div id="profile" class="col-xs-3 row-it-equal border-side-profile">
+
+
+
+ <div class="list-group">
+  <% if current_user %>
+  <%= link_to all_activity_profile_path(@user) , :class => 'list-group-item active' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , remote: true , :id => 'new-note' do %>
+  <span class="glyphicon glyphicon-th-list"> </span> 
+All Activity
+  <% end %>
+
+
+<%= link_to  following_profile_path(@user) , :class => 'list-group-item' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , remote: true , :id => 'my-notes'  do %>
+<span class="glyphicon glyphicon-arrow-right"></span>
+Following
+    <span id="following_count" class="badge"><%= Relationship.where(:follower_id => @user.id).count - 1 %></span>
+<% end %>
+
+<%= link_to  followers_profile_path(@user) , :class => 'list-group-item' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , remote: true , :id => 'my-notes'  do %>
+<span class="glyphicon glyphicon-arrow-left"></span>
+Followers   <span id="follower_count" class="badge">
+<%= Relationship.where(:following_id => @user.id).count - 1 %>
+</span>
+
+<% end %>
+    <%= link_to  notes_profile_path(@user) , :class => 'list-group-item' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , remote: true , :id => 'my-notes'  do %>
+<span class="glyphicon glyphicon-file"> </span>
+Notes 
+   <span class="badge" id="note_count"><%= Note.where(:user_id => @user.id).count %></span>
+<% end %>
+
+   
+            
+<% end %>
+          
+</div>
+</div>
+
+</div>
+
+</div>

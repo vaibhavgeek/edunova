@@ -1,0 +1,48 @@
+<div class="row">
+
+<div class="col-sm-1">
+<div class="thumbnail">
+<%= link_to profile_path(comment.user) do %>
+ <%= attachment_image_tag(comment.user, :image, :fill, 64, 64 ,fallback: "deafult-pic-64.png") %>
+ <% end %>
+</div><!-- /thumbnail -->
+</div><!-- /col-sm-1 -->
+
+<div class="col-sm-11">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong>@<%= comment.user.username %></strong> ( <%= comment.user.name %> ) <span class="text-muted">posted <%= time_ago_in_words(comment.created_at) %> ago</span> 
+
+ <% if current_user && current_user.id == comment.user_id %>
+                    <%= link_to raw(" <span aria-hidden='true'>×</span>"), 
+          note_comment_path(note_id: comment.note_id, id: comment.id), 
+           class: "pull-right close" , :method => :delete , data: {confirm: "Do you want to delete comment?"} , remote: true %>
+                     <% end %>
+                     <% if comment.user_id == Note.find(params[:note_id]).user_id %>
+
+<span class="label label-default pull-right" style="font-size:13px;">Note Creator</span>
+
+<% end %> 
+</div>
+<div class="panel-body">
+  <%= markdown(comment.comment.to_s) %> </div><!-- /panel-body -->
+</div><!-- /panel panel-default -->
+</div><!-- /col-sm-5 -->
+</div><!-- /row -->
+
+
+
+
+               
+
+
+  
+  
+  
+
+          
+
+                  	
+                    
+
+

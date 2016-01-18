@@ -1,0 +1,120 @@
+ <% if @notes != nil %> 
+ <center> <h1> search results</h1></center>
+<table class="table">
+
+<% for note in @notes %>
+ <tr>
+<td>
+	<div class="notes"> 
+    <%= link_to note_path(note) do%>
+    <h3><%= note.name %></h3>
+	<% end %> 
+	 by <b> @<%= note.user.username %> </b>
+	 <span class="pull-right"> <span class="badge"><%= note.get_upvotes.size %> votes </span>
+	 
+<span class="badge"><%= note.comments.count %> 
+    	  posts </span> </span>
+	 <br/>
+	<%= note.note_from_author %> 
+
+
+  
+	
+	
+	
+	</div>
+
+	<td>
+ </tr>
+<% end %>
+</table>
+
+<center>
+<%= will_paginate @notes , :renderer => WillPaginate::ActionView::LinkRenderer %>  
+</center>
+
+<% else %>
+
+<% if current_user %>
+
+ <% if @mynotes.count > 0 %>
+<center> <h1> my notes </h1></center>
+<table class="table">
+
+<% for note in @mynotes %>
+ <tr>
+<td>
+	<div class="notesa"> 
+    <%= link_to note_path(note)  do%>
+    <h3><%= note.name %></h3>
+    
+	<% end %>
+	<p class="list-group-item-text">
+    	 <span class="pull-right"> <span class="badge"><%= note.get_upvotes.size %> votes </span>
+
+<span class="badge"><%= note.comments.count %> 
+    	  posts </span> </span>
+
+
+    </p> 
+	<%= note.note_from_author %> 
+ <br>   
+	<%= link_to "view" , note_path(note)  , :class => 'action' %> &nbsp;
+	<%= link_to "edit" , edit_note_path(note) , remote: true , :class => 'action' %> &nbsp;
+	
+	    <%= link_to "delete note", 
+          note_path(note), 
+           class: "action" , :method => :delete , data: {confirm: "Do you want to delete note?"} , remote: true %>
+	</div>
+
+	<td>
+ </tr>
+<% end %>
+</table>
+<%= will_paginate @mynotes , :renderer => WillPaginate::ActionView::LinkRenderer %> 
+<% else %>
+<div class="well" role="alert">
+   
+<center><h3>It seems you have not created any note! Get Going!!</h3></center> <br/>
+<h4> <b><i> Why create a note? </b> </i></h4>
+<h5>
+	Creating notes help you engage with like minded people who are passionate about things same as you are. We help you connect to our extensive network and make sure you get recognized for what you create. <br/><br/>
+    Creating a note is also an amazing learning experience. After all teaching something as clearly as possible is the best way to learn. 
+
+<br/><br/>	
+	You also gain edunova credits. 
+</h5>
+<br/><br/>
+<h4> <b><i> What are edunova credits? </b> </i></h4>
+<h5>
+	Edunova credits can be understood as learning currency on edunova. As you make your mark in the learning community and gain more credits you will get to win exciting prizes and grab amazing oppurtunities as they come. 
+<br/> <br/>
+You can check out the current prizes and oppurtunities over here : <br/> 
+<a href="http://vaibhavgeek.blogspot.in/p/edunova-offers.html" target="_blank"> http://vaibhavgeek.blogspot.in/p/edunova-offers.html </a>
+
+</h5>
+
+<br/><br/>
+<h4> <b><i> I can't figure how to get started with edunova? </b> </i></h4>
+<h5>
+	No worries. We are always happy to help. There are some simple ways you can chat with us and let us help you out. <br/> <br/>
+	 <a href="https://www.facebook.com/edunova.io/" target="_blank"> Chat with edunova on facebook </a>
+
+	 <br/><br/>
+	Whatsapp us on +91 9167355066
+
+</h5>
+
+
+ </div>
+<% end %>
+<% end %>
+<% if !current_user %>
+
+ <center><h1>
+
+  	<%= link_to "sign up" , new_user_registration_path %> to create and share notes with your friends. </h1>
+<h2>It's free and always will be </h2>
+</center>
+<% end %>
+<% end %>

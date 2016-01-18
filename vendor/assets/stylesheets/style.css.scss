@@ -1,0 +1,211 @@
+
+.collapseact
+{
+    border-left: 1px solid  #003366;
+     border-right: 1px solid #003366;
+      border-bottom: 1px solid #003366;
+    padding: 5px;
+}
+
+body.home
+{
+    background-image: image-url("backhome.jpg");    
+}
+body
+{
+    background-image: image-url("background2.jpg");    
+}
+
+.well h5 {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  font-family: 'Glyphicons Halflings';
+  src: url(asset_path('glyphicons-halflings-regular.eot'));
+  src: url(asset_path('glyphicons-halflings-regular.eot?#iefix')) format('embedded-opentype'), url(asset_path('glyphicons-halflings-regular.woff')) format('woff'), url(asset_path('glyphicons-halflings-regular.ttf')) format('truetype'), url(asset_path('glyphicons-halflings-regular.svg#glyphicons_halflingsregular')) format('svg');
+}
+
+.well .CodeMirror,
+.well .CodeMirror-scroll {
+        min-height: 100px !important;
+
+}
+.note_name
+{
+  color:#003366;
+}
+.thumbnail {
+    padding:0px;
+}
+.panel {
+  position:relative;
+}
+.panel>.panel-heading:after,.panel>.panel-heading:before{
+  position:absolute;
+  top:11px;left:-16px;
+  right:100%;
+  width:0;
+  height:0;
+  display:block;
+  content:" ";
+  border-color:transparent;
+  border-style:solid solid outset;
+  pointer-events:none;
+}
+.panel>.panel-heading:after{
+  border-width:7px;
+  border-right-color:#f7f7f7;
+  margin-top:1px;
+  margin-left:2px;
+}
+.panel>.panel-heading:before{
+  border-right-color:#ddd;
+  border-width:8px;
+}
+
+hr
+{
+   border: none;
+    height: 2px;
+    /* Set the hr color */
+    color: brown; /* old IE */
+    background-color: brown; /* Modern Browsers */
+}
+
+@media(min-width:768px){
+      
+.list-group a.list-group-item
+{
+
+}
+
+#profile .list-group a.active
+{
+  border-left: 5px solid #003366 !important;
+  border-right: none !important;
+
+
+}
+
+.list-group a.active
+{
+  border-right: 10px solid #003366 !important;
+   
+
+}
+
+    .navbar-nav li a
+    {
+         
+
+    }
+     .navbar-nav li.active a
+     {
+          
+
+     }
+     
+}
+
+
+
+#introduction
+{
+  height: 100% !important;
+  height: 600px;
+  min-height: 300px;
+}
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
+
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+  .space-right {
+padding-right: 100px;  
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+
+.modal .modal-body {
+    max-height: 500px;
+    overflow-y: auto;
+}
+ul {
+	padding:0px;
+}
+hr.style {
+    padding: 0;
+    border: none;
+   
+    background-color: #003366;
+    text-align: center;
+}
+.head
+{
+    font-family: Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    font-weight: 300;
+    margin-top: 8px;
+    font-size:35px;
+    color:#003366;
+}
+.style
+{
+	font-family: Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    font-weight: 300;
+    margin-top: 8px;
+    font-size:22px;
+}
+
+#editprodiv
+{
+    padding-right: 15px;
+}
+#game
+{
+    position: absolute;
+    z-index:1;
+    left:300px;
+    background-color:white;
+    padding-left:10px;
+    padding-right:10px;
+    
+}
+
+/* This is comments design */

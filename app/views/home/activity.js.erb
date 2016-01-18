@@ -1,0 +1,6 @@
+<% if params[:via_link] == "true" %>
+$("#filter_notes").find("input").val("");
+$(".token").remove();
+
+<% end %>
+$('#activity_edu').html("<%= j render('edunova_activity') %>");

@@ -1,0 +1,72 @@
+<div class="row">
+	<% if @allfollowers.count > 1 %> <center> <h3> you have  <%=  pluralize(@allfollowers.count - 1, "follower")  %>  </h3></center>
+	<% else %>
+<center> <h4> tips to get more followers   </h4></center>
+  <div class="alert alert-warning" role="alert">
+  	<h4>1.) follow more people on edunova. </h4>
+ <h4>2.) engage in meaningful conversations on a note on edunova. </h4>
+ <h4>3.) create a note on what you are paasionate about. </h4>
+</div>
+
+
+
+<% end %>
+<% @allfollowers.each do |fol| %>
+<% if fol.following.id != current_user.id %>
+<div class="col-md-4">
+<%= link_to '@'+fol.following.username , profile_path(fol.following) %> 
+ <b> <%= fol.following.name %>	</b><br/>
+
+<table>
+<tr>
+<td>
+	<%= attachment_image_tag(fol.following, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
+
+</td>
+<td style="padding-left:10px;" valign="top">
+		<% if fol.following.dob != nil %>
+ 		<b> age: </b> <%=
+  			birthday=fol.following.dob.to_date
+  			now = Time.now.utc.to_date
+ 			 now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0) %>
+ 			   <br/>
+  		<% end %> 
+
+
+  
+		<% if fol.following.gender != ''  and fol.following.gender != nil %>
+		<b> gender: </b>
+ 		<%=fol.following.gender %> <br/>
+ 		<% end %>
+
+ 		<% if fol.following.intrested_in != '' and fol.following.intrested_in != nil %>
+ 			<b>intrested_in: </b>
+			<%= fol.following.intrested_in %>
+		<% end %>
+	</td>
+</tr>
+</table>
+<center>
+	<div id="<%= fol.following.id %>">
+		<% if  Relationship.joins('
+INNER JOIN users
+ON relationships.follower_id = users.id
+WHERE relationships.following_id = '+current_user.id.to_s + ' AND relationships.follower_id = '+ fol.following.id.to_s).count == 1 %>
+           <% if  Relationship.joins('
+INNER JOIN users
+ON relationships.follower_id = users.id
+WHERE relationships.follower_id = '+current_user.id.to_s + ' AND relationships.following_id = '+ fol.following.id.to_s).count == 1 %>
+<%= button_to "unfollow" , destroy_follow_user_feed_path(fol.following)   , {class: 'btn btn-danger' ,:method => :put , :id => 'unfollowi' , remote: true} %>
+           <%else %>
+<%= button_to "follow back" , follow_user_feed_path(fol.following)   , {class: 'btn btn-primary' ,:method => :put , :id => 'followi' , remote: true} %>
+
+           <% end %>
+
+	
+   <% end %>
+   </div>
+</center>
+ </div>
+ <% end %>
+<% end%>
+</div>

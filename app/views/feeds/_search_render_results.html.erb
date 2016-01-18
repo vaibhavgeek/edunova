@@ -1,0 +1,69 @@
+
+<div class="row">
+
+	<% if @peoples.exists? %>
+<% @peoples.each do |per| %> 
+<div class="col-md-4">
+<%= per.name %>	<br/>
+<%= link_to '@'+per.username , profile_path(per) %>
+<table>
+<tr>
+<td>
+	<%= attachment_image_tag(per, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
+
+</td>
+<td style="padding-left:10px;" valign="top">
+		<% if per.dob != nil %>
+ 		<b> age: </b> <%=
+  			birthday=per.dob.to_date
+  			now = Time.now.utc.to_date
+ 			 now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0) %>
+ 			   <br/>
+  		<% end %> 
+
+
+  
+		<% if per.gender != ''  and per.gender != nil %>
+		<b> gender: </b>
+ 		<%=per.gender %> <br/>
+ 		<% end %>
+
+
+ 		<% if per.intrested_in != '' and per.intrested_in != nil %>
+ 			<b>intrested_in: </b>
+			<%= per.intrested_in %>
+		<% end %>
+
+
+	</td>
+</tr>
+</table>
+<center>
+	<% @bool = Relationship.where(:follower_id => current_user.id , :following_id => per.id) %>
+	
+   <% if current_user.id != per.id %>
+        <div id="<%= per.id %>">
+		<% if @bool.count == 1 %>
+        
+
+	    <%= button_to "unfollow" , destroy_follow_user_feed_path(per)   , {class: 'btn btn-danger' ,:method => :put , :id => 'unfollowi' , remote: true} %>
+        
+	    
+
+	    <% elsif @bool.count == 0 %>
+        <%= button_to "follow" ,follow_user_feed_path(per)  , {class: "btn btn-primary" , :method => :put , remote: true } %>
+
+	    <% end %>
+	</div>
+	<% end %>    
+	
+</center>
+
+ </div>
+  <% end %>
+
+<% else %> 
+<center> <b> No results found for these search. </b> </center>
+<% end %>
+</div>
+

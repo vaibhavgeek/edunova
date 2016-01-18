@@ -1,0 +1,5 @@
+$('#editprodiv').remove();
+$('#new-edit').remove();
+$('#edit-link').show();
+$('#toappend').append('<%= j render("profile") %>');
+$('#edit_user_<%= current_user.id %>').submit();

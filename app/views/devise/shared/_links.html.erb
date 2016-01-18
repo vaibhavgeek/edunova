@@ -1,0 +1,32 @@
+
+
+
+
+
+
+<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.omniauthable? %>
+ 
+<center>
+ <%= link_to omniauth_authorize_path(resource_name, 'facebook') , :class => 'btn btn-block btn-social btn-facebook' , :"data-no-turbolink" => 'true' do %>
+        Sign In with facebook <i class="fa fa-facebook"></i>
+   <% end %>
+</center> <br/>
+
+          <center>
+          <%= link_to omniauth_authorize_path(resource_name, 'google_oauth2') , :class => 'btn btn-block btn-social btn-google' , :"data-no-turbolink" => 'true' do %>
+      Sign In with Google <i class="fa fa-google"></i>			  
+       		<% end %>
+      </center>   <br/>     
+
+
+  
+        
+
+
+
+<% end -%>
+

@@ -1,0 +1,44 @@
+ <div class="row no-gutter eq-height">
+<div class="panel panel-default" style="padding-left:15px;">
+
+            <h2>Change Password from old password</h2>
+
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= devise_error_messages! %>
+              <% if @user.provider != 'facebook' and @user.provider != 'google_oauth2' %>  
+
+              
+             <div class="field">
+                <%= f.label :current_password %> <br />
+                <%= f.password_field :current_password, autocomplete: "off" %>
+              </div>
+
+              <div class="field">
+                <%= f.label :new_password %><br />
+                <%= f.password_field :password, autocomplete: "off" %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password_confirmation %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              </div>
+
+             
+
+              <div class="actions">
+                <br/>
+                <%= f.submit "Change Password" , :class => 'btn btn-primary' %>
+              </div>
+            <% end %>
+            <% end %>
+<p class="alert alert-warning">
+If the change your password form displays nothing then please reset your password.
+ </p>
+
+
+            
+                <%= link_to "Back", :back %>
+
+  </div>
+
+</div>

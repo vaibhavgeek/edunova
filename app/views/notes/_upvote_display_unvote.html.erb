@@ -1,0 +1,11 @@
+
+
+
+                <%= link_to unlike_note_path(@note) , method: :put , class: "btn btn-default btn-sm" , :id => 'unlike_note_path' , remote: true do %>
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+
+                
+                Unvote <%= @note.get_upvotes.size %>
+                <% end %>
+
+                

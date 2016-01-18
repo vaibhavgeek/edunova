@@ -1,0 +1,8 @@
+<b><%= number_to_human(User.all.count) %></b>  members <i>signed up</i>. <br/>
+<b><%= number_to_human(Note.all.count) %></b>  notes <i>made</i>. <br/>
+<b><%= number_to_human(Comment.all.count) %></b>  conversations <i>happened</i>. <br/>
+<b><%= number_to_human(Play.all.count) %></b> people <i>played</i> the notes. <br/>
+<center>
+<%= link_to "about us" , home_about_us_path %>
+	</center>
+

@@ -1,0 +1,167 @@
+              <div class="row no-gutter eq-height">
+
+<div class="panel panel-default">
+  <div class="panel-body">
+<% if current_user %>
+<div class="col-sm-5 col-md-5"> 
+  <table style="width: 100%">
+<tr>
+  <td>
+    <h3>notifications  
+ <span id="unread_count" class="badge"><%= @unread_count %></span>
+    </h3>
+  </td>
+  <td align="right" valign="bottom">
+<%= link_to "mark as read" , home_mark_as_read_path , :method => :put ,:remote => 'true' %>  </td>
+</tr>
+</table>
+<div class="list-group">
+  <% if @notifications.count == 0 %>
+  <div class="alert alert-success" role="alert">
+hey! no notifications right now. 
+</div>
+<div class="alert alert-warning" role="alert">
+ new to edunova.io? learn how to use it.
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">.
+<button type="button" id="tour-go" class="btn btn-primary btn-lg btn-block">Start Tour</button> 
+    </div>
+</div>
+
+  </div>
+
+  <% end %>
+  <div id="heretoappendnoti">
+<%= render ("notifications") %>
+</div>
+    </div>
+
+  </div>
+
+<div class="col-sm-7 col-md-7" id="introduction"> 
+  <h3>what's edunova upto.</h3>
+
+<%= form_tag home_edunova_activity_path, :method => 'get', :id => "filter_notes" , :remote => true do %>
+search better:
+   <div class="input-group">
+                        <%= text_field_tag :search, params[:filter] , :placeholder =>'filter notes from labels' , :class =>'form-control' ,:id => "filtlabel"  %>
+                        <span class="input-group-btn">
+
+                          <%= button_tag(type: "submit", class: "btn btn-default") do %>
+      <span class="glyphicon glyphicon-search"></span>
+<% end %>
+                           
+                               
+                        </span>
+                    </div>
+                    <% end %>
+
+<script type="text/javascript">
+var engine = new Bloodhound({
+  
+  datumTokenizer: function(d) {
+    return Bloodhound.tokenizers.obj.whitespace(d.value);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+   remote: {
+    url: '/profiles/intrests/%QUERY.json',
+     filter: function (engine) {
+            // Map the remote source JSON array to a JavaScript object array
+            return $.map(engine, function (intrest) {
+                return {
+                    value: intrest.value
+                };
+            });
+        }
+  }
+
+});
+
+engine.initialize();
+$('#filtlabel').tokenfield({
+  typeahead: [null, { displayKey: 'value', source: engine.ttAdapter() }]
+});
+
+$('#filtlabel').on('tokenfield:createtoken', function (event) {
+    var existingTokens = $(this).tokenfield('getTokens');
+    $.each(existingTokens, function(index, token) {
+        if (token.value === event.attrs.value)
+            event.preventDefault();
+    });
+});
+</script>
+<span style="font-size:19px;">top labels: </span>
+<%= link_to '#all' , home_edunova_activity_path(:search => '' , :via_link => 'true') , :style => 'font-size:17px' , remote: true %>
+<% @labels.each do |lab| %> 
+<%= link_to '#' + lab.value.strip , home_edunova_activity_path(:search => lab.value.strip , :via_link => "true" ), :style => 'font-size:17px' , remote: true  %>
+<% end %>
+<div id="activity_edu">
+<%= render "edunova_activity" %>
+</div>
+</div>
+
+
+
+<% else %>
+ 
+<div class="col-sm-6 col-md-5 col-md-offset-1 border-right space-right"> 
+
+<br/><br/><br/>
+<div class="well">
+<%= render "devise/shared/links" %>
+<center>
+<%= link_to "Sign Up Via Email", new_user_registration_path ,:class => 'btn btn-block btn-success'  %>
+</center>
+
+<% if alert %>
+<br/>
+<p class="alert alert-danger">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+
+  <%= alert %></p>
+<% end %>
+<h3>please sign in</h3>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true , :class =>'form-control'%>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "off" ,  :class =>'form-control' %>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end -%>
+
+  <div class="actions">
+    <%= f.submit "Log in" ,  :class =>'btn btn-primary pull-right' %>
+  </div>
+<% end %>
+<br/><br/>
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name) , :class => "pull-right" %><br />
+<% end -%>
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) , :class => 'pull-right' %><br />
+<% end -%>
+</div>
+<br/><br/><br/><br/><br/><br/>
+      
+</div>
+  <div class="col-sm-6 col-md-6 "> 
+    <blockquote> platform for social and game based learning  </blockquote>
+                      <center><%= image_tag("brain_buzzer.jpg" ,:height => 450  ) %></center>
+
+</div>
+<% end %>
+</div>
+
+</div>
+</div>

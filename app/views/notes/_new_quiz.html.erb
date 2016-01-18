@@ -1,0 +1,25 @@
+  
+
+      <div class="modal-body">
+
+  <%= form_tag notes_add_quiz_path, :method => :get , :id => 'add_the_quiz' , :remote => "true" do %>
+    <center><%= select_tag :county, options_for_select(1..locals[:level_count] , locals[:level_count])  , :onchange => '$("#add_the_quiz").submit();' , :class => 'selectpicker' , :id => 'select_level'  %></center>
+
+
+<% end %>
+
+      <div id="loadquiz"> 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+</div>  
+
+     </div> 
+     
+      <div class="modal-footer">
+
+
+      </div>
+<script type="text/javascript">
+  $('.selectpicker').selectpicker();
+
+</script>

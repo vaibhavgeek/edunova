@@ -1,0 +1,25 @@
+<% if Note.where(:user_id => @user.id ).count != 0 %>
+<center>
+
+	<%= form_tag profile_path(@user), :method => :get , :id => 'look_note' , :remote => "true" do %>
+
+<%= collection_select :note, :name, Note.where(:user_id => @user.id ), :id,  :name, { prompt: "Please Select Note" } , { :class => "selectpicker" , :onchange => '$("#look_note").submit();'  }  %>
+<% end %>
+</center>
+<% end %>
+<div id="notesdisplay">
+	<% if Note.where(:user_id => @user.id ).count == 0 %>
+
+	<h3> <center> @<%= @user.username %> has not created a note yet.</center> </h3>
+	<% end %>
+</div>
+
+<% @allnotes.each do |note| %>
+<br/><br/><br/>
+
+	<% end %>
+
+
+
+
+

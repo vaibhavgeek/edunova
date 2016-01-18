@@ -1,0 +1,60 @@
+<% if current_user %>
+<% if current_user.awesome != nil || current_user.awesome == 1 %>
+<center><h3> What do you believe in? </h3></center>
+<p>Tell people what is that you are passionate about and why are you passionate about that particular thing. </p> 
+<%= form_for @passion , :as => :passion , :url => notes_add_passion_path   do |f| %>
+
+<div class="row">
+<div class="col-md-7">
+<%= f.text_field :video_url , :class => 'form-control' , :placeholder => 'Submit Youtube URL' %> 
+</div> <div class="col-md-5">
+<%= f.text_field :label ,  :class => "typeahead form-control"   %>
+<%= f.submit "Submit" , :class => 'btn btn-success' %> 
+</div> </div>
+<% end %>
+<div class="alert alert-info"> Please enter youtube URLS only. People who are submitting unrelated videos or copyright material will be strictly dealt with.   </div>  
+<% else %>
+<center><h3> Discover Yourself </h3></center>
+<% end %> <% end %>
+<div class="row">
+<% @allpassion.each do |passion| %>
+<% yid = passion.video_url.to_s[/v=([^&]+)/, 1] %>
+<div class="col-md-6">
+	<span style="font-size:18px;">#<%= passion.label %></span>
+by	<%= link_to  "@"+passion.user.username , profile_path(passion.user) %>
+
+<div class="embed-responsive embed-responsive-4by3">
+
+<iframe src="https://www.youtube.com/embed/<%= yid %>" frameborder="0" allowfullscreen></iframe> <br/>
+</div></div>
+	<% end %>
+</div>
+<script type="text/javascript">
+var engine = new Bloodhound({
+  
+  datumTokenizer: function(d) {
+    return Bloodhound.tokenizers.obj.whitespace(d.value);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+   remote: {
+    url: '/profiles/intrests/%QUERY.json',
+     filter: function (engine) {
+            // Map the remote source JSON array to a JavaScript object array
+            return $.map(engine, function (intrest) {
+                return {
+                    value: intrest.value
+                };
+            });
+        }
+  }
+
+});
+engine.initialize();
+
+$('.typeahead').typeahead(null, {
+  displayKey: 'value',
+  source: engine.ttAdapter()
+});
+
+
+</script>

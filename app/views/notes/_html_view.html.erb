@@ -1,0 +1,4 @@
+<div id="removeongame" class="removeongame">
+<% note_html = Note.friendly.find(params[:note_id]) %>
+<%= markdown(note_html.file.to_s) %>
+</div>

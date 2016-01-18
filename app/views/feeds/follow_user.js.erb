@@ -1,0 +1,3 @@
+$("#<%= params[:id] %>").empty();
+$("#<%= params[:id] %>").html('<%= button_to "unfollow" ,destroy_follow_user_feed_path(User.find(params[:id]))  , {class: "btn btn-danger" , :method => :put , remote: true } %>');
+$('#following_count').html("<%= Relationship.where(:follower_id => current_user.id).count - 1 %>");

@@ -1,0 +1,26 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: edunova
+  pool: 5
+  username: vaibhavgeek
+  password:
+
+test: &TEST
+  adapter: postgresql
+  encoding: utf8
+  database: edunova
+  pool: 5
+  username: vaibhavgeek
+  password:
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: edunova
+  pool: 5
+  username: vaibhavgeek
+  password:
+
+cucumber:
+  <<: *TEST

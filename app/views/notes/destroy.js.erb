@@ -1,0 +1,2 @@
+$("#content").html("<%= j render('my_notes') %>");
+$('#note_count').html("<%= Note.where(:user_id => current_user.id).count %>");

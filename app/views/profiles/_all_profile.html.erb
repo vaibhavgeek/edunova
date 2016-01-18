@@ -1,0 +1,68 @@
+<% if @profile_feeds.count != 0 %>
+
+<% @profile_feeds.each do |feed| %> 
+
+
+<div class ="row" id="<%= feed.id %>" style="margin-bottom:10px;">	<div class="col-md-1">
+			<% if feed.user.image_id != nil %>
+					<% if !feed.user.image_id.match(/^http/)  %>
+						
+	<%= attachment_image_tag(feed.user, :image, :fill, 64, 64 ,fallback: "deafult-pic.png") %>
+
+					<%else%>
+					<% image_50 = feed.user.image_id.to_s.gsub! '//photo.jpg?sz=50' , '/photo.jpg?sz=64' %>
+					<%= image_tag(image_50 , height: 64 , width: 64 )  %>
+
+					<% end %>
+
+			<% else %>		
+					<%= attachment_image_tag(feed.user, :image, :fill, 64, 64 ,fallback: "deafult-pic-64.png") %>
+
+			<% end %>
+	</div>
+
+
+  
+
+	
+	<div class="col-md-10">
+
+		 <%= link_to '@' + feed.user.username , profile_path(feed.user.id) %> 
+		<% if feed.set_type == 'create' %>
+          <b> <i> created </i> </b> a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> <br/>
+		                 		     <h4> <%= Note.find(feed.object_id).note_from_author %> </h4>
+
+
+          <% elsif feed.set_type == 'upvote' %>
+            <b> <i> upvoted </i> </b> a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> 
+            <br/>
+<% elsif feed.set_type == 'play' %>
+            <b> <i> played </i> </b> a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> <br/>
+            		      <%= Note.find(feed.object_id).note_from_author %>
+
+
+            <% elsif feed.set_type == 'downvote' %>
+            <b> <i> downvoted </i> </b> a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> 
+            <br/>
+
+            <% elsif feed.set_type == 'comment' %>
+            <b> <i> posted </i> </b> on a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> 
+            <br/>
+            <%= markdown(Comment.find(feed.comment_id).comment.to_s) %>
+            <% end %>
+
+         </div>
+	 <% if current_user && current_user.id == feed.user.id %>
+                    <%= link_to raw("<span aria-hidden='true'>×</span>"), 
+          feed_path(id: feed.id), 
+           class: "pull-right close" , remote: true , :method => :delete , data: {confirm: "Do you want to delete post?"} %>
+                     <% end %>
+</div>
+	 
+
+<% end %>
+<% else %><br/>
+<center><b><i>
+This person does not have any activity on edunova.io
+</i></b></center>
+<% end %>

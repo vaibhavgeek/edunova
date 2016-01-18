@@ -1,0 +1,15 @@
+<div class="removeongame">
+	<div class="col-md-10 col-md-offset-1">
+
+   <div id="showcomments">
+   	<div id="conversations">
+	    <% @comments = @note.comments.order('created_at ASC') %>
+<%= render :partial => "comments/comment", :collection => @comments, :as => :comment %>
+</div>
+
+ </div>
+
+  <%= render 'comments/form' %>
+
+</div>
+</div>

@@ -1,0 +1,2 @@
+$('#appendfl').html('<%= j render "follow_user" %>');
+$('#follower_count').html("<%= Relationship.where(:following_id => @user.id).count - 1 %>");

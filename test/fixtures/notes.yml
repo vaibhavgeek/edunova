@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  note_from_author: MyText
+  comments_id: 1
+  spam_count: 1
+  prereq: MyString
+  file: MyString
+  listcount: 1
+
+two:
+  name: MyString
+  description: MyText
+  note_from_author: MyText
+  comments_id: 1
+  spam_count: 1
+  prereq: MyString
+  file: MyString
+  listcount: 1

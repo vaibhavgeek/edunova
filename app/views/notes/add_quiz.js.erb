@@ -1,0 +1,32 @@
+var a = $("#select_level").val().toString();
+switch(a)
+{
+	case "1" : 
+	$("#loadquiz").html("<%= j render 'questions/question' , :locals => { :level => 1 }   %>")
+	break;
+
+	case "2" : 
+	$("#loadquiz").html("<%= j render 'questions/question' , :locals => { :level => 2 }  %>")
+	break;
+
+	case "3" : 
+	$("#loadquiz").html("<%= j render 'questions/question' , :locals => { :level => 3 }  %>")
+	break;
+
+	case "4" : 
+	$("#loadquiz").html("<%= j render 'questions/question' , :locals => { :level => 4 }  %>")
+	break;
+
+	case "5" : 
+	$("#loadquiz").html("<%= j render 'questions/question' , :locals => { :level => 5 }  %>")
+	break;
+
+	case "6" : 
+	$("#loadquiz").html("<%= j render 'questions/question' , :locals => { :level => 6 }  %>")
+	break;
+
+	default:
+	alert("Please select valid level.");
+
+}
+

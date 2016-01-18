@@ -1,0 +1,30 @@
+<div class="row"> 
+
+  <h4> Question 1 </h4>
+
+<div class="col-md-6"> 
+<%= f.text_field :question_text , :class => 'form-control' , :placeholder => 'Question Title' %> <br/> 
+Enter Options :- (Check one with the correct answer) <br/>
+ <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
+<%= f.text_field :answer %>
+  <br/>
+   <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
+<%= f.text_field :answer %>
+  <br/>
+   <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
+  <%= f.text_field :answer %>
+  <br/>
+  <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
+
+<%= f.text_field :answer %>
+
+</div>
+<div class="col-md-6"> 
+<%= f.text_area :answer , :class => 'form-control' , :placeholder => 'Enter description of the question' %> <br/> 
+ <%= f.text_area :solution , :class => "form-control" ,  :rows => "4"  , :placeholder => 'Explain your solution' %>
+
+
+</div>
+</div>
+
+	

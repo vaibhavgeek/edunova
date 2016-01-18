@@ -1,0 +1,47 @@
+<% @notifications.each do |notif| %> 
+    <% if notif.read == 0 %>
+          <div  class="list-group-item unreadnotif">
+<% else %>
+          <div  class="list-group-item">
+
+      <% end %>
+        <div class="media">
+           <div class="media-left">
+              
+                <%= attachment_image_tag(notif.from_id, :image, :fill, 50, 50 ,fallback: "deafult-pic-50.png") %>
+
+          </div>
+           <div class="media-body">
+        <p class="list-group-item-text">
+          <%= link_to  profile_path(notif.from_id.id) do %>
+
+          @<%=notif.from_id.username %>         <% end %>
+
+             <% case notif.category.to_s %>
+             <% when 'CONYCT' %>
+             posted on a note you also participated <b><%= link_to Note.find(notif.note_id).name , note_path(notif.note_id) %> </b>
+             <br/>
+            "<b> <%= Comment.find(notif.object_id).comment %> </b>"
+             <% when 'CONYC' %>
+             posted on note you created <b><%= link_to Note.find(notif.note_id).name , note_path(notif.note_id) %><br/> </b>
+                         "<b> <%= Comment.find(notif.object_id).comment %> </b>"
+
+            <% when 'UYN' %>
+            upvoted your note 
+            <b><%= link_to Note.find(notif.note_id).name , note_path(notif.note_id) %> </b>
+             <% when 'FYP' %>
+             followed you. Visit his profile 
+
+
+
+
+             <% end %>
+          </p>
+      </div>
+
+
+      </div>
+      </div>
+<% end %>
+       <%= js_will_paginate @notifications %>
+     

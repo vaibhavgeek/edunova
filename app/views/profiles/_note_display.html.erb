@@ -1,0 +1,22 @@
+<% @notee = Note.find(params[:note][:name]) %>
+<h2><center>Note Name:
+<span class="note_name"><%= link_to @notee.name , note_path(@notee)%></span>
+    	 <span class="pull-right">
+    	  <span class="badge"><%=  @notee.get_upvotes.size %> votes </span>
+
+<span class="badge"><%=  @notee.comments.count %> 
+    	  posts </span> </span>
+
+
+</center>
+</h2>Note From Author:
+<div class="well">
+ 
+<%=@notee.note_from_author %>
+
+  </div><br/>
+  Note Content:
+  <div class="well">
+
+<%= markdown(@notee.file.to_s) %>
+</div>
