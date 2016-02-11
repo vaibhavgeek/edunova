@@ -1,4 +1,4 @@
-	<% if @allfollowing.count > 1 %>	
+	<% if @allfollowing.count >= 1 %>	
 		<center> <h3> people @<%= @user.username %> is following   </h3></center>
 	<% end %>
 	<% @allfollowing.in_groups_of(3, false).each do |group| %>
@@ -15,7 +15,7 @@
 					<b><%= fol.follower.name %></b>	<br/>
 					<table>
 					<tr>
-					<td>
+					<td valign="top">
 						<%= attachment_image_tag(fol.follower, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
 
 					</td>
@@ -48,6 +48,8 @@
 
 </div>
 <% end %>
-<% if @allfollowing.count <= 1 %> 
+
+
+<% if @allfollowing.count < 1 %> 
 <center><h3>@<%= @user.username %> is following no one. </h3></center>
 <% end %>	

@@ -1,1 +1,2 @@
 $('#showcomments').html('<%= j render("load_comments") %>');
+$("#comment_count").html("<%= @note.comments.count %>");

@@ -1,4 +1,12 @@
+
 <div id="removeongame" class="removeongame">
+<div class="col-md-10 col-md-offset-1">
+<% if params[:id] %>
+<% note_html = Note.friendly.find(params[:id]) %>
+
+<% else %>
 <% note_html = Note.friendly.find(params[:note_id]) %>
+<% end %>
 <%= markdown(note_html.file.to_s) %>
+</div>
 </div>

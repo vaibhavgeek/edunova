@@ -1,2 +1,3 @@
 $('#showcomments').html('<%= j render("load_comments") %>');
 simplemde.value("");
+$("#comment_count").html("<%= @note.comments.count %>");

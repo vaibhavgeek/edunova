@@ -5,6 +5,10 @@
    	<div id="conversations">
 	    <% @comments = @note.comments.order('created_at ASC') %>
 <%= render :partial => "comments/comment", :collection => @comments, :as => :comment %>
+<% if @comments.count == 0 %>
+ <div class="alert alert-success"><center><h3> Be the first to initiate a conversation! </h3></center></div>
+<% end %>
+
 </div>
 
  </div>

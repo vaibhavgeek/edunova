@@ -35,7 +35,7 @@
 
     <div class="list-group border-bottom" style="padding-top:15px;">
   
-<%= link_to  notes_my_notes_path , :class => 'list-group-item' , :onclick => '$(".list-group-item").removeClass("active");$(this).addClass("active");' , remote: true , :id => 'my-notes'  do %>
+<%= link_to  notes_my_notes_path , :class => 'list-group-item active' , :onclick => '$(".list-group-item").removeClass("active");$(this).addClass("active");' , remote: true , :id => 'my-notes'  do %>
 <span class="glyphicon glyphicon-inbox"> </span>
  My Notes
    <span class="badge" id="note_count"><%= Note.where(:user_id => current_user.id).count %></span>

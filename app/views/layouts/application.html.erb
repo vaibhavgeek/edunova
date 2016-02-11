@@ -13,6 +13,16 @@
 <body class="<%= controller.controller_name %>">
 <% end %>
 
+<%= mathjax_tag %>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
 
 
 <header>
@@ -94,7 +104,6 @@
 
             <div class="container">
   
-    
 
 
 

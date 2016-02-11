@@ -6,7 +6,7 @@
 <div class="panel-default  border-bottom" id="section_feeds">
  
 
-<%= form_tag notes_path, :method => 'get', :id => "notes_search" do %>
+<%= form_tag feeds_search_results_path, :method => 'get', :id => "people_search" , remote:true do %>
 
 
     <div class="input-group" style="padding-left:10px; padding-right:10px;">
@@ -46,11 +46,11 @@ Followers   <span class="badge">
 
 <% end %>        
           
-          <%= link_to  feeds_search_people_path , :class => 'list-group-item' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");'  , remote: true do  %>
+          <%= link_to  feeds_hall_of_fame_path , :class => 'list-group-item' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");'  , remote: true do  %>
          <span class="glyphicon glyphicon-star"> </span> Hall of Fame 
             <% end %>
 
-             <%= link_to  feeds_search_people_path , :class => 'list-group-item' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");'  , remote: true do  %>
+             <%= link_to  feeds_invite_people_path , :class => 'list-group-item' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");'  , remote: true do  %>
        <i class="fa fa-users"></i>
 Invite Friends 
             <% end %>

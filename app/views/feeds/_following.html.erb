@@ -1,15 +1,22 @@
-<div class="row">
 	<% if @allfollowing.count > 1 %>	
 		<center> <h3> people you are following   </h3></center>
 	<% end %>
-<% @allfollowing.each do |fol| %> 
+
+<% @allfollowing.in_groups_of(3, false).each do |group| %>
+  <div class='row'>
+<br/>
+		
+		
+    <% group.each do |fol| %>
+
 			<% if fol.follower.id != current_user.id %>
 					<div class="col-md-4">
 					<%= link_to '@'+fol.follower.username , profile_path(fol.follower) %> 
 					<b><%= fol.follower.name %></b>	<br/>
 					<table>
 					<tr>
-					<td>
+					<td valign="top">
+
 						<%= attachment_image_tag(fol.follower, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
 
 					</td>
@@ -35,19 +42,19 @@
 </tr>
 </table>
 	<center>
-		<div id="<%= fol.follower.id %>">
+		<div id="<%= fol.follower.slug %>">
 		<%= button_to "unfollow" , destroy_follow_user_feed_path(fol.follower)   , {class: 'btn btn-danger' ,:method => :put , :id => 'unfollowi' , remote: true} %>
 	   </div>
 	</center>
 
- </div>
-<% end %>
 
-
-<% end %>
 
 </div>
+<% end %>
+
+<% end %>
+<% end %>
 
 <% if @allfollowing.count <= 1 %> 
-<h3>you are following no one right now. </h3>
+<center><h3>you are following no one right now.</h3></center>
 <% end %>	

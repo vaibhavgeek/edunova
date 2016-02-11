@@ -24,6 +24,7 @@ has_many :intrests
 before_save :default_username
   
 
+ 
   def should_generate_new_friendly_id?
   if !slug? || username_changed? || new_record? || slug.nil? || slug.blank?
       true
@@ -97,7 +98,6 @@ def self.from_omniauthg(access_token)
             user.dob = access_token.extra.raw_info.birthday 
             user.skip_confirmation! 
             user.provider = access_token.provider.to_s 
-            user.first_time_omniauth = 0
             user.password = Devise.friendly_token[0,20] 
             if max_slug == nil
               max_count = 1

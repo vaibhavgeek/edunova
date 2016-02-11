@@ -12,11 +12,12 @@ $(document).ready(ready);
 $(document).on('page:load', ready);
 function changetoinsight(){
   learnpam.detach();
-}
+};
 function changetolnote(){
   
   learnpam.appendTo('#coverlearn');
-}
+};
+
 
 $('#myModal').on('show.bs.modal', function (event) {
   var j=1;
@@ -24,6 +25,7 @@ $('#myModal').on('show.bs.modal', function (event) {
             var count = (stringhtml.match(/........................................................New_Level................................................/g) || []).length + 1;
           
   var modal = $(this);
+ 
   switch(count)
   {
     case 1:
@@ -76,7 +78,7 @@ function insert_level(){
 function customMarkdownParser (plainText) {
   
     plainText = simplemde.markdown(plainText);
-    plainText = plainText.replace(/\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_New_Level\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_/g, '<hr />');
+    plainText = plainText.replace(/........................................................New_Level................................................/g, '<hr />');
 
     return plainText
  
@@ -203,7 +205,7 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
   <div class="btn-group pull-right"  role="group" aria-label="...">
      
 
-  <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default" onclick="numberlevels()"><span class="fa fa-fw"><strong>Q</strong></span>
+  <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default"><span class="fa fa-fw"><strong>Q</strong></span>
  Insert Quiz</button>
   <button type="button" onclick="insert_level()" class="btn btn-default"><span class="fa fa-minus"> </span> New Level</button>
 </div>
@@ -213,41 +215,13 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
     <%= naw.text_area :file, :id=>'content-slide' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "Write a note. A good note has following properites. <br/> <ul> <li> Make it concise and clear </li> <li> Think from learner's point of view </li> <li> Tell the application of what you are teaching </li> </ul> "  %>
        
     <br/>
+    <%= naw.text_area :questions , :id => 'store_questions' , :rows => 10 , :value => '{ "level1" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level2" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level3" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} }, "level4" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level5" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level6" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } }' ,:style => 'display:none;' %>
 
         <%= naw.submit "Create" , {:class => 'btn btn-primary btn-lg pull-right'} %>
 
   <% end %>
  </div>
- <%= form_for new_note_question_path(:note_id => 26)  do |f| %>
-
-<div class="row"> 
-
-  <h4> Question 1 </h4>
-<div class="col-md-6"> 
-<%= f.text_field :question_text , :class => 'form-control' , :placeholder => 'Question Title' %> <br/> 
-Enter Options :- (Check one with the correct answer) <br/>
- <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
-<%= f.text_field :answer %>
-  <br/>
-   <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
-<%= f.text_field :answer %>
-  <br/>
-   <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
-  <%= f.text_field :answer %>
-  <br/>
-  <%= f.radio_button :description, "insight" , :checked => true, :id=>"first" , :onchange => '$(this).addClass("active").siblings(".active").removeClass("active");' %>
-
-<%= f.text_field :answer %>
-
-</div>
-<div class="col-md-6"> 
-<%= f.text_area :answer , :class => 'form-control' , :placeholder => 'Enter description of the question' %> <br/> 
- <%= f.text_area :solution , :class => "form-control" ,  :rows => "4"  , :placeholder => 'Explain your solution' %>
-
-
-</div>
-</div>
-<% end %>
+ 
 <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg">
     <div id="loadquestion" class="modal-content">

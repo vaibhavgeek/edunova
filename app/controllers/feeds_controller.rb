@@ -1,4 +1,10 @@
 class FeedsController < ApplicationController
+  
+
+def hall_of_fame
+ @topusers = User.all.joins('LEFT JOIN votes ON users.id = votes.voter_id ').group('users.id').order('COUNT(*) - SUM(votes.vote_flag::int) DESC')
+end
+
   def followers
   	@allfollowers = Relationship.joins('
 INNER JOIN users

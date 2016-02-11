@@ -1,38 +1,9 @@
-              <%= mathjax_tag %>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-
-
-
-
-
-
- <a id="e" tabindex="0" data-toggle="popover" data-trigger="focus" data-html="true" title=" QUESTION" ></a>
-<div  id="but" style="display: none">
-  <form role="form">
-    <div class="radio">
-      <label><input type="radio" name="optradio">Option 1</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio">Option 2</label>
-    </div>
-    <div class="radio ">
-      <label><input type="radio" name="optradio" >Option 3</label>
-    </div>
-<div class="radio ">
-      <label><input type="radio" name="optradio" >Option 4</label>
-    </div>
-  </form>
-  <button type="button" class="btn btn-primary" onclick="gettogame()">Submit</button>
+              
+<a id="e" tabindex="0" data-toggle="popover" data-trigger="focus" data-html="true"></a>
+<div id="displayquestions" style="display: none">
 </div>
 
+ 
 
 
 
@@ -80,9 +51,11 @@
  <%= link_to :back , class: "btn btn-default btn-sm" do %>
  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Go Back                <% end %>
 
+<% if @note.description.to_s != 'insight' %>
+
 <%= link_to note_game_view_path(@note) , remote: :true , class: "btn btn-default btn-sm" do %>
  <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Game  <% end %>
-
+<% end %>
 <%= link_to note_html_view_path(@note) , remote: :true , class: "btn btn-default btn-sm" do %>
  <span class="glyphicon glyphicon glyphicon-file" aria-hidden="true"></span> View Note  <% end %>
 
@@ -98,7 +71,7 @@
     <%= link_to  note_comment_view_path(@note)  ,:class => 'btn btn-primary btn-sm' , :remote => true do %> 
      <span class="glyphicon glyphicon-comment
 " aria-hidden="true"></span> conversation 
- <span class="badge"><%= @note.comments.count %>
+ <span class="badge" id="comment_count"><%= @note.comments.count %>
 </span>
     <% end %>
 
@@ -113,10 +86,12 @@
 <span class="glyphicon glyphicon-pencil"> </span> Edit 
 <% end %>
   <% end %>
-     <%= link_to  edit_note_path(@note)  ,:class => 'btn btn-default btn-sm'  do %>
+  <% if @note.description.to_s != 'insight' %>
+
+     <%= link_to  note_display_quiz_path(@note)  ,:class => 'btn btn-default btn-sm' , :remote => true  do %>
 <span class="glyphicon glyphicon-ok"></span> Quiz It! 
       <% end %> 
-
+<% end %>
 
   
 </div>
@@ -215,6 +190,8 @@
 
 
 <div id="mainconnote">
+     <% if @note.description.to_s != 'insight' %>
+
   <div id="tohihe">
 
 <div id='loading'>
@@ -225,7 +202,10 @@
   </div>
 </div>
     </div>
+
             <center><canvas id='myGame' width="1050" height="600"></canvas></center>
+            
+
 <center>
 <div class="btn-group">
 <a class="btn btn-default btn-sm" >
@@ -256,6 +236,9 @@
 </div>
 </center>
 </div>
+<% else %>
+<%= render 'html_view'  %>
+<% end %>
 </div>
 
   <div id="comments" class="col-lg-8" >
@@ -263,6 +246,9 @@
 </div>
 </div>
 </div>
+
+    <% if @note.description.to_s != 'insight' %>
+
 <script type="text/javascript">
 function closemodal() {
     $('#myModal').modal('hide');
@@ -292,6 +278,7 @@ var disp=0;//diplay score
 var comp=1,pflag=0;
 var fpos=[],j;
 var startx,starty;
+var xi;
 Q.Sprite.extend("Player",{
 
   init: function(p) {
@@ -339,33 +326,54 @@ Q.Sprite.extend("Checkpoint",{
   
 this.on("bump.left",function(collision){
   if(collision.obj.isA("Player"))
-  {
+  {console.log("hbhdbhb");
   collision.obj.p.x +=80;
   startx=collision.obj.p.x;
   starty=collision.obj.p.y;
-  alert(this.p.y);
-
+   xi= -110*2+860;
+   console.log(xi);
     this.play("open");
   Q.output();}
 });
 this.on("bump.right,bump.top",function(collision){
   if(collision.obj.isA("Player"))
-  {
+  {console.log("right");
   collision.obj.p.x -=80;
  startx=collision.obj.p.x;
   starty=collision.obj.p.y;
-  alert(this.p.y);
-
-    this.play("open");Q.output();}
+    this.play("open");
+   xi= -110*2+900;
+    Q.output();}
 });
  } 
 });
 
+
 Q.output= function()
 { 
 pflag=1;
+flag=flag+newscore;
+       disp=flag;
+       newscore=0;
+
+var yi= 80*2+200 + 200;
+$('#e').popover({ html : true, 
+        content: function() {
+          return $('#but').html();
+        }
+      });
+ $('#e').css({'position':'absolute','top':yi,'right':xi}).popover('show');
  
-  console.log("inside function");
+            
+ $('#e').on('shown.bs.popover', function (e) { $('#b').show();
+      Q.pauseGame();
+ });
+ $('.btn').click(function(){$('#b').hide();
+                      $('#e').popover('hide');
+                       Q.unpauseGame();
+                     });
+ 
+  
 }
 Q.Sprite.extend("Enemy",{
   init: function(p) {
@@ -411,9 +419,11 @@ fpos=[[900,200],[760,-30],[140,400],[900,550]];
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:1330, y: 600 }));
-  for(j=0 ;j<4;j++)           ///////// n=4 if no. of ques=4
-   stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1]}));
-
+     for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
+    {
+    stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1]}));
+    
+    }
   Q.stageScene("score",1, { 
   label: "score: "+newscore
 });     
@@ -452,7 +462,7 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
   stage.add("viewport").follow(player);
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
- for(j=0 ;j<4;j++)           ///////// n=4 if no. of ques=4
+ for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
    stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1]}));
 
   stage.insert(new Q.Tower({ x:2970, y: 660 }));
@@ -477,7 +487,7 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:980, y: 980 }));
-for(j=0 ;j<4;j++)           ///////// n=4 if no. of ques=4
+for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
    stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1]}));
   Q.stageScene("score",1, { 
   label: "score: "+flag});
@@ -499,7 +509,7 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:640, y: 650 }));
-for(j=0 ;j<4;j++)           ///////// n=4 if no. of ques=4
+for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
    stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1]}));
   Q.stageScene("score",1, { 
   label: "score: "+flag });
@@ -521,7 +531,7 @@ var player = stage.insert(new Q.Player({x:startx,y:starty,jumpSpeed:-450}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:3000, y: 620 }));
-for(j=0 ;j<4;j++)           ///////// n=4 if no. of ques=4
+for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
    stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1]}));
   Q.stageScene("score",1, { 
   label: "score: "+flag });
@@ -541,7 +551,7 @@ var player = stage.insert(new Q.Player({x:startx,y:starty,jumpSpeed:-450}));
   stage.add("viewport").follow(player);
   for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
-  for(j=0 ;j<4;j++)           ///////// n=4 if no. of ques=4
+  for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
    stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1]}));
 stage.insert(new Q.Tower({ x:1300, y: 150}));
  Q.stageScene("score",1, { 
@@ -683,3 +693,4 @@ Q.load("<%= asset_path('sprites.png') %>, <%= asset_path('sprites.json') %>, <%=
 }
 });
 </script>
+<% end %>

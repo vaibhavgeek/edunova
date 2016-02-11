@@ -13,7 +13,8 @@
 
 <% @notes_filter.each do |note| %>
  <a style="cursor:pointer;" class="list-group-item" type="button" data-toggle="collapse" data-target="#<%= note.id %>" aria-expanded="false" aria-controls="collapseExample">
-    <h4 class="list-group-item-heading"><%= note.name %></h4>
+    <h4 class="list-group-item-heading"><%= note.name %> <% if note.description.to_s == "insight" %><span class="label label-primary pull-right">Insight Note</span> <% end %>
+</h4>
     <p class="list-group-item-text">
     	 by <b> @<%= note.user.username %> </b> <span class="pull-right"> <span class="badge"><%= note.get_upvotes.size %> votes </span>
 
@@ -34,8 +35,8 @@ lables: <% labelss = note.prereq.split(",") %>
    <% end %>
 <%= note.note_from_author %> <br/>
 <center><%= link_to note_path(note) , :class => 'btn btn-success' do %> 
-<span class="glyphicon glyphicon-play-circle"></span>
- play note <% end %> </center>
+ <% if note.description.to_s == "insight" %>read insight <% else %> <span class="glyphicon glyphicon-play-circle"></span>
+ play  note <% end %><% end %> </center>
 
   
 </div>

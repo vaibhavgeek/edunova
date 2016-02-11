@@ -19,6 +19,16 @@ class NotesController < ApplicationController
             @notes_filter = Note.all.paginate(:per_page => 25, :page => params[:page]) 
  end
 
+
+
+def display_quiz
+ @note = Note.friendly.find(params[:note_id])
+ @questions_hash = JSON.parse(@note.questions)
+
+end
+
+
+
 def discover 
   @passion = Passion.new
   @allpassion = Passion.all
@@ -61,7 +71,7 @@ end
         Intrest.find_or_create_by(value: intr.strip.to_s)
       end  
    
-   @note.total_levels = note_params[:file].to_s.split('___').count
+   @note.total_levels = note_params[:file].to_s.split('........................................................New_Level................................................').count
     if @note.total_levels <= 6
           @note.user_id = current_user.id
               if params[:commit] == 'Create'
@@ -85,7 +95,7 @@ end
       @labels.each do |intr|
         Intrest.find_or_create_by(value: intr.strip.to_s)
       end  
-   @note.total_levels = note_params[:file].to_s.split('___').count
+   @note.total_levels = note_params[:file].to_s.split('........................................................New_Level................................................').count
     if @note.total_levels <= 6
           @note.user_id = current_user.id
              
@@ -174,14 +184,12 @@ end
 
   private
   def note_params
-   params.require(:note).permit(:name , :prereq , :file , :note_from_author , :description  )
+   params.require(:note).permit(:name , :prereq , :file , :note_from_author , :description , :questions )
   end
   
   def passion_params
     params.require(:passion).permit(:label , :video_url)
   end
 
-  def question_params 
-    params.require(:question).permit(:question)
-  end
+  
 end

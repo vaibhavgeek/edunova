@@ -1,7 +1,11 @@
 <% @notee = Note.find(params[:note][:name]) %>
-<h2><center>Note Name:
+<center>  <h2><% if @notee.description.to_s == "insight" %><span class="label label-warning pull-left">Insight</span> <% end %>
+	Note Name:
+
 <span class="note_name"><%= link_to @notee.name , note_path(@notee)%></span>
-    	 <span class="pull-right">
+    	 
+
+    	  <span class="pull-right">
     	  <span class="badge"><%=  @notee.get_upvotes.size %> votes </span>
 
 <span class="badge"><%=  @notee.comments.count %> 

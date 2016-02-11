@@ -1,17 +1,20 @@
-<div class="row">
-	<% if @allfollowers.count > 1 %> <center> <h3> you have  <%=  pluralize(@allfollowers.count - 1, "follower")  %>  </h3></center>
+	<% if @allfollowers.count > 1 %> <center> <h3> people following you  </h3></center>
 	<% else %>
-<center> <h4> tips to get more followers   </h4></center>
-  <div class="alert alert-warning" role="alert">
-  	<h4>1.) follow more people on edunova. </h4>
- <h4>2.) engage in meaningful conversations on a note on edunova. </h4>
- <h4>3.) create a note on what you are paasionate about. </h4>
-</div>
-
-
+<center> <h3> you do not have any followers    </h3></center>
+  
 
 <% end %>
-<% @allfollowers.each do |fol| %>
+
+
+
+
+<% @allfollowers.in_groups_of(3, false).each do |group| %>
+
+
+<div class="row">
+	<br/>
+
+    <% group.each do |fol| %>
 <% if fol.following.id != current_user.id %>
 <div class="col-md-4">
 <%= link_to '@'+fol.following.username , profile_path(fol.following) %> 
@@ -19,7 +22,7 @@
 
 <table>
 <tr>
-<td>
+<td valign="top">
 	<%= attachment_image_tag(fol.following, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
 
 </td>
@@ -47,7 +50,7 @@
 </tr>
 </table>
 <center>
-	<div id="<%= fol.following.id %>">
+	<div id="<%= fol.following.slug %>">
 		<% if  Relationship.joins('
 INNER JOIN users
 ON relationships.follower_id = users.id
@@ -60,13 +63,18 @@ WHERE relationships.follower_id = '+current_user.id.to_s + ' AND relationships.f
            <%else %>
 <%= button_to "follow back" , follow_user_feed_path(fol.following)   , {class: 'btn btn-primary' ,:method => :put , :id => 'followi' , remote: true} %>
 
-           <% end %>
+            <% end %>
 
 	
    <% end %>
    </div>
 </center>
+
+
+
  </div>
  <% end %>
+ <% end %>
+ </div>
 <% end%>
-</div>
+

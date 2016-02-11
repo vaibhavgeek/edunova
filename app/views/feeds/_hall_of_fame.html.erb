@@ -1,0 +1,53 @@
+	<center> <h3>top contributors on edunova</h3></center>
+
+
+<div class="well">
+<% @topusers.each do |user| %>
+
+<div class ="row" style="margin-bottom:10px;">	
+	<div class="col-md-1">
+			<% if user.image_id != nil %>
+					<% if !user.image_id.match(/^http/)  %>
+						
+	<%= attachment_image_tag(user, :image, :fill, 64, 64 ,fallback: "deafult-pic.png") %>
+
+					<%else%>
+					<% image_50 = user.image_id.to_s.gsub! '//photo.jpg?sz=50' , '/photo.jpg?sz=64' %>
+					<%= image_tag(image_50 , height: 64 , width: 64 )  %>
+
+					<% end %>
+
+			<% else %>		
+					<%= attachment_image_tag(user, :image, :fill, 64, 64 ,fallback: "deafult-pic-64.png") %>
+
+			<% end %>
+	</div>
+
+
+  
+
+	
+	<div class="col-md-10">
+				 <%= link_to '@' + user.username , profile_path(user) %>
+				  (<%= user.name %>)
+  <br/>
+                        
+<span class="badge"> created <%= Note.where(:user_id => user.id).count %> notes</span>
+  <br/>
+  <% if user.intrested_in != ''  and user.intrested_in != nil %>
+
+ <% @alllabels =  user.intrested_in.split(",") %>
+                        <b> intrested in: </b><% @alllabels.each do |lab| %>
+                              <span class="label label-primary"> <%= lab %>  </span>
+                              &nbsp;&nbsp;
+
+                        <% end %>
+                        <% end %>
+         </div>
+	 
+</div>
+	 
+
+<%  end %>
+</div>
+

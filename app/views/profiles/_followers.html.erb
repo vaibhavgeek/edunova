@@ -29,7 +29,8 @@
 
 <table>
 <tr>
-<td>
+<td valign="top">
+
 	<%= attachment_image_tag(fol.following, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
 
 </td>
@@ -58,7 +59,7 @@
 </table>
 <% if current_user == @user %>
 <center>
-	<div id="<%= fol.following.id %>">
+	<div id="<%= fol.following.slug %>">
 		<% if  Relationship.joins('
 INNER JOIN users
 ON relationships.follower_id = users.id

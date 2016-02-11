@@ -1,0 +1,14 @@
+if (!$("input[name='post[category]']:checked").val()) {
+   alert('Please select answers before submiting.');
+}
+else
+{
+	var answers = $(".correct_answer");
+	 	if(answers[0].html() == "option1")
+	 		alert("dasd");
+	$("input:checked").each(function() {
+		alert($(this).val());
+	 	
+		});
+
+}

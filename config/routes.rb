@@ -25,6 +25,7 @@ mathjax 'mathjax'
   get 'feeds/following'
   get 'feeds/followers'
   get 'feeds/search_results' 
+  get 'feeds/hall_of_fame'
   get 'comments/load_comments'
 
 devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" ,  registrations: "users/registrations"}
@@ -68,6 +69,8 @@ devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_call
         get 'html_view'
         get 'game_view'
         get 'comment_view'
+        get 'display_quiz'
+        post 'display_quiz_result'
         get 'load_level/:query' , to: 'notes#load_level' , :as => 'button_top_level'
         put 'next_level/:query', to: 'notes#next_level' , :as => 'update_level'
         resources :comments

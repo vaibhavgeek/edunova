@@ -1,4 +1,5 @@
 <% if current_user %>
+<center><i> People with more than 5 notes are allowed to submit videos. </i></center>
 <% if current_user.awesome != nil || current_user.awesome == 1 %>
 <center><h3> What do you believe in? </h3></center>
 <p>Tell people what is that you are passionate about and why are you passionate about that particular thing. </p> 
@@ -19,7 +20,7 @@
 <div class="row">
 <% @allpassion.each do |passion| %>
 <% yid = passion.video_url.to_s[/v=([^&]+)/, 1] %>
-<div class="col-md-6">
+<div class="col-md-4">
 	<span style="font-size:18px;">#<%= passion.label %></span>
 by	<%= link_to  "@"+passion.user.username , profile_path(passion.user) %>
 

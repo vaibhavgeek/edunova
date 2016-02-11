@@ -1,6 +1,265 @@
-For a question, I would require <br/>
-1.) current user
-2.) current note id
-<%= locals[:level] %>
 
-<br/><br/><br/><br/><br/><br/>
+<div id="level<%= locals[:level] %>">
+
+
+<form id="question1">
+
+<div class="row"> 
+<div class="col-md-12"> 
+	  <h4> Question 1 </h4>
+</div>
+<div class="col-md-6"> 
+	<input type="text" name="question_text" class="form-control" placeholder="Question Title"> </input>
+ <br/> 
+Enter Options :- (Check one with the correct answer) <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option1" placeholder="Option A"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option2" placeholder="Option B"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option3" placeholder="Option C"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+
+<input type="text" name="option4" placeholder="Option D"> </input>
+
+ 
+
+
+
+</div>
+<div class="col-md-6"> 
+ <textarea name="description" class="form-control" placeholder="Explain Your Question"></textarea>
+ <br/> 
+ <textarea name="solution" class="form-control" rows="4" placeholder="Explain Your Solution"></textarea>
+
+
+</div>
+</div>
+</form>
+<form id="question2" style="display:none;">
+<hr/>
+<div class="row"> 
+<div class="col-md-12"> 
+    <h4> Question 2 </h4>
+</div>
+<div class="col-md-6"> 
+  <input type="text" name="question_text" class="form-control" placeholder="Question Title"> </input>
+ <br/> 
+Enter Options :- (Check one with the correct answer) <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option1" placeholder="Option A"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option2" placeholder="Option B"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option3" placeholder="Option C"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+
+<input type="text" name="option4" placeholder="Option D"> </input>
+
+ 
+
+
+
+</div>
+<div class="col-md-6"> 
+ <textarea name="description" class="form-control" placeholder="Explain Your Question"></textarea>
+ <br/> 
+ <textarea name="solution" class="form-control" rows="4" placeholder="Explain Your Solution"></textarea>
+
+
+</div>
+</div>
+</form>
+<form id="question3" style="display:none;">
+<hr/>
+<div class="row"> 
+<div class="col-md-12"> 
+    <h4> Question 3</h4>
+</div>
+<div class="col-md-6"> 
+  <input type="text" name="question_text" class="form-control" placeholder="Question Title"> </input>
+ <br/> 
+Enter Options :- (Check one with the correct answer) <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option1" placeholder="Option A"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option2" placeholder="Option B"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option3" placeholder="Option C"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+
+<input type="text" name="option4" placeholder="Option D"> </input>
+
+ 
+
+
+
+</div>
+<div class="col-md-6"> 
+ <textarea name="description" class="form-control" placeholder="Explain Your Question"></textarea>
+ <br/> 
+ <textarea name="solution" class="form-control" rows="4" placeholder="Explain Your Solution"></textarea>
+
+
+</div>
+</div>
+</form>
+<form id="question4" style="display:none;">
+<hr/>
+<div class="row"> 
+<div class="col-md-12"> 
+    <h4> Question 4 </h4>
+</div>
+<div class="col-md-6"> 
+  <input type="text" name="question_text" class="form-control" placeholder="Question Title"> </input>
+ <br/> 
+Enter Options :- (Check one with the correct answer) <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parent().addClass("active").siblings(".active").removeClass("active");' checked="true"> </input>
+<input type="text" name="option1" placeholder="Option A"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option2" placeholder="Option B"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+<input type="text" name="option3" placeholder="Option C"> </input>
+  <br/>
+<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' checked="true"> </input> 
+
+<input type="text" name="option4" placeholder="Option D"> </input>
+
+ 
+
+
+
+</div>
+<div class="col-md-6"> 
+ <textarea name="description" class="form-control" placeholder="Explain Your Question"></textarea>
+ <br/> 
+ <textarea name="solution" class="form-control" rows="4" placeholder="Explain Your Solution"></textarea>
+
+
+</div>
+</div>
+</form><br/>
+<div id="append_alert">
+ <button type="button" id="new_question" class="btn btn-success pull-left" onclick='addquestion();'><i class="glyphicon glyphicon-plus" > </i> Add Question</button>
+</div>
+<script type="text/javascript">
+
+
+
+var questions_hash = $("#store_questions").val();
+var i,j,k,lev;
+var questions = [];
+var kill;
+var current_level = "level" + parseInt("<%= locals[:level] %>").toString();
+var obj = jQuery.parseJSON(questions_hash);
+
+for (var level in obj){
+           if (obj.hasOwnProperty(level)) {
+            if(current_level == level){
+                        for (var key in obj[level]) {
+                           var question = obj[level][key];
+                                if(question.hasOwnProperty('question_text')){
+                                  if(question['question_text'] != "")
+                                  {
+
+                                    if(key.toString != "question1")
+                                    {
+                                      $("#" + key.toString()).show();
+                                    }
+                                     $("#"+key.toString()+" input[name='question_text']").val(question['question_text']);
+                                     $("#"+key.toString()+" input[name='option1']").val(question['option1']);
+                                     $("#"+key.toString()+" input[name='option2']").val(question['option2']);
+                                     $("#"+key.toString()+" input[name='option3']").val(question['option3']);
+                                     $("#"+key.toString()+" input[name='option4']").val(question['option4']);
+                                     $("#"+key.toString()+" textarea[name='description']").val(question['description']);
+                                     $("#"+key.toString()+" textarea[name='solution']").val(question['solution']);
+                                  }
+                                }
+                               
+
+                        }
+            }
+}}
+
+
+  
+  
+
+function addquestion(){
+
+for (i=1;i<=4;i++)
+  {
+    questions[i] = $("#question" + i.toString())
+    if(questions[i].is(':visible'))
+    {
+     kill = i + 1;
+    }
+  }
+  if(kill == 4 || kill == 5)
+    {
+      $("#append_alert").html('<div class="alert alert-info"> Only four questions per level are allowed right now </div>')
+    }
+  questions[kill].show();
+  questions[kill].focus();
+  
+};
+
+function addandclose() {
+  for (j=1;j<=4;j++)
+  {
+    questions[j] = $("#question" + j.toString())
+  }
+  $.each(obj,function(index,value){
+    if (index == current_level )
+    { 
+        for (var key in value) {
+           if (value.hasOwnProperty(key)) {
+            lev = parseInt(key.substring(8,9));
+            value[key] = questions[lev].serializeObject();
+          }
+        }
+      //$.each(value, function(question,question_f) {
+        // lev = parseInt(question.substring(8,9));
+         //question_f = questions[lev].serializeObject();
+       // questions[k] = $("#question" + k.toString());
+      //});
+             
+    }
+  });
+ // obj.level<%=locals[:level] %>.question1 = ($('#question1').serializeObject());  
+  $('#store_questions').val(JSON.stringify(obj));
+   // $('#store_questions').val(JSON.stringify($('#question1').serializeObject()));
+ 
+};
+
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
+
+</script>
+</div>

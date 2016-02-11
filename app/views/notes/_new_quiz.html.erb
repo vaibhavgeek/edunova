@@ -3,20 +3,26 @@
       <div class="modal-body">
 
   <%= form_tag notes_add_quiz_path, :method => :get , :id => 'add_the_quiz' , :remote => "true" do %>
-    <center><%= select_tag :county, options_for_select(1..locals[:level_count] , locals[:level_count])  , :onchange => '$("#add_the_quiz").submit();' , :class => 'selectpicker' , :id => 'select_level'  %></center>
+    <center><%= select_tag :county, options_for_select(1..locals[:level_count] , locals[:level_count])  , :onchange => 'addandclose();$("#add_the_quiz").submit();' , :class => 'selectpicker' , :id => 'select_level'  %></center>
 
 
 <% end %>
 
       <div id="loadquiz"> 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
-</div>  
+<%=  render 'questions/question' , :locals => { :level => locals[:level_count] }   %></div>  
 
      </div> 
      
       <div class="modal-footer">
+<div class="row"> 
+	<div class="col-md-6">
 
+ </div>
+ <div class="col-md-6">
+ <input type="button" id="sumbit" onclick="addandclose();" value="Submit Questions" class="btn btn-primary pull-right" data-dismiss="modal"> </input>
+</div>
+
+</div>
 
       </div>
 <script type="text/javascript">

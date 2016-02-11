@@ -3,13 +3,13 @@
 
  
   
-       <%= markdown(Note.friendly.find(params[:id]).file.split('___')[locals[:level] - 1].to_s) %>
+       <%= markdown(Note.friendly.find(params[:id]).file.split('........................................................New_Level................................................')[locals[:level] - 1].to_s) %>
       </div>
       <div class="modal-footer">
       	<% if locals[:level] == 0 %>
       	<% locals[:level] = 1 %>
       	<% end %>
-<% @times = (Note.friendly.find(params[:id]).file.split('___')[locals[:level] - 1].to_s.html_safe.to_s.split.size / 280.0) %>
+<% @times = (Note.friendly.find(params[:id]).file.split('........................................................New_Level................................................')[locals[:level] - 1].to_s.html_safe.to_s.split.size / 280.0) %>
 <script type="text/javascript">
 
 	var time = parseFloat("<%= @times.to_s %>");
