@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 ruby "2.2.2"
+gem 'puma'
 
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
