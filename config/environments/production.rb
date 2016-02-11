@@ -3,7 +3,7 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-config.action_mailer.default_url_options = { :host => 'edunova-alpha.herokuapp.com' }
+config.action_mailer.default_url_options = { :host => 'aqueous-gorge-96923.herokuapp.com' }
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.perform_deliveries = true
 config.action_mailer.raise_delivery_errors = false
