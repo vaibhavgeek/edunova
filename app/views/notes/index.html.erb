@@ -50,16 +50,7 @@
 <% end %>
 
     <div class="list-group border-bottom" style="padding-top:5px;">
-<%= link_to  notes_explore_path , :class => 'list-group-item' , :onclick => '$(".list-group-item").removeClass("active");$(this).addClass("active");' , remote: true , :id => 'explore-notes'  do %>
-<span class="glyphicon glyphicon-flash"> </span>
- Explore Notes
-   
-<% end %>
-<%= link_to  notes_discover_path , :class => 'list-group-item' , :onclick => '$(".list-group-item").removeClass("active");$(this).addClass("active");' , remote: true , :id => 'my-notes'  do %>
-<span class="glyphicon glyphicon-cloud"> </span>
- Discover
-   
-<% end %>
+
 
 <%= link_to  notes_help_path , :class => 'list-group-item' , :onclick => '$(".list-group-item").removeClass("active");$(this).addClass("active");' , remote: true , :id => 'my-notes'  do %>
 <span class="glyphicon glyphicon-question-sign"> </span>

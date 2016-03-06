@@ -1,14 +1,35 @@
-if (!$("input[name='post[category]']:checked").val()) {
+if (!$("input[name='quiz[level]']:checked").val()) {
    alert('Please select answers before submiting.');
 }
 else
 {
-	var answers = $(".correct_answer");
-	 	if(answers[0].html() == "option1")
-	 		alert("dasd");
-	$("input:checked").each(function() {
-		alert($(this).val());
-	 	
-		});
+		var questions = document.getElementsByClassName("question");
+		var j;
+		var p = 0;
+		var arrin = [];
+		var arrsol = [];
+		for( j=1; j<=questions.length; j++)
+		{ 
+			arrin[j] = $("#question"+ j.toString() + " input:checked").val();
+		    arrsol[j] = $("#question"+j.toString() + " #answer").text();
+		    if($.trim(arrin[j]) == $.trim(arrsol[j]))
+			{
+				p = p + 1;
+				$("#question" + j.toString() + " #solution").show();
+				$("#question" + j.toString() + " #message").html("<div class='alert alert-success'> Correct Answer! </div>")
+			}
+			else
+			{
+				$("#question" + j.toString() + " #solution").hide();
+				$("#question" + j.toString() + " #message").html("<div class='alert alert-danger'> Incorrect Answer! Please read note and try again. Tell us in conversation if you are still not able to get it. </div>")
+		
+			}	
+			
+		}
+		if(p >= (questions.length /2) )
+				 {
+				 	<% Feed.find_or_create_by(:user_id => current_user.id , :object_id => @note.id  , :set_type => 'quiz' )           %>
+				 	$("#message_top").html("<div class='alert alert-success'> Posted in your feed successfully </div> ")
 
+				 }
 }

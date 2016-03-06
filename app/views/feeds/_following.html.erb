@@ -43,7 +43,8 @@
 </table>
 	<center>
 		<div id="<%= fol.follower.slug %>">
-		<%= button_to "unfollow" , destroy_follow_user_feed_path(fol.follower)   , {class: 'btn btn-danger' ,:method => :put , :id => 'unfollowi' , remote: true} %>
+		<%= button_to  destroy_follow_user_feed_path(fol.follower)   , {class: 'btn btn-danger' ,:method => :put , :id => 'unfollowi' , remote: true} do  %> <i class="glyphicon glyphicon-remove"> </i> Unfollow 
+		<% end %>
 	   </div>
 	</center>
 

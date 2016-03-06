@@ -1,3 +1,10 @@
+<span style="font-size:19px;">all labels: </span>
+<%= link_to '#all' , home_edunova_activity_path(:search => '' , :via_link => 'true') , :style => 'font-size:15px' , remote: true %>
+<% @labels.each do |lab| %> 
+<%= link_to '#' + lab.value.strip , home_edunova_activity_path(:search => lab.value.strip , :via_link => "true" ), :style => 'font-size:17px' , remote: true  %> <% if lab != @labels.last %> , <% end %>
+<% end %>
+
+
 
 <div class="list-group">
  

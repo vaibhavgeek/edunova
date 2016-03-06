@@ -1,25 +1,97 @@
 <script type="text/javascript">
+var ready;
+ready = function() {
 
-function exampleAction(){
+  learnpam = $('#learnparams');
+  learnpam.detach();
+
+
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+function changetoinsight(){
+  learnpam.detach();
+};
+function changetolnote(){
+  
+  learnpam.appendTo('#coverlearn');
+};
+
+
+$('#myModal').on('show.bs.modal', function (event) {
+  var j=1;
+  var stringhtml = simplemde.value();
+            var count = (stringhtml.match(/........................................................New_Level................................................/g) || []).length + 1;
+          
+  var modal = $(this);
+ 
+  switch(count)
+  {
+    case 1:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 1 }  %>")
+    break;
+
+    case 2:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 2 }  %>")
+    break;
+
+    case 3:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 3 }  %>")
+    break;
+
+    case 4:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 4 }  %>")
+    break;
+
+    case 5:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 5 }  %>")
+    break;
+
+    case 6:
+     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 6 }  %>")
+    break;
+
+    default:
+  }
+ 
+});
+
+
+
+
+
+
+function insert_level(){
             var stringhtml = simplemde.value();
-            var count = (stringhtml.match(/\*\*\*/g) || []).length + 2;
+            var count = (stringhtml.match(/........................................................New_Level................................................/g) || []).length + 2;
             if(count <= 6)
             {
-              simplemde.value( simplemde.value() + '*** \n');
+              simplemde.value( simplemde.value() + '\n........................................................New_Level................................................\n');
             }
             else
             {
                 alert('As of now you can only have 6 levels');
             }
+
+}
+function customMarkdownParser (plainText) {
+  
+    plainText = simplemde.markdown(plainText);
+    plainText = plainText.replace(/........................................................New_Level................................................/g, '<hr />');
+
+    return plainText
+ 
 }
  
 
-var simplemde = new SimpleMDE({ element: document.getElementById("content-slide") ,  toolbar: ["bold", "italic" , "heading" , "|", "link" , "image" , "|" , "preview" , "side-by-side" , "fullscreen" , "guide" , {
-            name: "new_level",
-            action: exampleAction,
-            className: "fa fa-minus",
-            title: "New Level",
-        } ]});
+
+var simplemde = new SimpleMDE({
+ element: document.getElementById("content-slide"),
+  previewRender: function(plainText) {
+        return customMarkdownParser(plainText); // Returns HTML from a custom parser
+    }
+});
 
 
 
@@ -29,17 +101,13 @@ $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     
 });
-
+$(function () {
+  $('[data-toggle="popover"]').popover()
+});
 </script>
-
-
-<div class="panel-body panel">
+<center><h1>edit note : <%= @note.name %></h1></center>
 
  <%= form_for @note  do |naw| %>
-
-<center><h1>edit note: <%= @note.name %></h1></center>
-
-
          
 <div style="padding-left:15px; padding-right:15px;" class="row">
 <% if @note.errors.any? %>
@@ -59,14 +127,43 @@ $(document).ready(function() {
              Title
         <%= naw.text_field :name ,:class => "form-control"  %>
          Note from author <br>
-    <%= naw.text_area :note_from_author , :class => "form-control" %>
+    <%= naw.text_area :note_from_author , :class => "form-control" , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell users wether the note requires any prerequisites and what is purpose for creating this note." %>
+              
+   <br/> Type of note : 
+<center>
+   <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-default active">
+      <%= naw.radio_button :description, "insight" , :checked => true, :id=>"first", :style=>"display:none;" , :onchange => 'changetoinsight()' %>
+
+    <input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fa fa-bolt"></i>
+  Insight Note
+  </label>
+  <label class="btn btn-default">
+     <%= naw.radio_button :description, "learning", :id=>"first", :style=>"display:none;" , :onchange =>'changetolnote()' %>
+    <input type="radio" name="options" id="option2" autocomplete="off">  
+    <i class="glyphicon glyphicon-list-alt"> </i> Learning Note
+  </label>
+  <button class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" data-content="<b><i>Insight Note: </i></b><br/> These notes are simple ideas or exciting insights you want to share. You cannot create questions and neither the game is embedded. <br/> <br/> <b><i> Learning Note: </i> </b> <br/> These notes help you learn something properly. They have embedded questions to clear your concepts regarding the topic. ">
+     
+    <i class="fa fa-question-circle"></i>
+
+  </button>
+</div></center> <br/>
+    
               Labels <br>
 
-    <%= naw.text_field :prereq , :class => "form-control" ,  :rows => "7" , :id => 'prerequisites' %><br>
+    <%= naw.text_field :prereq , :class => "form-control" ,  :rows => "7" , :id => 'prerequisites' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell the branch, this note belongs to. example maths, programming, history etc " %><br>
             Content
+<br/>
+<center>
+    
+</div>
+                       
 
-   
-<br/><br/>
+    </div> </center>
+
+<br/>
+
 <script type="text/javascript">
 var engine = new Bloodhound({
   
@@ -102,17 +199,35 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
 });
 </script>
 
- </div>
-        
-         
-       
-      
-    <%= naw.text_area :file, :id=>'content-slide'  %>
-    <br/>
+    <div id="coverlearn">  
+     <div id="learnparams"> 
+ 
+  <div class="btn-group pull-right"  role="group" aria-label="...">
+     
 
-        <%= naw.submit "Update Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
+  <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default"><span class="fa fa-fw"><strong>Q</strong></span>
+ Insert Quiz</button>
+  <button type="button" onclick="insert_level()" class="btn btn-default"><span class="fa fa-minus"> </span> New Level</button>
+</div>
+<br/><br/>
+</div>
+</div>
+    <%= naw.text_area :file, :id=>'content-slide' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "Write a note. A good note has following properites. <br/> <ul> <li> Make it concise and clear </li> <li> Think from learner's point of view </li> <li> Tell the application of what you are teaching </li> </ul> "  %>
+       
+    <br/>
+    <%= naw.text_area :questions , :id => 'store_questions' , :rows => 10 , :value => '{ "level1" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level2" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level3" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} }, "level4" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level5" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level6" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } }' ,:style => 'display:none;' %>
+
+        <%= naw.submit "Create" , {:class => 'btn btn-primary btn-lg pull-right'} %>
 
   <% end %>
+ </div>
+ 
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div id="loadquestion" class="modal-content">
+      
 
 
-         
+    </div>
+  </div>
+</div>

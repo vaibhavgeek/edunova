@@ -32,6 +32,9 @@
           <b> <i> created </i> </b> a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> <br/>
 		                 		     <h4> <%= Note.find(feed.object_id).note_from_author %> </h4>
 
+<% elsif feed.set_type == 'quiz' %>
+            <b> <i> quizzed </i> </b> a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %></b> <br/> <%= Note.find(feed.object_id).note_from_author %>
+
 
           <% elsif feed.set_type == 'upvote' %>
             <b> <i> upvoted </i> </b> a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> 

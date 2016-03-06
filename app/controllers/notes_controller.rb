@@ -16,6 +16,8 @@ class NotesController < ApplicationController
    end
   
  def explore
+       @labels = Intrest.all    
+
             @notes_filter = Note.all.paginate(:per_page => 25, :page => params[:page]) 
  end
 
@@ -25,6 +27,11 @@ def display_quiz
  @note = Note.friendly.find(params[:note_id])
  @questions_hash = JSON.parse(@note.questions)
 
+end
+
+def display_quiz_result
+@note = Note.friendly.find(params[:note_id])
+ @questions_hash = JSON.parse(@note.questions)
 end
 
 

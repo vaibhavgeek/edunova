@@ -42,7 +42,7 @@
 	<% @bool = Relationship.where(:follower_id => current_user.id , :following_id => per.id) %>
 	
    <% if current_user.id != per.id %>
-        <div id="<%= per.id %>">
+        <div id="<%= per.slug %>">
 		<% if @bool.count == 1 %>
         
 

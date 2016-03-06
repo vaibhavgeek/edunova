@@ -89,6 +89,12 @@ WHERE relationships.following_id = '+@user.id.to_s).order(:created_at => :desc)
         @profile_feeds = Feed.joins('INNER JOIN  users 
         ON feeds.user_id = users.id').where(:set_type => 'play' , :user_id => @user.id).order(:created_at => :desc)
   end 
+  def quizzed
+     @user = User.friendly.find(params[:id])
+        @profile_feeds = Feed.joins('INNER JOIN  users 
+        ON feeds.user_id = users.id').where(:set_type => 'quiz' , :user_id => @user.id).order(:created_at => :desc)
+ 
+  end
   def upvoted
        @user = User.friendly.find(params[:id])
         @profile_feeds = Feed.joins('INNER JOIN  users 

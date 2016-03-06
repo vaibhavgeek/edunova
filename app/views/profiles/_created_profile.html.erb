@@ -29,7 +29,8 @@
 
 		posted by <%= link_to '@' + feed.user.username , profile_path(feed.user.id) %> <br/>
           <b> <i> created </i> </b> a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> <br/>
-		     <%= Note.find(feed.object_id).note_from_author %>
+		                  <h4> <%= Note.find(feed.object_id).note_from_author %> </h4>
+
       
 
          </div>

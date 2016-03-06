@@ -3,6 +3,8 @@
 	 <li><%= link_to "All",  all_profile_path(User.friendly.find(params[:id]))  , :class => 'active' , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");'  , :sort => 'all' , :type => 'button' , remote: true  %></li>
 <li><%= link_to "Created",  created_profile_path(User.friendly.find(params[:id]))   , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , :sort => 'create' , :type => 'button' , remote: true  %>  </li>
 <li><%= link_to "Played",  played_profile_path(User.friendly.find(params[:id]))  , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , :sort => 'play' , :type => 'button' , remote: true  %></li>
+<li><%= link_to "Quizzed",  quizzed_profile_path(User.friendly.find(params[:id]))  , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , :sort => 'quiz' , :type => 'button' , remote: true  %></li>
+
 <li><%= link_to "Upvoted",  upvoted_profile_path(User.friendly.find(params[:id]))  , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , :sort => 'upvote' , :type => 'button' , remote: true  %></li>
 <li><%= link_to "Posted",  commented_profile_path(User.friendly.find(params[:id])) , :onclick => '$(this).addClass("active").siblings(".active").removeClass("active");' , :sort => 'comment' , :type => 'button' , remote: true  %></li>
 

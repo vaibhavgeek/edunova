@@ -29,8 +29,9 @@
 		posted by <%= link_to '@' + feed.user.username , profile_path(feed.user.id) %> <br/>
 		
             <% if feed.set_type == 'comment' %>
-            <b> <i> posted </i> </b> on a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> 
+           <b> <i> posted </i> </b> on a note  <b> <%= link_to Note.find(feed.object_id).name , note_path(feed.object_id) %> </b> 
             <br/>
+            <%= markdown(Comment.find(feed.comment_id).comment.to_s) %>
             <% end %>
 
          </div>

@@ -1,36 +1,49 @@
 
 <div id="removeongame" class="removeongame">
+	<%= @questions_hash.to_s %>
+<br/><br/>
+	<% if  @questions_hash.to_s != '{"level1"=>{"question1"=>{}, "question2"=>{}, "question3"=>{}, "question4"=>{}}, "level2"=>{"question1"=>{}, "question2"=>{}, "question3"=>{}, "question4"=>{}}, "level3"=>{"question1"=>{}, "question2"=>{}, "question3"=>{}, "question4"=>{}}, "level4"=>{"question1"=>{}, "question2"=>{}, "question3"=>{}, "question4"=>{}}, "level5"=>{"question1"=>{}, "question2"=>{}, "question3"=>{}, "question4"=>{}}, "level6"=>{"question1"=>{}, "question2"=>{}, "question3"=>{}, "question4"=>{}}}' %>
 <div class="col-md-6 col-md-offset-3 well">
+<div id="message_top"> </div>
+	<% cnt = 0 %>
+<% @questions_hash.each do |level| %> 
+<% if level[1]["question1"].to_s != "{}" || level[1]["question2"].to_s != "{}" || level[1]["question3"].to_s != "{}" || level[1]["question4"].to_s != "{}"  %> 
+<% level[1].each do |question| %>
+			<% if  question[1]["question_text"] != "" %>
+			<% cnt = cnt + 1 %>
+			<form class="question" id="<%= "question" + cnt.to_s %>">
 
-<% @questions_hash.each do |level| %>
+			<h3><%= question[1]["question_text"] %> </h3> 
+			<p> 	<%= question[1]["description"] %> </p> 
+					 <%= radio_button("quiz", "level", "option1" ) %>
+					 		    <%= question[1]["option1"] %><br/>
+					 <%= radio_button("quiz", "level", "option2" ) %>
+					 			<%= question[1]["option2"] %><br/>
+					 <%= radio_button("quiz", "level", "option3" ) %>
+					 			<%= question[1]["option3"] %><br/>
+					 <%= radio_button("quiz", "level", "option4" ) %>
+					 			<%= question[1]["option4"] %><br/>
 
-				<% if level[1]["question1"]["question_text"] != "" %>
-<%= level[1]["question1"] %>
-<form id="level1">
-				<h4> <%= level[1]["question1"]["question_text"]   %> </h4> 
-				<p><%= level[1]["question1"]["description"] %> <br/>
-				  <%= radio_button("post", "category", "option1" ) %>
-				<%= level[1]["question1"]["option1"]   %><br/>
-				          <%= radio_button("post", "category", "option2") %>
-				<%= level[1]["question1"]["option2"]   %><br/>  <%= radio_button("post", "category", "option3") %>
-				<%= level[1]["question1"]["option3"]   %><br/>  <%= radio_button("post", "category", "option4") %>
-				<%= level[1]["question1"]["option4"]   %> <br/>
-				<div class="alert alert-info solu" id="solution<%= level[0] %>" style="display:none;">
-					<%= level[1]["question1"]["solution"] %>
-				</div>
-				<div id="answer" class="correct_answer">
-<%= level[1]["question1"].to_s.split('"correct_answer"=>"on",')[1].to_s[2..8] %>
+			<span style="display:none;" id="answer"><%= question[1].to_s.split('"correct_answer"=>"on",')[1].to_s[2..8] %>
+			</span>
+			<div id="solution" class="alert alert-info" style="display:none;">
+								<%= question[1]["solution"] if question[1]["solution"] != "" %>
 </div>
-</form>
-				<% end %>
+<div id="message"> </div>
+			</form>
+			<% end %>
 
-				
-
-
-<%= "<hr/>".html_safe if level[1]["question1"]["question_text"] != "" || level[1]["question2"]["question_text"] != "" || level[1]["question3"]["question_text"] != "" || level[1]["question4"]["question_text"] != "" %>
 <% end %>
-
+<% end %>
+<% end %>
 
 <%= link_to "Sumbit Quiz" , note_display_quiz_result_path(@note) , :method => :post , :class => 'btn btn-success pull-right' , remote: true  %><br/><br/>
 </div>
+<% else %> 
+	<div class="col-md-10 col-md-offset-1">
+<br/>
+ <div class="alert alert-warning"><center><h3> No Quiz for this note! </h3></center></div>
+</div>
+<% end %>
+
 </div>
