@@ -1,6 +1,77 @@
-<%= locals[:question] %> 	<br/><br/><h4>What is 15 + 12 equal to ? </h4>
-<p>This is a very simple question based on elementary concepts of addition </p> 
-<input type="radio" name="question1" value="male"> 27<br>
-  <input type="radio" name="question1" value="female"> 26<br>
-  <input type="radio" name="question1" value="other"> 37 <br/>
-    <input type="radio" name="question1" value="other"> 22 <br/>
+<% questring = "question" +  locals[:question].to_s %> 	
+
+
+<%  questions_hash = JSON.parse(locals[:question_content]) %>
+<% lev = "level" +  locals[:level].to_s %>
+<form class="question">
+
+			<h3><%= questions_hash[lev][questring]["question_text"] %> </h3> 
+			<p> 	<%= questions_hash[lev][questring]["description"] %> </p> 
+					 <%= radio_button("quiz", "level", "option1" ) %>
+					 		    <%= questions_hash[lev][questring]["option1"] %><br/>
+					 <%= radio_button("quiz", "level", "option2" ) %>
+					 			<%= questions_hash[lev][questring]["option2"] %><br/>
+					 <%= radio_button("quiz", "level", "option3" ) %>
+					 			<%= questions_hash[lev][questring]["option3"] %><br/>
+					 <%= radio_button("quiz", "level", "option4" ) %>
+					 			<%= questions_hash[lev][questring]["option4"] %><br/>
+
+			<span style="display:none;" id="answer"><%= questions_hash[lev][questring].to_s.split('"correct_answer"=>"on",')[1].to_s[2..8] %>
+			</span>
+			<div id="solution" class="alert alert-info" style="display:none;">
+								<%= questions_hash[lev][questring]["solution"] if questions_hash[lev][questring]["solution"] != "" %>
+</div>
+<div id="message"> </div>
+			</form> 	
+
+<button onclick="readlevel();" class="btn btn-default"> Read Level</button>
+  <button class="btn btn-primary pull-right" onclick="checkanswer();">Submit</button>
+<script type="text/javascript">
+function checkanswer(){
+	given_answer =  $.trim($(".question input:checked").val());
+	correct_answera = $.trim($(".question #answer").text());
+	if(given_answer == correct_answera)
+	{
+		closequestion();
+	}
+	else
+	{
+		$("#message").html("<br/><div class='alert-danger'> Wrong Answer, Please try again </div><br/>")
+	}
+}
+function readlevel(){
+	switch(l)
+{
+  case 1:
+  $("#placeholder-modal").html("<%= j render 'loadlevel', :locals => { :level => 1 , :read => 'true' } %> ");
+  break;
+
+  case 2:
+  $("#placeholder-modal").html("<%= j render 'loadlevel', :locals => { :level => 2 , :read => 'true' } %> ");
+  break;
+
+  case 3:
+  $("#placeholder-modal").html("<%= j render 'loadlevel', :locals => { :level => 3 , :read => 'true'} %> ");
+  break;
+
+  case 4:
+  $("#placeholder-modal").html("<%= j render 'loadlevel', :locals => { :level => 4 , :read => 'true'} %> ");
+  break;
+
+  case 5:
+  $("#placeholder-modal").html("<%= j render 'loadlevel', :locals => { :level => 5 , :read => 'true'} %> ");
+  break;
+
+  case 6:
+  $("#placeholder-modal").html("<%= j render 'loadlevel', :locals => { :level => 6 , :read => 'true'} %> ");
+  break;
+
+  default:
+  $("#placeholder-modal").html("Some Error Ocurred, we will look into this matter. ");
+}
+  
+     $('#myModal').modal({backdrop:'static',keyboard:true, show:true});
+
+                       Q.pauseGame();
+}
+</script>

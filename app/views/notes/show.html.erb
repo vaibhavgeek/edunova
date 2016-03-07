@@ -4,8 +4,7 @@
 <div id="content_question">
 Loading.... Please wait
 </div>
-<button class="btn btn-default"> Read Level</button>
-  <button class="btn btn-primary pull-right" onclick="closequestion();">Submit</button>
+
 </div>
 
  
@@ -378,24 +377,164 @@ else if(temp!=p.flag_no)
  console.log("cnt="+cnt);
  $('#e').on('shown.bs.popover', function (e) {
      $('#b').show();
-     switch(cnt)
+switch(l)
+{
+  case 1:
+  switch(cnt)
      {
       case 1:
-      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 1} %> ");
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 1 , :question_content => @note.questions , :level => 1 } %> ");
       break;
 
       case 2:
-      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 2} %> ");
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 2 , :question_content => @note.questions , :level => 1 } %> ");
       break;
 
       case 3:
-      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 3} %> ");
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 3 , :question_content => @note.questions , :level => 1 } %> ");
       break;
 
       case 4:
-      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 4} %> ");
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 4 , :question_content => @note.questions , :level => 1 } %> ");
       break;
      }
+  break;
+
+  case 2:
+  switch(cnt)
+     {
+      case 1:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 1 , :question_content => @note.questions , :level => 2 } %> ");
+      break;
+
+      case 2:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 2 , :question_content => @note.questions , :level => 2 } %> ");
+      break;
+
+      case 3:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 3 , :question_content => @note.questions , :level => 2 } %> ");
+      break;
+
+      case 4:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 4 , :question_content => @note.questions , :level => 2 } %> ");
+      break;
+     }
+  break;
+
+  case 3:
+  switch(cnt)
+     {
+      case 1:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 1 , :question_content => @note.questions , :level => 3 } %> ");
+      break;
+
+      case 2:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 2 , :question_content => @note.questions , :level => 3 } %> ");
+      break;
+
+      case 3:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 3 , :question_content => @note.questions , :level => 3 } %> ");
+      break;
+
+      case 4:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 4 , :question_content => @note.questions , :level => 3 } %> ");
+      break;
+     }
+  break;
+
+  case 4:
+ switch(cnt)
+     {
+      case 1:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 1 , :question_content => @note.questions , :level => 4 } %> ");
+      break;
+
+      case 2:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 2 , :question_content => @note.questions , :level => 4 } %> ");
+      break;
+
+      case 3:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 3 , :question_content => @note.questions , :level => 4 } %> ");
+      break;
+
+      case 4:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 4 , :question_content => @note.questions , :level => 4 } %> ");
+      break;
+     }
+  break;
+
+  case 5:
+  switch(cnt)
+     {
+      case 1:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 1 , :question_content => @note.questions , :level => 5 } %> ");
+      break;
+
+      case 2:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 2 , :question_content => @note.questions , :level => 5 } %> ");
+      break;
+
+      case 3:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 3 , :question_content => @note.questions , :level => 5 } %> ");
+      break;
+
+      case 4:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 4 , :question_content => @note.questions , :level => 5 } %> ");
+      break;
+     }
+  break;
+
+  case 6:
+switch(cnt)
+     {
+      case 1:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 1 , :question_content => @note.questions  , :level => 6  } %> ");
+
+      case 2:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 2 , :question_content => @note.questions  , :level => 6 } %> ");
+      break;
+
+      case 3:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 3 , :question_content => @note.questions  , :level => 6 } %> ");
+      break;
+
+      case 4:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 4 , :question_content => @note.questions  , :level => 6 } %> ");
+      break;
+     }
+  break;
+
+  default:
+  switch(cnt)
+     {
+      case 1:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 1 , :question_content => @note.questions  , :level => 1 } %> ");
+      break;
+
+      case 2:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 2 , :question_content => @note.questions  , :level => 1 } %> ");
+      break;
+
+      case 3:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 3 , :question_content => @note.questions  , :level => 1 } %> ");
+      break;
+
+      case 4:
+      $('#content_question').html("<%= j render 'show_question', :locals => { :question => 4 , :question_content => @note.questions  , :level => 1 } %> ");
+      break;
+     }
+}
+
+
+
+
+
+
+
+
+
+
+     
      
       Q.pauseGame();
  });
@@ -441,7 +580,7 @@ Q.scene("1",function(stage) {
   if( pflag==0)
 {l=1;startx=450;starty=180; cnt=0;}
 h=0;
-pos=[[700,0],[800,0],[600,150],[55,450],[55,0],[1280,650],[1330,600]];
+pos=[[800,0],[600,150],[55,0],[1280,650],[1330,600]];
 fpos=[[900,200],[760,-30],[140,400],[900,550]];
 
 
@@ -454,7 +593,13 @@ fpos=[[900,200],[760,-30],[140,400],[900,550]];
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:1330, y: 600 }));
-     for(j=0 ;j<4;j++)           ///////// n=4 if no. of ques=4
+  <% cnt_quest = 0 %>
+  <% @questions_hash["level1"].each do |quest| %>
+    <% if quest[1]["question_text"] != "" %>
+    <% cnt_quest = cnt_quest + 1 %>
+    <% end %>
+  <% end %>
+     for(j=0 ;j<parseInt('<%= cnt_quest %>');j++)           ///////// n=4 if no. of ques=4
     {
    stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
            
@@ -473,7 +618,7 @@ Q.scene("score",function(stage) {
   }));
    var b= stage.insert (new Q.UI.Button ({
 x:Q.width-100 , y: 20 , fill : '#CCCCCC', 
-label : "skip game, take quiz" , font : '16px Arial' }));
+label : "skip game" , font : '16px Arial' }));
  b.on("click",function(){
 Q.clearStages();
 flag=flag+newscore;
@@ -498,8 +643,14 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
   stage.add("viewport").follow(player);
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
- for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
-   stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
+ <% cnt_ques = 0 %>
+  <% @questions_hash["level2"].each do |ques| %>
+    <% if ques[1]["question_text"] != "" %>
+    <% cnt_ques = cnt_ques + 1 %>
+    <% end %>
+  <% end %>
+     for(j=0 ;j<parseInt('<%= cnt_ques %>');j++)          
+      stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
 
   stage.insert(new Q.Tower({ x:2970, y: 660 }));
   Q.stageScene("score",1, { 
@@ -524,8 +675,14 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:980, y: 980 }));
-for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
-   stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
+ <% cnt_que = 0 %>
+  <% @questions_hash["level3"].each do |que| %>
+    <% if que[1]["question_text"] != "" %>
+    <% cnt_que = cnt_que + 1 %>
+    <% end %>
+  <% end %>
+     for(j=0 ;j<parseInt('<%= cnt_que %>');j++) 
+       stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
   Q.stageScene("score",1, { 
   label: "score: "+flag});
 });
@@ -547,8 +704,14 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:640, y: 650 }));
-for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
-   stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
+ <% cnt_ques = 0 %>
+  <% @questions_hash["level4"].each do |ques| %>
+    <% if ques[1]["question_text"] != "" %>
+    <% cnt_ques = cnt_ques + 1 %>
+    <% end %>
+  <% end %>
+     for(j=0 ;j<parseInt('<%= cnt_ques %>');j++)    
+        stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
   Q.stageScene("score",1, { 
   label: "score: "+flag });
 });
@@ -570,8 +733,13 @@ var player = stage.insert(new Q.Player({x:startx,y:starty,jumpSpeed:-450}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:3000, y: 620 }));
-for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
-   stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
+ <% cnt_ques = 0 %>
+  <% @questions_hash["level5"].each do |ques| %>
+    <% if ques[1]["question_text"] != "" %>
+    <% cnt_ques = cnt_ques + 1 %>
+    <% end %>
+  <% end %>
+     for(j=0 ;j<parseInt('<%= cnt_ques %>');j++)       stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
   Q.stageScene("score",1, { 
   label: "score: "+flag });
 });
@@ -591,8 +759,13 @@ var player = stage.insert(new Q.Player({x:startx,y:starty,jumpSpeed:-450}));
   stage.add("viewport").follow(player);
   for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
-  for(j=0 ;j<2;j++)           ///////// n=4 if no. of ques=4
-   stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
+ <% cnt_ques = 0 %>
+  <% @questions_hash["level6"].each do |ques| %>
+    <% if ques[1]["question_text"] != "" %>
+    <% cnt_ques = cnt_ques + 1 %>
+    <% end %>
+  <% end %>
+     for(j=0 ;j<parseInt('<%= cnt_ques %>');j++)       stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
 stage.insert(new Q.Tower({ x:1300, y: 150}));
  Q.stageScene("score",1, { 
   label: "score: "+flag });
