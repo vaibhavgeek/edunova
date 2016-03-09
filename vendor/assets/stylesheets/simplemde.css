@@ -1,3 +1,13 @@
+#myModal
+{
+     z-index: 1060;
+
+}
+.unreadnotif
+{
+  background-color: rgb(227, 227, 227) !important; 
+  border: 3px solid white;
+}
 .CodeMirror {
 	height: auto;
 	min-height: 300px;
