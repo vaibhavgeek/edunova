@@ -15,8 +15,8 @@ port: 587,
 domain: "gmail.com",
 authentication: "plain",
 enable_starttls_auto: true,
-user_name: "vaibhav.dkm@gmail.com",
-password: "edunova.io"
+user_name: "vaibhavblogger@gmail.com",
+password: "F1inindia"
 }
 
 
