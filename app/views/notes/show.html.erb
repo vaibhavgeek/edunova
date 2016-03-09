@@ -1,5 +1,5 @@
               
-<a id="e" tabindex="0" data-toggle="popover" data-trigger="focus" data-html="true"></a>
+<a id="e" tabindex="0" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-html="true"></a>
 <div id="but" style="display: none">
 <div id="content_question">
 Loading.... Please wait
@@ -29,7 +29,7 @@ Loading.... Please wait
 <div class="panel-body">
 
 
-<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal" id="myModal" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -369,7 +369,7 @@ $('#e').popover({ html : true,
           return $('#but').html();
         }
       });
- $('#e').css({'position':'absolute','top':yi,'right':xi}).popover('show');
+ $('#e').css({'position':'fixed','top':'50%','right':'50%'}).popover('show');
   if(cnt==0)
  { cnt++;temp=p.flag_no;}
 else if(temp!=p.flag_no)

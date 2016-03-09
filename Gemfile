@@ -15,6 +15,7 @@ gem 'rails_bootstrap_navbar'
 
 gem 'bootstrap-typeahead-rails'
 gem "refile-s3"
+gem 'nprogress-rails'
 
 
 

@@ -38,7 +38,8 @@
 //= require edunova_tour
 //= require bootstrap-select
 
-
-//= require turbolinks
+//= require nprogress
+//= require nprogress-turbolinks
+//= require nprogress-ajax
 
 //= require_tree .
