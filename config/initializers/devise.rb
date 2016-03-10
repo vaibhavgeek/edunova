@@ -240,8 +240,8 @@ config.secret_key = '6cba3c175bc496f02e118798e0d6dd4d974c602c695a1d99cf945913a4d
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-config.omniauth :google_oauth2,'228518371217-kntsfcvbic4lrb4g2lj3ti018d9g77dd.apps.googleusercontent.com' , 'g3ezIKxhSpj5QIKKkP4c-rhq', {access_type: "offline", :scope => 'userinfo.email,userinfo.profile' , :image_size => '170' , skip_jwt: true}
-config.omniauth :facebook, "843622779026346", "20123d9594640cc880e57eaddc5f7833"
+config.omniauth :google_oauth2,'228518371217-kntsfcvbic4lrb4g2lj3ti018d9g77dd.apps.googleusercontent.com' , 'g3ezIKxhSpj5QIKKkP4c-rhq', {access_type: "offline", :scope => 'userinfo.email,userinfo.profile' , :image_size => '170' , skip_jwt: true , provider_ignores_state: true }
+config.omniauth :facebook, "843622779026346", "20123d9594640cc880e57eaddc5f7833"                                                                                                                                              
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
