@@ -4,7 +4,7 @@ ruby "2.2.2"
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
 gem 'mathjax-rails'
-	
+gem "wysiwyg-rails"
 gem 'redcarpet'
 gem 'friendly_id'
 gem 'acts_as_votable',	 '~> 0.10.0'
@@ -22,9 +22,9 @@ gem 'nprogress-rails'
 gem 'devise'
 
 gem 'omniauth'
+gem 'yt', '~> 0.25.5'
 
 gem 'omniauth-facebook'
-
 gem 'oauth2'
 gem 'omniauth-google-oauth2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

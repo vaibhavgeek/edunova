@@ -13,7 +13,6 @@
  *= require_tree .
  *= require_self
  *= application
- *= require font-awesome
  *= require bootstrap
  *= require bootstrap-theme
  *= require style
@@ -21,8 +20,15 @@
  *= require bootstrap-tokenfield
  *= require bootstrap-typeahead-rails
  *= require bootstrap-tour
- *= require simplemde.min
  *= require bootstrap-select
  *= require nprogress
  *= require nprogress-bootstrap
+ *= require plugins/colors.min.css
+ *= require plugins/image.min.css
+ *= require plugins/line_breaker.min.css
+ *= require plugins/table.min.css
+ *= require plugins/video.min.css
+ *= require froala_editor.min.css
+ *= require froala_style.min.css
+ *= require font-awesome
  */

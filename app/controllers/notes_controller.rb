@@ -16,9 +16,8 @@ class NotesController < ApplicationController
    end
   
  def explore
-       @labels = Intrest.all    
-
-            @notes_filter = Note.all.paginate(:per_page => 25, :page => params[:page]) 
+    @labels = Intrest.all    
+    @notes_filter = Note.all.paginate(:per_page => 25, :page => params[:page]) 
  end
 
 
@@ -56,8 +55,11 @@ end
 
   def new
   	@note = Note.new
+    @hash = AmazonSignature::data_hash
     @array_levels = [*1..6].to_json
   end
+
+
   def destroy
     @note = Note.friendly.find(params[:id])
     @deletefeed = Feed.where(:object_id => @note.id)
@@ -68,11 +70,12 @@ end
     @deletenotifications.destroy_all
     @note.destroy
     @mynotes = Note.where(:user_id => current_user.id).paginate(:per_page => 7, :page => params[:page])
-
   end
+
+
   def create
-    
    @note = Note.new(note_params)
+   @hash = AmazonSignature::data_hash
    @labels = note_params[:prereq].split(",")
       @labels.each do |intr|
         Intrest.find_or_create_by(value: intr.strip.to_s)
@@ -93,9 +96,9 @@ end
                 @note.save
               end
    end
-
-   
   end
+
+
   def update
     @note = Note.friendly.find(params[:id])
      @labels = note_params[:prereq].split(",")
@@ -112,6 +115,7 @@ end
    end
   end
 
+
   def edit
     @note = Note.friendly.find(params[:id])
     if @note.user_id != current_user.id
@@ -119,14 +123,19 @@ end
     end
   end
 
+
   def show
    @note = Note.friendly.find(params[:id])
    @questions_hash = JSON.parse(@note.questions)
    @get_level = Play.where(:user_id => current_user.id , :note_id => @note).first
   end
+
+
   def comment_view  
        @note = Note.friendly.find(params[:note_id])
   end
+
+
   def my_notes
     @mynotes = Note.where(:user_id => current_user.id).paginate(:per_page => 7, :page => params[:page])
   end
@@ -140,14 +149,18 @@ end
     sendnotif = Notification.new(:to_id => User.find(@note.user_id) , :from_id => current_user , :read => 0 ,:category => 'UYN' , :note_id => @note.id )
     sendnotif.save
     end
-     
-    
   end
   
-  def next_level
+  def openlibrary
     
+    
+ end
 
-
+ def search_results
+  videos = Yt::Collections::Videos.new
+  @video = videos.where(q: 'vaibhav maheshwari', safe_search: 'none').first(5)
+ end
+  def next_level
      @note = Note.friendly.find(params[:note_id])
      if  Play.where(:user_id => current_user.id , :note_id => @note.id ).count > 0
       play = Play.where(:user_id => current_user.id , :note_id => @note.id ).first
@@ -159,8 +172,6 @@ end
         else
           play.update_attributes(:p_count => p_cnt)
         end
-      
-
      else 
      play =  Play.new(:user_id => current_user.id , :note_id => @note.id , :p_count => 0 , :current_level => params[:query].to_i  )
      play.save
@@ -173,9 +184,6 @@ end
       end
       end
     
-
-
-
   end
 
   def unvote
