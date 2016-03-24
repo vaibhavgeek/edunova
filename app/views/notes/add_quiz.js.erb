@@ -1,5 +1,5 @@
-var a = $("#select_level").val().toString();
-switch(a)
+var ant = $("#select_level").val().toString();
+switch(ant)
 {
 	case "1" : 
 	$("#loadquiz").html("<%= j render 'questions/question' , :locals => { :level => 1 }   %>")
@@ -27,6 +27,7 @@ switch(a)
 
 	default:
 	alert("Please select valid level.");
+	break;
 
 }
 

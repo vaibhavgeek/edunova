@@ -3,26 +3,25 @@ development:
   encoding: utf8
   database: edunova
   pool: 5
-  username: vaibhavgeek
-  password:
+  host: localhost
+  username: postgres
+  password: vaibhavgeek   
 
 test: &TEST
   adapter: postgresql
   encoding: utf8
   database: edunova
   pool: 5
-  username: vaibhavgeek
-  password:
+  username: postgres
+  password: vaibhavgeek
 
 production:
-  production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: edunova
-  username: vaibhavgeek 
-  password: F1inindia
-  host: aafgkrl4000vuv.cldiuzwqkq5z.us-east-1.rds.amazonaws.com
-  port: 3306
+  pool: 5
+  username: postgres
+  password: vaibhavgeek
 
 cucumber:
   <<: *TEST

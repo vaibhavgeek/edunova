@@ -80,11 +80,9 @@ body
 
 hr
 {
-   border: none;
-    height: 2px;
-    /* Set the hr color */
-    color: brown; /* old IE */
-    background-color: brown; /* Modern Browsers */
+      border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
 }
 
 @media(min-width:768px){

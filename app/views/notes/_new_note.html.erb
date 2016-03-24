@@ -1,3 +1,13 @@
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div id="loadquestion" class="modal-content">
+      
+
+
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
 var ready;
 ready = function() {
@@ -19,9 +29,13 @@ function changetolnote(){
 };
 
 
+
 $('#myModal').on('show.bs.modal', function (event) {
+   
+
   var j=1;
-  var count = 5;
+  var raw_html =   $('#content-slide').froalaEditor('html.get');
+  var count = (raw_html.match(/<hr>/g) || []).length + 1;
           
   var modal = $(this);
  
@@ -172,19 +186,9 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
     <%= naw.text_area :file, :id=> 'content-slide'   %>
        
     <br/>
-    <%= naw.text_area :file, :id=>'level2content'   %>
-       
-       <br/>
-       <%= naw.text_area :file, :id=>'level3content'   %>
-       <br/>
-       <%= naw.text_area :file, :id=>'level4content'   %>
-       <br/>
-       <%= naw.text_area :file, :id=>'level5content'   %>
-       <br/>
-       <%= naw.text_area :file, :id=>'level6content'   %>
-       <br/>
+  
 <div id="coverlearn">
-     <div id="learnparams" class="btn-group"  role="group" aria-label="...">
+<div id="learnparams" class="btn-group"  role="group" aria-label="...">
 
   <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
 Insert Quiz
@@ -193,44 +197,67 @@ Insert Quiz
   <button type="button" class="btn btn-default btn-lg" id="new_level_button">
 Add Section
   </button>
+</div>      
 </div>
-</div>
-    <%= naw.text_area :questions , :id => 'store_questions' , :rows => 10 , :value => '{ "level1" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level2" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level3" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} }, "level4" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level5" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level6" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } }' ,:style => 'display:none;' %>
+    <%= naw.text_field :questions , :id => 'store_questions' , :value => '{ "level1" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level2" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level3" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} }, "level4" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level5" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level6" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } }' ,:style => 'display:none;' %>
       
 
         <%= naw.submit "Create Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
 
   <% end %>
  </div>
- 
-<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-lg">
-    <div id="loadquestion" class="modal-content">
-      
 
 
-    </div>
-  </div>
-</div>
+
 <script type="text/javascript">
+
 $(function() {
+$.FroalaEditor.DefineIcon('my_dropdown', {NAME: 'maxcdn'});
+    $.FroalaEditor.RegisterCommand('my_dropdown', {
+      title: 'Insert Maths',
+      type: 'dropdown',
+      focus: true,
+      undo: true,
+      refreshAfterCallback: true,
+      options: {
+        'eq': 'LaTeX Equation',
+        'inte': 'LaTeX Integral' 
+      },
+      callback: function (cmd, val) {
+        console.log (val);
+      }
+      // Callback on refre
+      // Callback on dropdown show.
+    });
+
+
     $('#content-slide') 
     .on('froalaEditor.initialized', function (e, editor) {
         editor.events.bindClick($('body'), '#new_level_button', function () {
-          editor.html.insert('<hr/>');
+          var raw_html =   $('#content-slide').froalaEditor('html.get');
+          var count = (raw_html.match(/<hr>/g) || []).length + 2;
+          if(count <= 6)
+          {
+                      editor.html.insert('<hr/> <br/>');
+          }
+          else
+          {
+                       alert('As of now you can only have 6 levels');
+
+          }
         });
       }).froalaEditor({
       // Set custom buttons with separator between them.
-        heightMin: 300,
-      toolbarButtons: [ 'bold', 'italic', 'underline', 'fontFamily', 'fontSize' ,  'color' , 'strikethrough', 'subscript', 'superscript', 'outdent', 'indent', 'insertTable' , 'insertImage' , 'insertVideo' , '|' , 'undo', 'redo' ],
+        heightMin: 400,
+      toolbarButtons: [ 'bold', 'italic', 'underline', 'fontFamily', 'fontSize' ,  'color' , 'strikethrough', 'subscript', 'superscript', 'outdent', 'indent', 'insertTable' , 'insertImage' , 'insertVideo' , '|','formatOL' ,'formatUL',  '|' , 'my_dropdown' ,'|' , 'undo', 'redo'  ],
       toolbarButtonsXS: ['undo', 'redo' , '-', 'bold', 'italic', 'underline'],
                   imageUploadToS3: {
              bucket: '<%= @hash[:bucket] %>',
              region: 's3-us-west-2', // Change the region if it is different
              keyStart: '<%= @hash[:key_start] %>',
              callback: function (url, key) {
-             console.log (url);
-             console.log (key);
+            // console.log (url);
+            // console.log (key);
              },
              params: {
              acl: '<%= @hash[:acl] %>',

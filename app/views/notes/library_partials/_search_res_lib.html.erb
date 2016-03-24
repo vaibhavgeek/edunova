@@ -1,0 +1,27 @@
+<div style="padding-top:5px;">
+<table class="table table-striped">
+
+<% @video_list.each do |video| %>
+<tr> <td>
+<h4> <%= video.title %> </h4>
+<img class="img-rounded img-responsive"  src= "http://img.youtube.com/vi/<%= video.id %>/mqdefault.jpg" />
+<button class="btn btn-primary pull-right" onclick ="add_video('<%= video.id %>')" style="margin-top:3px;"><i class="glyphicon glyphicon-plus" />  </button>
+from: <b> <%= video.channel_title %> </b> <br/>
+duration: <b> <%= Time.at(video.duration).utc.strftime("%M:%S") %> </b>
+
+</td>
+</tr>
+<% end %>
+</table>
+</div>
+<script type="text/javascript">
+	function add_video(id){
+		var html_s = '<p><span class="fr-video fr-dvb fr-draggable" contenteditable="false" draggable="true"><iframe width="640" height="360" src="//www.youtube.com/embed/'+ id + '" frameborder="0" allowfullscreen=""></iframe></span></p>';
+		  $('#content-slide').froalaEditor('html.insert' , html_s , false);
+
+
+	}
+</script>
+<!-- 
+html to be added
+-->

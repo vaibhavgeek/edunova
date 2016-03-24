@@ -2,43 +2,48 @@
 <div id="level<%= locals[:level] %>">
 
 
-<form id="question1">
+        <form id="question1">
 
-<div class="row"> 
-<div class="col-md-12"> 
-	  <h4> Question 1 </h4>
-</div>
-<div class="col-md-6"> 
-	<input type="text" name="question_text" class="form-control" placeholder="Question Title"> </input>
- <br/> 
-Enter Options :- (Check one with the correct answer) <br/>
-<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' > </input> 
-<input type="text" name="option1" placeholder="Option A"> </input>
-  <br/>
-<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' > </input> 
-<input type="text" name="option2" placeholder="Option B"> </input>
-  <br/>
-<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' > </input> 
-<input type="text" name="option3" placeholder="Option C"> </input>
-  <br/>
-<input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' > </input> 
+        <div class="row"> 
+        <div class="col-md-12"> 
+        	  <h4> Question 1 </h4>
+        </div>
+        <div class="col-md-6"> 
+        	<input type="text" name="question_text" class="form-control" placeholder="Question Title"> </input>
+         <br/> 
+        Enter Options :- (Check one with the correct answer) <br/>
+        <label class="option">
 
-<input type="text" name="option4" placeholder="Option D"> </input>
+        <input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' > </input> 
+        </label>
+        <input type="text" name="option1" placeholder="Option A"> </input>
+          <br/>
+        <input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' > </input> 
+        <input type="text" name="option2" placeholder="Option B"> </input>
+          <br/>
+        <input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' > </input> 
+        <input type="text" name="option3" placeholder="Option C"> </input>
+          <br/>
+        <input type="radio" name="correct_answer" onchange='$(this).parEnt().addclass("active").siblings(".active").removeclass("active");' > </input> 
 
- 
+        <input type="text" name="option4" placeholder="Option D"> </input>
 
-
-
-</div>
-<div class="col-md-6"> 
- <textarea name="description" class="form-control" placeholder="Explain Your Question"></textarea>
- <br/> 
- <textarea name="solution" class="form-control" rows="4" placeholder="Explain Your Solution"></textarea>
+         
 
 
-</div>
-</div>
-</form>
+
+        </div>
+        <div class="col-md-6"> 
+         <textarea name="description" class="form-control" placeholder="Explain Your Question"></textarea>
+         <br/> 
+         <textarea name="solution" class="form-control" rows="4" placeholder="Explain Your Solution"></textarea>
+
+
+        </div>
+        </div>
+        </form>
+
+
 <form id="question2" style="display:none;">
 <hr/>
 <div class="row"> 
@@ -76,6 +81,11 @@ Enter Options :- (Check one with the correct answer) <br/>
 </div>
 </div>
 </form>
+
+
+
+
+
 <form id="question3" style="display:none;">
 <hr/>
 <div class="row"> 
@@ -113,6 +123,11 @@ Enter Options :- (Check one with the correct answer) <br/>
 </div>
 </div>
 </form>
+
+
+
+
+
 <form id="question4" style="display:none;">
 <hr/>
 <div class="row"> 
@@ -150,9 +165,16 @@ Enter Options :- (Check one with the correct answer) <br/>
 </div>
 </div>
 </form><br/>
+
+
+
 <div id="append_alert">
  <button type="button" id="new_question" class="btn btn-success pull-left" onclick='addquestion();'><i class="glyphicon glyphicon-plus" > </i> Add Question</button>
 </div>
+</div>
+
+
+
 <script type="text/javascript">
 
 
@@ -262,4 +284,3 @@ $.fn.serializeObject = function()
 
 
 </script>
-</div>

@@ -81,10 +81,9 @@ end
         Intrest.find_or_create_by(value: intr.strip.to_s)
       end  
    
-   @note.total_levels = note_params[:file].to_s.split('........................................................New_Level................................................').count
+   @note.total_levels = note_params[:file].to_s.split('<hr>').count
     if @note.total_levels <= 6
           @note.user_id = current_user.id
-              if params[:commit] == 'Create'
                  if @note.save
                    updatefeed = Feed.new(:user_id => current_user.id , :object_id => @note.id  , :set_type => 'create' , :fcontent => @note.note_from_author)           
                    updatefeed.save   
@@ -92,9 +91,7 @@ end
                  else
                    render "new"
                  end
-              elsif params[:commit] == "Save"
-                @note.save
-              end
+              
    end
   end
 
@@ -156,9 +153,13 @@ end
     
  end
 
- def search_results
+ def search_results_videos
   videos = Yt::Collections::Videos.new
-  @video = videos.where(q: 'vaibhav maheshwari', safe_search: 'none').first(5)
+  if params[:selected_course][:course_tag] != 'all'
+  @video_list = videos.where(q: params[:search].to_s , safe_search: 'none' , order: 'Relevance' , channel_id: params[:selected_course][:course_tag] ).first(4)
+  else
+  @video_list = videos.where(q: params[:search].to_s , safe_search: 'none' , order: 'Relevance').first(4)
+  end 
  end
   def next_level
      @note = Note.friendly.find(params[:note_id])

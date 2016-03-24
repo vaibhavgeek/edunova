@@ -13,7 +13,7 @@
 
 <% @notes_filter.each do |note| %>
  <a style="cursor:pointer;" class="list-group-item" type="button" data-toggle="collapse" data-target="#<%= note.id %>" aria-expanded="false" aria-controls="collapseExample">
-    <h4 class="list-group-item-heading"><%= note.name %> <% if note.description.to_s == "insight" %><span class="label label-primary pull-right">Insight Note</span> <% end %>
+    <h4 class="list-group-item-heading"><%= note.name %> <% if note.description.to_s == "insight" %><span style="background-color: #337AB7;" class="badge pull-right">Insight Note</span> <% end %>
 </h4>
     <p class="list-group-item-text">
     	 by <b> @<%= note.user.username %> </b> <span class="pull-right"> <span class="badge"><%= note.get_upvotes.size %> votes </span>

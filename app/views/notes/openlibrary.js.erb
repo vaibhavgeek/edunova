@@ -1,1 +1,9 @@
-$("#right_section").html("<%= j render ('notes/library_partials/lib_view') %>");
+$("#right_section_inner_cover").hide();
+if($('#library_cover').length == 0) {
+		$("#right_section").append("<%= j render ('notes/library_partials/lib_view') %>");
+    }
+    else
+    {
+    	$("#library_cover").show();
+    }
+$('.selectpicker').selectpicker();
