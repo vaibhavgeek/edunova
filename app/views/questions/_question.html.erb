@@ -194,11 +194,15 @@ for (var level in obj){
                                 if(question.hasOwnProperty('question_text')){
                                   if(question['question_text'] != "")
                                   {
+                                    var question_string = JSON.stringify(question);
+                                    var splited = question_string.split("\"correct_answer\":\"on\",")[1].toString().substring(7,8);
+                                    
 
                                     if(key.toString != "question1")
                                     {
                                       $("#" + key.toString()).show();
                                     }
+                                    $("input[type='radio']:nth-child("+splited+")").prop("checked", true);
                                      $("#"+key.toString()+" input[name='question_text']").val(question['question_text']);                         
                                      $("#"+key.toString()+" input[name='option1']").val(question['option1']);
                                      $("#"+key.toString()+" input[name='option2']").val(question['option2']);
