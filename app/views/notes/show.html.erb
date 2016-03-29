@@ -49,6 +49,7 @@ Loading.... Please wait
 
 <div class="row" style="padding-left:15px;padding-right:15px;">
 <div class="row">
+<%= @note.questions %>
   <div class="col-md-4">
   <div class="btn-group">
  
@@ -595,7 +596,7 @@ for(var i=0;i<pos.length;i++)
   stage.insert(new Q.Tower({ x:1330, y: 600 }));
   <% cnt_quest = 0 %>
   <% @questions_hash["level1"].each do |quest| %>
-    <% if quest[1]["question_text"] != "" %>
+    <% if quest[1]["question_text"].to_s.strip != "" %>
     <% cnt_quest = cnt_quest + 1 %>
     <% end %>
   <% end %>

@@ -7,6 +7,6 @@
 <% else %>
 <% note_html = Note.friendly.find(params[:note_id]) %>
 <% end %>
-<%= markdown(note_html.file.to_s) %>
+<%= note_html.file.to_s %>
 </div>
 </div>

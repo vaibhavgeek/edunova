@@ -8,7 +8,7 @@
 <% @questions_hash.each do |level| %> 
 <% if level[1]["question1"].to_s != "{}" || level[1]["question2"].to_s != "{}" || level[1]["question3"].to_s != "{}" || level[1]["question4"].to_s != "{}"  %> 
 <% level[1].each do |question| %>
-			<% if  question[1]["question_text"] != "" %>
+			<% if  question[1]["question_text"].to_s.strip != "" %>
 			<% cnt = cnt + 1 %>
 			<form class="question" id="<%= "question" + cnt.to_s %>">
 

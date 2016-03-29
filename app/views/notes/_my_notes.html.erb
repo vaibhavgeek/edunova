@@ -50,10 +50,12 @@
     
 	<% end %>
 	<p class="list-group-item-text">
-    	 <span class="pull-right"> <span class="badge"><%= note.get_upvotes.size %> votes </span>
 
+    	 <span class="pull-right"> &nbsp;<span class="badge"><%= note.get_upvotes.size %> votes </span>
 <span class="badge"><%= note.comments.count %> 
     	  posts </span> </span>
+
+<% if note.description.to_s == "insight" %><span style="background-color: #337AB7;" class="badge pull-right">insight note</span> <% end %>
 
 
     </p> 
