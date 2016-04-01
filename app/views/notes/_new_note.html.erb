@@ -78,8 +78,8 @@ $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     
 });
-$(function () {
-  $('[data-toggle="popover"]').popover()
+$('[data-toggle="popover"]').popover({
+    container: 'body'
 });
 </script>
 <center><h1>create new note</h1></center>
@@ -221,10 +221,31 @@ $.FroalaEditor.DefineIcon('my_dropdown', {NAME: 'maxcdn'});
       refreshAfterCallback: true,
       options: {
         'eq': 'LaTeX Equation',
-        'inte': 'LaTeX Integral' 
+        'inte': 'LaTeX Integral',
+        'frac' : 'LaTeX Fraction',
+        'quid' : 'LaTeX Guide' 
       },
       callback: function (cmd, val) {
-        console.log (val);
+          switch(val.toString())
+          {
+            case 'eq':
+              $('#content-slide').froalaEditor('html.insert' , "$$ ax^2 + bx + c = 0 $$" , false);
+            break;
+
+            case 'inte':
+              $('#content-slide').froalaEditor('html.insert' , "$$ \\int(ax^2 + bx + c)dx $$ " , false);
+            break;
+
+            case 'frac':            
+              $('#content-slide').froalaEditor('html.insert' , "$$ {a+1\\over b+1} $$ " , false);
+            break;
+
+            case 'quid' :
+              window.open(url,'_blank');
+            break;
+
+            default:
+          }
       }
       // Callback on refre
       // Callback on dropdown show.

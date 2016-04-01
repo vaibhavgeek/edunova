@@ -9,6 +9,8 @@
       	<% if locals[:level] == 0 %>
       	<% locals[:level] = 1 %>
       	<% end %>
+
+
  <!--
        
 <%# @times = (Note.friendly.find(params[:id]).file.split('<hr>')[locals[:level] - 1].to_s.html_safe.to_s.split.size / 500.0) %>
@@ -31,5 +33,17 @@ clearInterval(timer);
 </script>
 <div class="alert-warning pull-left"> <b> Next Level button will be displayed when you finish reading this section! (magic) </b> </div>
  -->
+
+ <% if locals[:read] == 'true' %> 
+     <script type="text/javascript">
+            $('#e').popover('hide');
+            $('#timer').click(function(e) {
+               $('#e').popover('show');
+
+
+            });
+     </script>
+
+ <% end %>
         <%= button_to "next level" ,  note_update_level_path(:note_id => @note.id , :query => locals[:level]) , :class => 'btn btn-success pull-right' , :id => 'timer' , :onclick => 'closemodal()' , :method => 'put' , remote: true   %>
       </div>

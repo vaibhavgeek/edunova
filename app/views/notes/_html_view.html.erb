@@ -7,6 +7,10 @@
 <% else %>
 <% note_html = Note.friendly.find(params[:note_id]) %>
 <% end %>
-<%= note_html.file.to_s %>
+<div class="fr-view">
+
+<%= note_html.file.html_safe %>
+
+</div>
 </div>
 </div>

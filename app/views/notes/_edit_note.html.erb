@@ -1,10 +1,22 @@
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div id="loadquestion" class="modal-content">
+      
+
+
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
 var ready;
 ready = function() {
 
   learnpam = $('#learnparams');
+  if("<%= @a %>".toString() == 'true')
+  {
   learnpam.detach();
-
+  }
 
 };
 
@@ -19,10 +31,13 @@ function changetolnote(){
 };
 
 
+
 $('#myModal').on('show.bs.modal', function (event) {
+   
+
   var j=1;
-  var stringhtml = simplemde.value();
-            var count = (stringhtml.match(/........................................................New_Level................................................/g) || []).length + 1;
+  var raw_html =   $('#content-slide').froalaEditor('html.get');
+  var count = (raw_html.match(/<hr>/g) || []).length + 1;
           
   var modal = $(this);
  
@@ -58,54 +73,18 @@ $('#myModal').on('show.bs.modal', function (event) {
 });
 
 
-
-
-
-
-function insert_level(){
-            var stringhtml = simplemde.value();
-            var count = (stringhtml.match(/........................................................New_Level................................................/g) || []).length + 2;
-            if(count <= 6)
-            {
-              simplemde.value( simplemde.value() + '\n........................................................New_Level................................................\n');
-            }
-            else
-            {
-                alert('As of now you can only have 6 levels');
-            }
-
-}
-function customMarkdownParser (plainText) {
   
-    plainText = simplemde.markdown(plainText);
-    plainText = plainText.replace(/........................................................New_Level................................................/g, '<hr />');
-
-    return plainText
- 
-}
- 
-
-
-var simplemde = new SimpleMDE({
- element: document.getElementById("content-slide"),
-  previewRender: function(plainText) {
-        return customMarkdownParser(plainText); // Returns HTML from a custom parser
-    }
-});
-
-
-
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     
 });
-$(function () {
-  $('[data-toggle="popover"]').popover()
+$('[data-toggle="popover"]').popover({
+    container: 'body'
 });
 </script>
-<center><h1>edit note : <%= @note.name %></h1></center>
+<center><h1>edit note: <%= @note.name %></h1></center>
 
  <%= form_for @note  do |naw| %>
          
@@ -125,22 +104,22 @@ $(function () {
   <% end %>
 
              Title
-        <%= naw.text_field :name ,:class => "form-control"  %>
+        <%= naw.text_field :name , :class => 'form-control'  %>
          Note from author <br>
-    <%= naw.text_area :note_from_author , :class => "form-control" , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell users wether the note requires any prerequisites and what is purpose for creating this note." %>
+    <%= naw.text_area :note_from_author , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell users wether the note requires any prerequisites and what is purpose for creating this note." , :class => 'form-control' %>
               
    <br/> Type of note : 
 <center>
    <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-default active">
-      <%= naw.radio_button :description, "insight" , :checked => true, :id=>"first", :style=>"display:none;" , :onchange => 'changetoinsight()' %>
+  <label class="btn btn-default <%= 'active' if @a == 'true' %>">
+      <%= naw.radio_button :description, "insight" , :checked => @a, :id=>"first", :style=>"display:none;" , :onchange => 'changetoinsight()' %>
 
-    <input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fa fa-bolt"></i>
+    <input type="radio" name="options" id="option1" autocomplete="off"><i class="fa fa-bolt"></i>
   Insight Note
   </label>
-  <label class="btn btn-default">
-     <%= naw.radio_button :description, "learning", :id=>"first", :style=>"display:none;" , :onchange =>'changetolnote()' %>
-    <input type="radio" name="options" id="option2" autocomplete="off">  
+  <label class="btn btn-default <%= 'active' if @b == 'true' %>">
+     <%= naw.radio_button :description, "learning", :checked => @b , :id=>"first", :style=>"display:none;" , :onchange =>'changetolnote()' %>
+    <input type="radio" name="options" id="option2" autocomplete="off"  >  
     <i class="glyphicon glyphicon-list-alt"> </i> Learning Note
   </label>
   <button class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" data-content="<b><i>Insight Note: </i></b><br/> These notes are simple ideas or exciting insights you want to share. You cannot create questions and neither the game is embedded. <br/> <br/> <b><i> Learning Note: </i> </b> <br/> These notes help you learn something properly. They have embedded questions to clear your concepts regarding the topic. ">
@@ -152,7 +131,7 @@ $(function () {
     
               Labels <br>
 
-    <%= naw.text_field :prereq , :class => "form-control" ,  :rows => "7" , :id => 'prerequisites' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell the branch, this note belongs to. example maths, programming, history etc " %><br>
+    <%= naw.text_field :prereq ,  :rows => "7" , :id => 'prerequisites' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell the branch, this note belongs to. example maths, programming, history etc " %><br>
             Content
 <br/>
 <center>
@@ -199,35 +178,119 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
 });
 </script>
 
-    <div id="coverlearn">  
-     <div id="learnparams"> 
- 
-  <div class="btn-group pull-right"  role="group" aria-label="...">
+   
+</div>
+</div>
      
+     <%= link_to "Open Library" , notes_openlibrary_path , :class => 'btn btn-success openlib' , :remote  => true %>
 
-  <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default"><span class="fa fa-fw"><strong>Q</strong></span>
- Insert Quiz</button>
-  <button type="button" onclick="insert_level()" class="btn btn-default"><span class="fa fa-minus"> </span> New Level</button>
-</div>
-<br/><br/>
-</div>
-</div>
-    <%= naw.text_area :file, :id=>'content-slide' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "Write a note. A good note has following properites. <br/> <ul> <li> Make it concise and clear </li> <li> Think from learner's point of view </li> <li> Tell the application of what you are teaching </li> </ul> "  %>
+
+    <%= naw.text_area :file, :id=> 'content-slide'   %>
        
     <br/>
-    <%= naw.text_area :questions , :id => 'store_questions' , :rows => 10 , :value => '{ "level1" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level2" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level3" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} }, "level4" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level5" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level6" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } }' ,:style => 'display:none;' %>
+  
+<div id="coverlearn">
+<div id="learnparams" class="btn-group"  role="group" aria-label="...">
 
-        <%= naw.submit "Create" , {:class => 'btn btn-primary btn-lg pull-right'} %>
+  <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
+Insert Quiz
+  </button>
+
+  <button type="button" class="btn btn-default btn-lg" id="new_level_button">
+Add Section
+  </button>
+</div>      
+</div>
+    <%= naw.text_field :questions , :id => 'store_questions' , :value => @note.questions  , :style => "display:none;"%>
+      
+
+        <%= naw.submit "Save Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
 
   <% end %>
  </div>
- 
-<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-lg">
-    <div id="loadquestion" class="modal-content">
-      
 
 
-    </div>
-  </div>
-</div>
+
+<script type="text/javascript">
+
+$(function() {
+$.FroalaEditor.DefineIcon('math_insert_drop', {NAME: 'maxcdn'});
+    $.FroalaEditor.RegisterCommand('math_insert_drop', {
+      title: 'Insert Maths',
+      type: 'dropdown',
+      focus: true,
+      undo: true,
+      refreshAfterCallback: true,
+      options: {
+        'eq': 'LaTeX Equation',
+        'inte': 'LaTeX Integral',
+        'frac' : 'LaTeX Fraction',
+        'quid' : 'LaTeX Guide' 
+      },
+      callback: function (cmd, val) {
+          switch(val.toString())
+          {
+            case 'eq':
+              $('#content-slide').froalaEditor('html.insert' , "$$ ax^2 + bx + c = 0 $$" , false);
+            break;
+
+            case 'inte':
+              $('#content-slide').froalaEditor('html.insert' , "$$ \\int(ax^2 + bx + c)dx $$ " , false);
+            break;
+
+            case 'frac':            
+              $('#content-slide').froalaEditor('html.insert' , "$$ {a+1\\over b+1} $$ " , false);
+            break;
+
+            case 'quid' :
+              window.open(url,'_blank');
+            break;
+
+            default:
+          }
+      }
+      // Callback on refre
+      // Callback on dropdown show.
+    });
+
+
+    $('#content-slide') 
+    .on('froalaEditor.initialized', function (e, editor) {
+        editor.events.bindClick($('body'), '#new_level_button', function () {
+          var raw_html =   $('#content-slide').froalaEditor('html.get');
+          var count = (raw_html.match(/<hr>/g) || []).length + 2;
+          if(count <= 6)
+          {
+                      editor.html.insert('<hr/> <br/>');
+          }
+          else
+          {
+                       alert('As of now you can only have 6 levels');
+
+          }
+        });
+      }).froalaEditor({
+      // Set custom buttons with separator between them.
+        heightMin: 400,
+      toolbarButtons: [ 'bold', 'italic', 'underline', 'fontFamily', 'fontSize' ,  'color' , 'strikethrough', 'subscript', 'superscript', 'outdent', 'indent', 'insertTable' , 'insertImage' , 'insertVideo' , '|','formatOL' ,'formatUL',  '|' , 'math_insert_drop' ,'|' , 'undo', 'redo'  ],
+      toolbarButtonsXS: ['undo', 'redo' , '-', 'bold', 'italic', 'underline'],
+                  imageUploadToS3: {
+             bucket: '<%= @hash[:bucket] %>',
+             region: 's3-us-west-2', // Change the region if it is different
+             keyStart: '<%= @hash[:key_start] %>',
+             callback: function (url, key) {
+            // console.log (url);
+            // console.log (key);
+             },
+             params: {
+             acl: '<%= @hash[:acl] %>',
+             AWSAccessKeyId: '<%= @hash[:access_key] %>',
+             policy: '<%= @hash[:policy] %>',
+             signature: '<%= @hash[:signature] %>',
+             }
+}
+    })
+  });
+
+
+</script>
