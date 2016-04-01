@@ -20,8 +20,8 @@ production:
   encoding: utf8
   database: edunova
   pool: 5
-  username: postgres
-  password: vaibhavgeek
+  username: vaibhav
+  password: nonsense
 
 cucumber:
   <<: *TEST
