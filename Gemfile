@@ -18,7 +18,7 @@ gem "refile-s3"
 gem 'nprogress-rails'
 
 
-gem 'activeadmin'
+gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 
 gem 'omniauth'
