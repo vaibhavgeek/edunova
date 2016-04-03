@@ -18,7 +18,7 @@ enable_starttls_auto: true,
 user_name: "vaibhavblogger@gmail.com",
 password: "F1inindia"
 }
-config.assets.precompile += %w[active_admin.css active_admin.js]
+config.assets.precompile += ['active_admin.css', 'active_admin.js']
 
 
   # Eager load code on boot. This eager loads most of Rails and

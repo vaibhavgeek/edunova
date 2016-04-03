@@ -24,7 +24,7 @@ module Edunova
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.autoload_paths += %W(#{config.root}/lib)
-   config.assets.precompile += %w( active_admin.css active_admin/print.css active_admin.js )
+config.assets.precompile += ['active_admin.css', 'active_admin.js']
 
   end
 end
