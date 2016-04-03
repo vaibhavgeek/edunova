@@ -300,7 +300,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  activeadmin (~> 1.0.0.pre2)
+  activeadmin
   acts_as_votable (~> 0.10.0)
   bootstrap-typeahead-rails
   bootstrap-will_paginate
