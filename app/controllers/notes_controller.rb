@@ -102,7 +102,7 @@ end
       @labels.each do |intr|
         Intrest.find_or_create_by(value: intr.strip.to_s)
       end  
-   @note.total_levels = note_params[:file].to_s.split('........................................................New_Level................................................').count
+   @note.total_levels = note_params[:file].to_s.split('<hr>').count
     if @note.total_levels <= 6
           @note.user_id = current_user.id
              

@@ -182,12 +182,7 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
      
      <%= link_to "Open Library" , notes_openlibrary_path , :class => 'btn btn-success openlib' , :remote  => true %>
 
-
-    <%= naw.text_area :file, :id=> 'content-slide'   %>
-       
-    <br/>
-  
-<div id="coverlearn">
+<div class="pull-right" id="coverlearn">
 <div id="learnparams" class="btn-group"  role="group" aria-label="...">
 
   <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
@@ -199,6 +194,12 @@ Add Section
   </button>
 </div>      
 </div>
+<br/><br/>
+    <%= naw.text_area :file, :id=> 'content-slide'   %>
+       
+    <br/>
+  
+
     <%= naw.text_field :questions , :id => 'store_questions' , :value => '{ "level1" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level2" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level3" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} }, "level4" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level5" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level6" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } }' ,:style => 'display:none;' %>
       
 

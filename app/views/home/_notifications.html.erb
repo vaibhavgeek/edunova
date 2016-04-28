@@ -30,8 +30,7 @@
             upvoted your note 
             <b><%= link_to Note.find(notif.note_id).name , note_path(notif.note_id) %> </b>
              <% when 'FYP' %>
-             followed you. Visit his profile 
-
+             followed you. Congrats on getting one more follower! Visit @<%= notif.from_id.username %>'s  profile
 
 
 
