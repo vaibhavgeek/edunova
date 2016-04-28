@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
 mathjax 'mathjax'
   get  'home/admin'
   get 'mentor/index'
