@@ -1,10 +1,7 @@
 <% @notifications.each do |notif| %> 
-    <% if notif.read == 0 %>
-          <div  class="list-group-item unreadnotif">
-<% else %>
-          <div  class="list-group-item">
+   
+          <div  class="list-group-item <%= 'unreadnotif' if notif.read == 0 %>">
 
-      <% end %>
         <div class="media">
            <div class="media-left">
               
