@@ -3,7 +3,7 @@
 
  
   
-       <%= markdown(Note.friendly.find(params[:id]).file.split('<hr>')[locals[:level] - 1].to_s) %>
+       <%= Note.friendly.find(params[:id]).file.split('<hr>')[locals[:level] - 1].html_safe %>
       </div>
       <div class="modal-footer">
       	<% if locals[:level] == 0 %>
