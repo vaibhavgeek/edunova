@@ -66,13 +66,12 @@ self.username ||= rand(1.100)
 end
   
 def self.from_omniauth(auth)
-   uname = auth.info.first_name.downcase.parameterize
-   max_slug = User.where("username like '#{uname}-%'")
   where(email: auth.info.email).first_or_create do |user|
+       uname = auth.info.name.downcase.parameterize
+      max_slug = User.where("username like '#{uname}-%'")
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
     user.name = auth.info.name
-    user.gender = auth.extra.raw_info.gender
     user.skip_confirmation! 
     user.username = auth.uid.to_s
     if max_slug == nil
