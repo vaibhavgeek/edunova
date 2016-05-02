@@ -25,7 +25,9 @@
 	
 	<br/>
 	<% end %>
-
+                        <center>   <p style="margin:0px; padding:0px;" class="lead">
+ created: <span style="font-size:19px;  color:green"> <%= Note.where(:user_id => @user.id).count %>  </span> notes  </p> </center>
+                         
        
       </div>
 </div>

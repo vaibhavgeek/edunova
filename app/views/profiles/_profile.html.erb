@@ -3,7 +3,7 @@
 
   <div class="row eq-height">
         <div class="col-xs-3">
- <%= attachment_image_tag(@user, :image, :fill, 200, 170 ,fallback: "deafult-pic.png" , :class => "img-rounded img-responsive")  %>
+ <%= attachment_image_tag(@user, :image, :fill, 170, 150 ,fallback: "deafult-pic.png" , :class => "img-rounded img-responsive profile_image")  %>
 </div>
  <div class="col-xs-4 row-it-equal" style="padding-left:8px">
     <h3 style="margin:0px; padding:0px;">
@@ -20,22 +20,13 @@
                          <p style="margin:0px; padding:0px;" class="lead">  
                          <%=@user.name %>
                          </br>
-                         <% if @user.dob != nil %>
-                         <% birthday=@user.dob.to_date
-                          now = Time.now.utc.to_date
-                          age = now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0) %>
-                            <% if age != 100 %>
-                            <%=age %>
-                            <% end %>
-                          <% end %>
-                        <% if @user.gender != ''  and @user.gender != nil %>
-                         <%=@user.gender %>
-                        <% end %>
+                         
                         </p>
 
-                        <p style="margin:0px; padding:0px;" class="lead">
-                        created: <span style="font-size:19px;  color:green"> <%= Note.where(:user_id => @user.id).count %>  </span> notes
-                          </p>
+     <p  class="desc_profile" style="margin:0px; padding:0px;">
+I am programmer who is extremely lazy and highly creative! 
+     </p>  
+
 
                             
 

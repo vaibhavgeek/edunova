@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
   
 
 def hall_of_fame
- @topusers = User.all.joins('LEFT JOIN votes ON users.id = votes.voter_id ').group('users.id').order('SUM(votes.vote_flag::int) DESC').first(5)
+ @topusers = User.all.select("users.*, count(user_id) as note_count").joins("LEFT JOIN notes AS notes ON notes.user_id = users.id").group("users.id").order('note_count DESC').limit(10)
 end
 
   def followers

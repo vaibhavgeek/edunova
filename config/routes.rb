@@ -70,6 +70,7 @@ devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_call
       resources :notes do
         get 'html_view'
         get 'game_view'
+        post 'auto_save_note'
         get 'comment_view'
         get 'display_quiz'
         post 'display_quiz_result'

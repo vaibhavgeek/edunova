@@ -21,11 +21,10 @@
   <% end %>
 
 
-   <center><h1>edit your profile</h1></center> 
 
     <div class="row eq-height">
         <div class="col-xs-3 row-it-equal">
-           <%= attachment_image_tag(@profile, :image, :fill, 200, 170 ,fallback: "deafult-pic.png" , :class => "img-rounded img-responsive")  %>
+           <%= attachment_image_tag(@profile, :image, :fill, 170, 150 ,fallback: "deafult-pic.png" , :class => "img-rounded img-responsive profile_image")  %>
            <%= f.label :image, "profile image" %>
   <%= f.attachment_field :image %>
 
@@ -44,15 +43,6 @@
  
 
 
-
-  
-  
-  <%= f.label :dob, 'date of birth' %> <br/>
- <%= f.date_select :dob, :start_year=>1915,:end_year=>2005 , :class =>'date-select' , :class =>'form-control' %>
- <br/>
-    <%= f.label :gender %><br/>
-
-    <%= f.select :gender, options_for_select(%w[male female other], current_user.gender) %>
 
           </div>
          <div class="col-xs-5 row-it-equal">
