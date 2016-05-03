@@ -12,6 +12,8 @@ mathjax 'mathjax'
   put 'home/mark_as_read'
   get 'notes/openlibrary'
   get 'notes/search_results_videos'  
+  get 'notes/new_note_change'
+
   # get 'notes/explore'
   # get 'notes/discover'
   # post 'notes/add_passion'
