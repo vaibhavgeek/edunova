@@ -652,13 +652,13 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
   stage.add("viewport").follow(player);
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
- <% cnt_ques = 0 %>
+ <% cnt_ques1 = 0 %>
   <% @questions_hash["level2"].each do |ques| %>
     <% if ques[1]["question_text"] != "" %>
-    <% cnt_ques = cnt_ques + 1 %>
+    <% cnt_ques1 = cnt_ques1 + 1 %>
     <% end %>
   <% end %>
-     for(j=0 ;j<parseInt('<%= cnt_ques %>');j++)          
+     for(j=0 ;j<parseInt('<%= cnt_ques1 %>');j++)          
       stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
 
   stage.insert(new Q.Tower({ x:2970, y: 660 }));
@@ -684,13 +684,13 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:980, y: 980 }));
- <% cnt_que = 0 %>
+ <% cnt_que2 = 0 %>
   <% @questions_hash["level3"].each do |que| %>
     <% if que[1]["question_text"] != "" %>
-    <% cnt_que = cnt_que + 1 %>
+    <% cnt_que2 = cnt_que2 + 1 %>
     <% end %>
   <% end %>
-     for(j=0 ;j<parseInt('<%= cnt_que %>');j++) 
+     for(j=0 ;j<parseInt('<%= cnt_que2 %>');j++) 
        stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
   Q.stageScene("score",1, { 
   label: "score: "+flag});
@@ -713,13 +713,13 @@ var player = stage.insert(new Q.Player({x:startx,y:starty}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:640, y: 650 }));
- <% cnt_ques = 0 %>
+ <% cnt_ques3 = 0 %>
   <% @questions_hash["level4"].each do |ques| %>
     <% if ques[1]["question_text"] != "" %>
-    <% cnt_ques = cnt_ques + 1 %>
+    <% cnt_ques3 = cnt_ques3 + 1 %>
     <% end %>
   <% end %>
-     for(j=0 ;j<parseInt('<%= cnt_ques %>');j++)    
+     for(j=0 ;j<parseInt('<%= cnt_ques3 %>');j++)    
         stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
   Q.stageScene("score",1, { 
   label: "score: "+flag });
@@ -742,13 +742,13 @@ var player = stage.insert(new Q.Player({x:startx,y:starty,jumpSpeed:-450}));
 for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
   stage.insert(new Q.Tower({ x:3000, y: 620 }));
- <% cnt_ques = 0 %>
+ <% cnt_ques4 = 0 %>
   <% @questions_hash["level5"].each do |ques| %>
     <% if ques[1]["question_text"] != "" %>
-    <% cnt_ques = cnt_ques + 1 %>
+    <% cnt_ques4 = cnt_ques4 + 1 %>
     <% end %>
   <% end %>
-     for(j=0 ;j<parseInt('<%= cnt_ques %>');j++)       stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
+     for(j=0 ;j<parseInt('<%= cnt_ques4 %>');j++)       stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
   Q.stageScene("score",1, { 
   label: "score: "+flag });
 });
@@ -768,13 +768,13 @@ var player = stage.insert(new Q.Player({x:startx,y:starty,jumpSpeed:-450}));
   stage.add("viewport").follow(player);
   for(var i=0;i<pos.length;i++)
   stage.insert(new  Q.Enemy({x: pos[i][0] ,y: pos[i][1]}));
- <% cnt_ques = 0 %>
+ <% cnt_ques5 = 0 %>
   <% @questions_hash["level6"].each do |ques| %>
     <% if ques[1]["question_text"] != "" %>
-    <% cnt_ques = cnt_ques + 1 %>
+    <% cnt_ques5 = cnt_ques5 + 1 %>
     <% end %>
   <% end %>
-     for(j=0 ;j<parseInt('<%= cnt_ques %>');j++)       stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
+     for(j=0 ;j<parseInt('<%= cnt_ques5 %>');j++)       stage.insert(new Q.Checkpoint({x:fpos[j][0],y:fpos[j][1],flag_no:j}));
 stage.insert(new Q.Tower({ x:1300, y: 150}));
  Q.stageScene("score",1, { 
   label: "score: "+flag });
