@@ -104,7 +104,6 @@ end
       end  
    @note.total_levels = note_params[:file].to_s.split('<hr>').count
     if @note.total_levels <= 6
-          @note.user_id = current_user.id
              
                  if @note.update(note_params)
                    redirect_to :controller => 'notes', :action => 'show', :id => @note.id
