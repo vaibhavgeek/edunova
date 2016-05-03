@@ -31,7 +31,7 @@ ready = function() {
     content: "<h3>profile page</h3> <br/><br/> <ul style='padding-left:3px;font-size:15px;'>Your profile speaks about your talent. Complete it and update it regularly { <b> edit your profile </b> } <br/> <br/> Follow users after you know what they are passionate about { <b> follow people </b> } </ul> ",
     backdrop: true,
     placement: "bottom",
-    path: "/profiles/vaibhav-1"
+    path: "/profiles/vaibhavgeek"
   }
 ] , 
 
