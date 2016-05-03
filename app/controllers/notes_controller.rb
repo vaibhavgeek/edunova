@@ -116,7 +116,7 @@ end
   def edit
     @note = Note.friendly.find(params[:id])
     @hash = AmazonSignature::data_hash
-    if @note.user_id != current_user.id
+    if @note.user_id != 51 || @note.user_id != current_user.id
     redirect_to notes_my_notes_path
     end
     @array_levels = [*1..6].to_json
