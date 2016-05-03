@@ -116,7 +116,7 @@ end
   def edit
     @note = Note.friendly.find(params[:id])
     @hash = AmazonSignature::data_hash    
-    if @note.user_id == 51 || @note.user_id == current_user.id
+    if current_user.id == 51 || @note.user_id == current_user.id
       @array_levels = [*1..6].to_json
       @a,@b = "false"
               if @note.description == 'insight'
