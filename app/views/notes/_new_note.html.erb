@@ -180,7 +180,7 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
 </div>
 </div>
      
-     <%= link_to "Open Library" , notes_openlibrary_path , :class => 'btn btn-success openlib' , :remote  => true %>
+     
 
 <div class="pull-right" id="coverlearn">
 <div id="learnparams" class="btn-group"  role="group" aria-label="...">
@@ -194,8 +194,20 @@ Add Section
   </button>
 </div>      
 </div>
+
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="#">Note Content</a></li>
+  <li role="presentation"><a href="#">Javascript Applet</a></li>
+  <li role="presentation">    <%= link_to "Open Library" , notes_openlibrary_path , :remote  => true %>
+</li>
+</ul>
 <br/><br/>
-    <%= naw.text_area :file, :id=> 'content-slide'   %>
+
+
+ <%= naw.text_area :file, :id=> 'content-slide'   %>
+
+
+
        
     <br/>
   
