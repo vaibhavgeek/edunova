@@ -1,0 +1,5 @@
+{
+	"door_open":{"sx":0,"sy":0,"cols":1,"tilew":70,"tileh":110,"frames":1},
+	"door_closed":{"sx":70,"sy":0,"cols":1,"tilew":70,"tileh":110,"frames":1}
+}
+// Someone said comments are important ,so here it is !! AS useless as your * in ****.

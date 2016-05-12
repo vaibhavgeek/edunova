@@ -1,87 +1,3 @@
-<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-lg">
-    <div id="loadquestion" class="modal-content">
-      
-
-
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-var ready;
-ready = function() {
-
-  learnpam = $('#learnparams');
-  learnpam.detach();
-
-
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
-function changetoinsight(){
-  learnpam.detach();
-};
-function changetolnote(){
-  
-  learnpam.appendTo('#coverlearn');
-};
-
-
-
-$('#myModal').on('show.bs.modal', function (event) {
-   
-
-  var j=1;
-  var raw_html =   $('#content-slide').froalaEditor('html.get');
-  var count = (raw_html.match(/<hr>/g) || []).length + 1;
-          
-  var modal = $(this);
- 
-  switch(count)
-  {
-    case 1:
-     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 1 }  %>")
-    break;
-
-    case 2:
-     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 2 }  %>")
-    break;
-
-    case 3:
-     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 3 }  %>")
-    break;
-
-    case 4:
-     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 4 }  %>")
-    break;
-
-    case 5:
-     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 5 }  %>")
-    break;
-
-    case 6:
-     modal.find("#loadquestion").html("<%= j render 'new_quiz' , :locals => { :level_count => 6 }  %>")
-    break;
-
-    default:
-  }
- 
-});
-
-
-  
-</script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-    
-});
-$('[data-toggle="popover"]').popover({
-    container: 'body'
-});
-</script>
 <center><h1>create new note</h1></center>
 
  <%= form_for @note  do |naw| %>
@@ -106,26 +22,7 @@ $('[data-toggle="popover"]').popover({
          Note from author <br>
     <%= naw.text_area :note_from_author , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell users wether the note requires any prerequisites and what is purpose for creating this note." , :class => 'form-control' %>
               
-   <br/> Type of note : 
-<center>
-   <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-default active">
-      <%= naw.radio_button :description, "insight" , :checked => true, :id=>"first", :style=>"display:none;" , :onchange => 'changetoinsight()' %>
-
-    <input type="radio" name="options" id="option1" autocomplete="off" checked><i class="fa fa-bolt"></i>
-  Insight Note
-  </label>
-  <label class="btn btn-default">
-     <%= naw.radio_button :description, "learning", :id=>"first", :style=>"display:none;" , :onchange =>'changetolnote()' %>
-    <input type="radio" name="options" id="option2" autocomplete="off">  
-    <i class="glyphicon glyphicon-list-alt"> </i> Learning Note
-  </label>
-  <button class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" data-content="<b><i>Insight Note: </i></b><br/> These notes are simple ideas or exciting insights you want to share. You cannot create questions and neither the game is embedded. <br/> <br/> <b><i> Learning Note: </i> </b> <br/> These notes help you learn something properly. They have embedded questions to clear your concepts regarding the topic. ">
-     
-    <i class="fa fa-question-circle"></i>
-
-  </button>
-</div></center> <br/>
+    
     
               Labels <br>
 
@@ -182,23 +79,13 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
      
      
 
-<div class="pull-right" id="coverlearn">
-<div id="learnparams" class="btn-group"  role="group" aria-label="...">
 
-  <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
-Insert Quiz
-  </button>
-
-  <button type="button" class="btn btn-default btn-lg" id="new_level_button">
-Add Section
-  </button>
-</div>      
-</div>
 
 <ul class="nav nav-pills">
   <li role="presentation" class="active"><a href="#">Note Content</a></li>
-  <li role="presentation"><a href="#">Javascript Applet</a></li>
-  <li role="presentation">    <%= link_to "Open Library" , notes_openlibrary_path , :remote  => true %>
+ <li role="presentation">    <%= link_to "Enter Exercise" , notes_new_note_change_exercise_path , :remote  => true %>  <li role="presentation"><a href="#">Javascript Applets</a></li>
+
+  <li role="presentation">    <%= link_to "Open Video Library" , notes_openlibrary_path , :remote  => true %>
 </li>
 </ul>
 <br/><br/>
