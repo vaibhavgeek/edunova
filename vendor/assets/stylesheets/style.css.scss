@@ -33,11 +33,11 @@
 
 body.home
 {
-    background-image: image-url("backhome.jpg");    
+    background-image: asset-url("backhome.jpg");    
 }
 body
 {
-    background-image: image-url("background2.jpg");    
+    background-image: asset-url("background2.jpg");    
 }
 
 .well h5 {
