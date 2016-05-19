@@ -80,14 +80,6 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
      
 
 
-
-<ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="#">Note Content</a></li>
- <li role="presentation">    <%= link_to "Enter Exercise" , notes_new_note_change_exercise_path , :remote  => true %>  <li role="presentation"><a href="#">Javascript Applets</a></li>
-
-  <li role="presentation">    <%= link_to "Open Video Library" , notes_openlibrary_path , :remote  => true %>
-</li>
-</ul>
 <br/><br/>
 
 
@@ -97,10 +89,17 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
 
        
     <br/>
+    
+
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="#">Note Content</a></li>
+ <li role="presentation">    <%= link_to "Enter Exercise" , notes_new_note_change_exercise_path , :remote  => true %>  <li role="presentation"><a href="#">Javascript Applets</a></li>
+
+  <li role="presentation">    <%= link_to "Open Video Library" , notes_openlibrary_path , :remote  => true %>
+</li>
+</ul>
   
 
-    <%= naw.text_field :questions , :id => 'store_questions' , :value => '{ "level1" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level2" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level3" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} }, "level4" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level5" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } , "level6" : { "question1": { } , "question2" : {} , "question3" : {} , "question4" : {} } }' ,:style => 'display:none;' %>
-      
 
         <%= naw.submit "Create Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
 
@@ -108,87 +107,3 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
  </div>
 
 
-
-<script type="text/javascript">
-
-$(function() {
-$.FroalaEditor.DefineIcon('my_dropdown', {NAME: 'maxcdn'});
-    $.FroalaEditor.RegisterCommand('my_dropdown', {
-      title: 'Insert Maths',
-      type: 'dropdown',
-      focus: true,
-      undo: true,
-      refreshAfterCallback: true,
-      options: {
-        'eq': 'LaTeX Equation',
-        'inte': 'LaTeX Integral',
-        'frac' : 'LaTeX Fraction',
-        'quid' : 'LaTeX Guide' 
-      },
-      callback: function (cmd, val) {
-          switch(val.toString())
-          {
-            case 'eq':
-              $('#content-slide').froalaEditor('html.insert' , "$$ ax^2 + bx + c = 0 $$" , false);
-            break;
-
-            case 'inte':
-              $('#content-slide').froalaEditor('html.insert' , "$$ \\int(ax^2 + bx + c)dx $$ " , false);
-            break;
-
-            case 'frac':            
-              $('#content-slide').froalaEditor('html.insert' , "$$ {a+1\\over b+1} $$ " , false);
-            break;
-
-            case 'quid' :
-              window.open(url,'_blank');
-            break;
-
-            default:
-          }
-      }
-      // Callback on refre
-      // Callback on dropdown show.
-    });
-
-
-    $('#content-slide') 
-    .on('froalaEditor.initialized', function (e, editor) {
-        editor.events.bindClick($('body'), '#new_level_button', function () {
-          var raw_html =   $('#content-slide').froalaEditor('html.get');
-          var count = (raw_html.match(/<hr>/g) || []).length + 2;
-          if(count <= 6)
-          {
-                      editor.html.insert('<hr/> <br/>');
-          }
-          else
-          {
-                       alert('As of now you can only have 6 levels');
-
-          }
-        });
-      }).froalaEditor({
-      // Set custom buttons with separator between them.
-        heightMin: 400,
-      toolbarButtons: [ 'bold', 'italic', 'underline', 'fontFamily', 'fontSize' ,  'color' , 'strikethrough', 'subscript', 'superscript', 'outdent', 'indent', 'insertTable' , 'insertImage' , 'insertVideo' , '|','formatOL' ,'formatUL',  '|' , 'my_dropdown' ,'|' , 'undo', 'redo'  ],
-      toolbarButtonsXS: ['undo', 'redo' , '-', 'bold', 'italic', 'underline'],
-                  imageUploadToS3: {
-             bucket: '<%= @hash[:bucket] %>',
-             region: 's3-us-west-2', // Change the region if it is different
-             keyStart: '<%= @hash[:key_start] %>',
-             callback: function (url, key) {
-            // console.log (url);
-            // console.log (key);
-             },
-             params: {
-             acl: '<%= @hash[:acl] %>',
-             AWSAccessKeyId: '<%= @hash[:access_key] %>',
-             policy: '<%= @hash[:policy] %>',
-             signature: '<%= @hash[:signature] %>',
-             }
-}
-    })
-  });
-
-
-</script>
