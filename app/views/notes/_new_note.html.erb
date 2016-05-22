@@ -27,16 +27,47 @@
               Labels <br>
 
     <%= naw.text_field :prereq ,  :rows => "7" , :id => 'prerequisites' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell the branch, this note belongs to. example maths, programming, history etc " %><br>
-            Content
+            Note
 <br/>
-<center>
     
+
+
+
+
+   
 </div>
-                       
+</div>
+     
+     
 
-    </div> </center>
 
-<br/>
+
+<div class="note-wrapper">
+<div class="widget-wrapper">
+<b> Add Article :- </b>
+ <%= naw.text_area :file, :id=> 'content-slide' , :class => 'editable'  %>
+</div></div>
+
+    <br/>
+    
+Add widget:-    <br/>    <br/>
+ 
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="#"> Add Article</a></li>
+ <li role="presentation">    <%= link_to "Add Exercise" , notes_new_note_change_exercise_path , :remote  => true %>  <li role="presentation"><a href="#">Add Javascript Applets</a></li>
+
+  <li role="presentation">    <%= link_to "Add Video" , notes_openlibrary_path , :remote  => true %>
+</li>
+</ul>
+  
+
+
+        <%= naw.submit "Create Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
+
+  <% end %>
+ </div>
+
+
 
 <script type="text/javascript">
 var engine = new Bloodhound({
@@ -71,36 +102,24 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
             event.preventDefault();
     });
 });
+
+var editor = new MediumEditor('.editable', {
+    toolbar: {
+        /* These are the default options for the toolbar,
+           if nothing is passed this is what is used */
+        allowMultiParagraphSelection: true,
+        buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
+        diffLeft: 0,
+        diffTop: -10,
+        firstButtonClass: 'medium-editor-button-first',
+        lastButtonClass: 'medium-editor-button-last',
+        standardizeSelectionStart: false,
+        static: false,
+        relativeContainer: null,
+        /* options which only apply when static is true */
+        align: 'center',
+        sticky: false,
+        updateOnEmptySelection: false
+    }
+});
 </script>
-
-   
-</div>
-</div>
-     
-     
-
-
-<br/><br/>
-
-
- <%= naw.text_area :file, :id=> 'content-slide'   %>
-
-   
-    <br/>
-    
-<ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="#">Note Content</a></li>
- <li role="presentation">    <%= link_to "Enter Exercise" , notes_new_note_change_exercise_path , :remote  => true %>  <li role="presentation"><a href="#">Javascript Applets</a></li>
-
-  <li role="presentation">    <%= link_to "Open Video Library" , notes_openlibrary_path , :remote  => true %>
-</li>
-</ul>
-  
-
-
-        <%= naw.submit "Create Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
-
-  <% end %>
- </div>
-
-

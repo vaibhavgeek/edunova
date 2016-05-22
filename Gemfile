@@ -4,7 +4,9 @@ ruby "2.2.3"
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
 gem 'mathjax-rails'
-gem "wysiwyg-rails"
+
+
+gem 'medium-editor-rails'
 gem 'redcarpet'
 gem 'friendly_id'
 gem 'acts_as_votable',	 '~> 0.10.0'

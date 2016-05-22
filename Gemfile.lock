@@ -108,6 +108,8 @@ GEM
       mime-types (>= 1.16, < 4)
     mathjax-rails (2.6.1)
       railties (>= 3.0)
+    medium-editor-rails (2.2.0)
+      railties (>= 3.0)
     mime-types (2.99.1)
     mini_magick (4.5.1)
     mini_portile2 (2.0.0)
@@ -247,9 +249,6 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     will_paginate (3.0.7)
-    wysiwyg-rails (2.2.4)
-      font-awesome-rails (~> 4.4, >= 4.4.0.0)
-      railties (>= 3.2, < 5.0)
     yt (0.25.35)
       activesupport
 
@@ -270,6 +269,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mathjax-rails
+  medium-editor-rails
   nprogress-rails
   oauth2
   omniauth
@@ -290,7 +290,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   will_paginate (~> 3.0.6)
-  wysiwyg-rails
   yt (~> 0.25.5)
 
 BUNDLED WITH
