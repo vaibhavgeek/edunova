@@ -21,7 +21,7 @@
 //= require quintus_touch
 //= require quintus_ui
 //= require quintus_anim
-
+//= require quintus_tmx
 //= require jquery_ujs
 
 //= require bootstrap
