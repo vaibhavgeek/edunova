@@ -24,13 +24,13 @@ class NotesController < ApplicationController
 
 def display_quiz
  @note = Note.friendly.find(params[:note_id])
- @questions_hash = JSON.parse(@note.questions)
+ @questions_hash = ""
 
 end
 
 def display_quiz_result
 @note = Note.friendly.find(params[:note_id])
- @questions_hash = JSON.parse(@note.questions)
+ @questions_hash = ""
 end
 
 
@@ -131,7 +131,11 @@ end
 
   def show
    @note = Note.friendly.find(params[:id])
+<<<<<<< HEAD
    @questions_hash = ''
+=======
+   @questions_hash = ""
+>>>>>>> 0065584a55cf8876f1bc4864f33184a64c8c547b
    if current_user
    @get_level = Play.where(:user_id => current_user.id , :note_id => @note).first
   end
