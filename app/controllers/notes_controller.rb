@@ -131,7 +131,7 @@ end
 
   def show
    @note = Note.friendly.find(params[:id])
-   @questions_hash = JSON.parse(@note.questions)
+   @questions_hash = ''
    if current_user
    @get_level = Play.where(:user_id => current_user.id , :note_id => @note).first
   end

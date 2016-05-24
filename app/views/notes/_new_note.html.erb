@@ -42,19 +42,18 @@
 
 
 
-<div class="note-wrapper">
-<div class="widget-wrapper">
-<b> Add Article :- </b>
- <%= naw.text_area :file, :id=> 'content-slide' , :class => 'editable'  %>
-</div></div>
+<div class="note-wrapper" id="note-wrapper">
+<%= render :partial => 'notes/widgets/article' , :locals => { :naw => 'addform' } %>
+
+</div>
 
     <br/>
     
 Add widget:-    <br/>    <br/>
  
 <ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="#"> Add Article</a></li>
- <li role="presentation">    <%= link_to "Add Exercise" , notes_new_note_change_exercise_path , :remote  => true %>  <li role="presentation"><a href="#">Add Javascript Applets</a></li>
+ <li role="presentation"> <%= link_to "Add Article" , notes_new_note_add_article_path , :remote  => true %>  </li> <li role="presentation"> <%= link_to "Add Exercise" , notes_new_note_add_quiz_path , :remote  => true %>  </li>
+ <li role="presentation"> <%= link_to "Add SVG Javascript Applet" , notes_new_note_add_applet_path , :remote  => true %> </li>
 
   <li role="presentation">    <%= link_to "Add Video" , notes_openlibrary_path , :remote  => true %>
 </li>
