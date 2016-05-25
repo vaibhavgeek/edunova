@@ -43,8 +43,12 @@
 
 
 <div class="note-wrapper" id="note-wrapper">
-<%= render :partial => 'notes/widgets/article' , :locals => { :naw => 'addform' } %>
+<%= naw.fields_for :notearticles do |builder| %>
 
+        <%= builder.text_area :content , :class => 'editable' , :id => 'content-slide' %>
+
+
+<% end %>
 </div>
 
     <br/>
@@ -102,23 +106,4 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
     });
 });
 
-var editor = new MediumEditor('.editable', {
-    toolbar: {
-        /* These are the default options for the toolbar,
-           if nothing is passed this is what is used */
-        allowMultiParagraphSelection: true,
-        buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
-        diffLeft: 0,
-        diffTop: -10,
-        firstButtonClass: 'medium-editor-button-first',
-        lastButtonClass: 'medium-editor-button-last',
-        standardizeSelectionStart: false,
-        static: false,
-        relativeContainer: null,
-        /* options which only apply when static is true */
-        align: 'center',
-        sticky: false,
-        updateOnEmptySelection: false
-    }
-});
 </script>

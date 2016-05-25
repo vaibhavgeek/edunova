@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  note_id: 1
+  question_text: MyText
+  option1: MyText
+  option2: MyText
+  option3: MyText
+  option4: MyText
+  correct_answer: MyText
+
+two:
+  note_id: 1
+  question_text: MyText
+  option1: MyText
+  option2: MyText
+  option3: MyText
+  option4: MyText
+  correct_answer: MyText

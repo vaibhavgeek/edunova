@@ -1,1 +1,4 @@
-$("#note-wrapper").append("<%= render :partial => 'notes/widgets/article' %>");
+if($(".widget-wrapper").length < 6)
+{
+$("#note-wrapper").append("<br/><%= j render :partial => 'notes/widgets/article' , :locals => { :naw => 'addform' } %> ");
+}

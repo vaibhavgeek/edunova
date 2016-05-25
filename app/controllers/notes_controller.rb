@@ -55,6 +55,7 @@ end
 
   def new
   	@note = Note.new
+    3.times { @note.notearticles.build }
     @hash = AmazonSignature::data_hash
     @array_levels = [*1..6].to_json
   end
@@ -75,15 +76,13 @@ end
 
   def create
    @note = Note.new(note_params)
+   @note.user_id = current_user.id
    @hash = AmazonSignature::data_hash
    @labels = note_params[:prereq].split(",")
       @labels.each do |intr|
         Intrest.find_or_create_by(value: intr.strip.to_s)
       end  
    
-   @note.total_levels = note_params[:file].to_s.split('<hr>').count
-    if @note.total_levels <= 6
-          @note.user_id = current_user.id
                  if @note.save
                    updatefeed = Feed.new(:user_id => current_user.id , :object_id => @note.id  , :set_type => 'create' , :fcontent => @note.note_from_author)           
                    updatefeed.save   
@@ -92,7 +91,7 @@ end
                    render "new"
                  end
               
-   end
+   
   end
 
 
@@ -133,9 +132,6 @@ end
    @note = Note.friendly.find(params[:id])
    @questions_hash = ''
 
-   if current_user
-   @get_level = Play.where(:user_id => current_user.id , :note_id => @note).first
-  end
 
   end
 
@@ -213,7 +209,7 @@ end
 
   private
   def note_params
-   params.require(:note).permit(:name , :prereq , :file , :note_from_author , :description , :questions )
+   params.require(:note).permit(:name , :prereq , :note_from_author , :notearticles_attributes => [:content])
   end
   
   def passion_params

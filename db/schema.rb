@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403084540) do
+ActiveRecord::Schema.define(version: 20160525162445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,58 @@ ActiveRecord::Schema.define(version: 20160403084540) do
     t.integer  "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "note_applets", force: :cascade do |t|
+    t.integer  "note_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "note_articles", force: :cascade do |t|
+    t.integer  "note_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "note_questions", force: :cascade do |t|
+    t.integer  "note_id"
+    t.text     "question_text"
+    t.text     "option1"
+    t.text     "option2"
+    t.text     "option3"
+    t.text     "option4"
+    t.text     "correct_answer"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "noteapplets", force: :cascade do |t|
+    t.integer  "note_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notearticles", force: :cascade do |t|
+    t.integer  "note_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notequestions", force: :cascade do |t|
+    t.integer  "note_id"
+    t.text     "question_text"
+    t.text     "option1"
+    t.text     "option2"
+    t.text     "option3"
+    t.text     "option4"
+    t.text     "correct_answer"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "notes", force: :cascade do |t|

@@ -1,13 +1,14 @@
 class Note < ActiveRecord::Base
     
 extend FriendlyId
-  friendly_id :name,  use: [:slugged, :finders] 
-
+    friendly_id :name,  use: [:slugged, :finders] 
     acts_as_votable
-	belongs_to :user
-	has_many :comments
+  	belongs_to :user
+	  has_many :comments
     validates_presence_of :name 
-    validates_presence_of :file
+   
+    has_many :notearticles, :dependent => :destroy
+    accepts_nested_attributes_for :notearticles, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
     
 def should_generate_new_friendly_id?
 
