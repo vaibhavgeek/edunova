@@ -42,18 +42,22 @@
 
 
 
-<div class="note-wrapper" id="note-wrapper">
+<div id="note-wrapper">
 <%= naw.fields_for :notearticles do |builder| %>
 
-        <%= builder.text_area :content , :class => 'editable' , :id => 'content-slide' %>
+        <%= render 'notearticle_fields', f: builder %> <br/>
 
+<% end %> 
+Add widget:-    <br/> <br/>
 
-<% end %>
+<ul class="nav nav-pills">
+ <li role="presentation">
+               <%= link_to_add_association 'Add Article', naw, :notearticles %>
+</li></ul>
 </div>
 
     <br/>
     
-Add widget:-    <br/>    <br/>
  
 <ul class="nav nav-pills">
  <li role="presentation"> <%= link_to "Add Article" , notes_new_note_add_article_path , :remote  => true %>  </li> <li role="presentation"> <%= link_to "Add Exercise" , notes_new_note_add_quiz_path , :remote  => true %>  </li>

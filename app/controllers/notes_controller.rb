@@ -55,7 +55,6 @@ end
 
   def new
   	@note = Note.new
-    3.times { @note.notearticles.build }
     @hash = AmazonSignature::data_hash
     @array_levels = [*1..6].to_json
   end
@@ -209,7 +208,7 @@ end
 
   private
   def note_params
-   params.require(:note).permit(:name , :prereq , :note_from_author , :notearticles_attributes => [:content])
+   params.require(:note).permit(:name , :prereq , :note_from_author , :notearticles_attributes => [:id , :content , :_destroy])
   end
   
   def passion_params

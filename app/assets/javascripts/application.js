@@ -35,6 +35,7 @@
 //= require bootstrap-typeahead-rails
 //= require edunova_tour
 //= require bootstrap-select
+//= require cocoon
 
 //= require nprogress
 //= require nprogress-turbolinks
