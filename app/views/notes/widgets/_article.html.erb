@@ -1,8 +1,14 @@
-<div class="widget-wrapper">
-<b> Add Article :- </b>
-<%= text_area(:application, :notes,  class: 'editable' , :id => 'content-slide') %>
-</div>
+ 
+  <div class="widge-wrapper">
+    
+  <%= f.label :content %>
 
+    <br/>
+    <%= f.text_area :content , :class => 'editable' %>
+  
+  <%= link_to_remove_association "remove article", f , {wrapper_class: 'widge-wrapper'} %>
+  <br/> <br/> 
+  </div>
 <script type="text/javascript">
 	var editor = new MediumEditor('.editable', {
     toolbar: {

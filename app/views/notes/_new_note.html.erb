@@ -45,28 +45,25 @@
 <div id="note-wrapper">
 <%= naw.fields_for :notearticles do |builder| %>
 
-        <%= render 'notearticle_fields', f: builder %> <br/>
+        <%= render 'notes/widgets/article', f: builder %> <br/>
 
 <% end %> 
 Add widget:-    <br/> <br/>
 
-<ul class="nav nav-pills">
- <li role="presentation">
-               <%= link_to_add_association 'Add Article', naw, :notearticles %>
-</li></ul>
 </div>
 
-    <br/>
-    
- 
 <ul class="nav nav-pills">
- <li role="presentation"> <%= link_to "Add Article" , notes_new_note_add_article_path , :remote  => true %>  </li> <li role="presentation"> <%= link_to "Add Exercise" , notes_new_note_add_quiz_path , :remote  => true %>  </li>
- <li role="presentation"> <%= link_to "Add SVG Javascript Applet" , notes_new_note_add_applet_path , :remote  => true %> </li>
-
-  <li role="presentation">    <%= link_to "Add Video" , notes_openlibrary_path , :remote  => true %>
+ <li role="presentation">
+               <%= link_to_add_association 'Add Article', naw, :notearticles  , :partial => 'notes/widgets/article' , :'data-association-insertion-method' => 'append' , :'data-association-insertion-node' => '#note-wrapper' %>
+</li>
+<li role="presentation">
+               <%= link_to_add_association 'Add Article', naw, :notearticles  , :partial => 'notes/widgets/article' , :'data-association-insertion-method' => 'append' , :'data-association-insertion-node' => '#note-wrapper' %>
+</li>
+<li role="presentation">
+              <%= link_to_add_association 'Add Article', naw, :notearticles  , :partial => 'notes/widgets/article' , :'data-association-insertion-method' => 'append' , :'data-association-insertion-node' => '#note-wrapper' %>
 </li>
 </ul>
-  
+    
 
 
         <%= naw.submit "Create Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
