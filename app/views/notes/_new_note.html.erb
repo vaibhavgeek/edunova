@@ -26,7 +26,7 @@
     
               Labels <br>
 
-    <%= naw.text_field :prereq ,  :rows => "7" , :id => 'prerequisites' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell the branch, this note belongs to. example maths, programming, history etc " %><br>
+    <%= naw.text_field :prereq ,  :rows => "7" , :id => 'prerequisites' , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell the branch, this note belongs to. example maths, programming, history etc " %>
             
     
 
@@ -52,16 +52,21 @@
         <%= render 'notes/widgets/applet', f: build %> <br/>
 
 <% end %> 
+<%= naw.fields_for :notequestions do |qf| %>
+
+        <%= render 'notes/widgets/exercise', f: qf %> <br/>
+
+<% end %> 
 
 
 </div>
-Add widget to Note:-    <br/> <br/>
+Add widget to Note:-    <br/> <br/>   
 <ul class="nav nav-pills">
  <li role="presentation">
                <%= link_to_add_association 'Add Article', naw, :notearticles  , :partial => 'notes/widgets/article' , :'data-association-insertion-method' => 'append' , :'data-association-insertion-node' => '#note-wrapper' %>
 </li>
 <li role="presentation">
-               <%= link_to_add_association 'Add Exercise', naw, :notearticles  , :partial => 'notes/widgets/exercise' , :'data-association-insertion-method' => 'append' , :'data-association-insertion-node' => '#note-wrapper' %>
+               <%= link_to_add_association 'Add Exercise', naw, :notequestions  , :partial => 'notes/widgets/exercise' , :'data-association-insertion-method' => 'append' , :'data-association-insertion-node' => '#note-wrapper' %>
 </li>
 <li role="presentation">
               <%= link_to_add_association 'Add SVG/JQuery Applet', naw, :noteapplets  , :partial => 'notes/widgets/applet' , :'data-association-insertion-method' => 'append' , :'data-association-insertion-node' => '#note-wrapper' %>

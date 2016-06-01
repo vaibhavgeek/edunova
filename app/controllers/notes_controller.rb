@@ -209,7 +209,7 @@ end
 
   private
   def note_params
-   params.require(:note).permit(:name , :prereq , :note_from_author , :notearticles_attributes => [:id , :content , :_destroy] , :noteapplets_attributes => [:id , :content , :_destroy])
+   params.require(:note).permit(:name , :prereq , :note_from_author , :notearticles_attributes => [:id , :content , :_destroy] , :noteapplets_attributes => [:id , :content , :_destroy] , :notequestions_attributes => [:id , :question_text , :option1 ,:option2 ,:option3 , :option4 , :correct_answer , :hint , :solution_explain , :_destroy])
   end
   
   def passion_params

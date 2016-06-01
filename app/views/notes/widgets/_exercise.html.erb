@@ -1,0 +1,35 @@
+  <div class="exercise-wrapper">
+  <%= f.label :"Add Question" %>
+  
+  <div class="row"> 
+
+<div class="col-md-2"> <b>Type Question  </b></div>
+<div class="col-md-10"> <%= f.text_area :question_text  , :class => "form-control" %> </div>
+</div> <br/>
+<div class="row">
+<div class="col-md-2"> <b> Hint </b> </div>
+<div class="col-md-10"><%= f.text_area :hint , :class => "form-control" %> </div>
+</div> <br/>
+<div class="row">
+<div class="col-md-2"> <b> Option 1 </b></div>
+<div class="col-md-4"> <%= f.text_field :option1 , :class => "form-control"%></div>
+<div class="col-md-2"> <b> Option 2 </b></div>
+<div class="col-md-4"> <%= f.text_field :option2 , :class => "form-control"%></div>
+ </div><br/>
+ <div class="row">
+ <div class="col-md-2"> <b> Option 3 </b></div>
+<div class="col-md-4"> <%= f.text_field :option3 , :class => "form-control"%></div>
+ <div class="col-md-2"> <b> Option 4 </b></div>
+<div class="col-md-4"> <%= f.text_field :option4 , :class => "form-control"%></div>
+ 
+ </div> <br/>
+ <div class="row"> 
+
+<div class="col-md-2"> <b> Explain Solution  </b></div>
+<div class="col-md-10"> <%= f.text_area :solution_explain  , :class => "form-control" %> </div>
+</div>
+
+
+  <%= link_to_remove_association "Remove Question", f , {wrapper_class: 'exercise-wrapper' ,  :class => 'btn btn-danger'} %>
+<br/> <br/>
+</div>
