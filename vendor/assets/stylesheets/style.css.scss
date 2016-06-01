@@ -1,3 +1,16 @@
+.option
+{
+  display:inline !important;
+}
+.wrapopt 
+{
+    background-color:#241009 !important;
+}
+input[type=radio]:checked + .wrapopt{
+    background-color:#241009 !important;
+}
+
+
 .editable
 {
      min-height: 200px;

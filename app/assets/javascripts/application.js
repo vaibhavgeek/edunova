@@ -36,7 +36,7 @@
 //= require edunova_tour
 //= require bootstrap-select
 //= require cocoon
-
+//= require icheck
 //= require nprogress
 //= require nprogress-turbolinks
 //= require nprogress-ajax

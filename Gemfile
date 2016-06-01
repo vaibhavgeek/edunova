@@ -3,7 +3,6 @@ ruby "2.2.3"
 
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
-gem 'mathjax-rails'
 gem "cocoon"
 
 

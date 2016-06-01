@@ -11,16 +11,48 @@
 <div class="col-md-10"><%= f.text_area :hint , :class => "form-control" %> </div>
 </div> <br/>
 <div class="row">
+
+  <%= f.radio_button :correct_answer, 'option3' , :style => 'display:none'  %>
+  <%= f.radio_button :correct_answer, 'option4' , :style => 'display:none'  %>
+
 <div class="col-md-2"> <b> Option 1 </b></div>
-<div class="col-md-4"> <%= f.text_field :option1 , :class => "form-control"%></div>
+<div class="col-md-4"> 
+<div class="input-group"> <span class="input-group-addon"> 
+  <%= f.radio_button :correct_answer, 'option1'  %>
+
+ </span> 
+<%= f.text_field :option1 , :class => "form-control"%>
+ </div>
+
+
+</div> 
 <div class="col-md-2"> <b> Option 2 </b></div>
-<div class="col-md-4"> <%= f.text_field :option2 , :class => "form-control"%></div>
+<div class="col-md-4"> 
+<div class="input-group"> <span class="input-group-addon"> 
+  <%= f.radio_button :correct_answer, 'option2'  %>
+
+ </span> 
+<%= f.text_field :option2 , :class => "form-control"%>
+ </div>
+</div>
  </div><br/>
  <div class="row">
  <div class="col-md-2"> <b> Option 3 </b></div>
-<div class="col-md-4"> <%= f.text_field :option3 , :class => "form-control"%></div>
+<div class="col-md-4"> 
+<div class="input-group"> <span class="input-group-addon"> 
+  <%= f.radio_button :correct_answer, 'option3'  %>
+
+ </span> 
+<%= f.text_field :option3 , :class => "form-control"%>
+ </div>
+</div>
  <div class="col-md-2"> <b> Option 4 </b></div>
-<div class="col-md-4"> <%= f.text_field :option4 , :class => "form-control"%></div>
+<div class="col-md-4"> <div class="input-group"> <span class="input-group-addon"> 
+  <%= f.radio_button :correct_answer, 'option4'  %>
+
+ </span> 
+<%= f.text_field :option4 , :class => "form-control"%>
+ </div></div>
  
  </div> <br/>
  <div class="row"> 
