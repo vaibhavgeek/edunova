@@ -185,6 +185,488 @@
 </div>
 </div>
 
+<p class="bubble">message from a galaxy far far away (max: 80 characters/msg) .How you doin'?</p>
+
+      <div id='b' class='jumbotron col-sm-6'> 
+ <p>
+Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
+
+All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
+
+The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
+Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
+
+All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
+
+The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
+Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
+
+All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
+
+The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
+     </p>
+      <div class="footer">
+        <button type="button" class="btn btn-default" id='close_modal' data-dismiss="modal">Close</button>
+      </div></div>
+    <a id="e" tabindex="0" data-toggle="popover" data-trigger="focus" data-html="true"   ></a>
+<div  id="but" class='jumbotron' style="display: none">
+  <form role="form">
+      <div class="well" id="t" style="background-color:lavender;"></div>
+      <div class="radio ">
+      <label><input type="radio" name="optradio" value='1' ><div id="1">Option 1</div></label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" value='2'><div id="2">Option 2</div></label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="optradio" value='3' ><div id="3">Option 3</div></label>
+    </div>
+<div class="radio ">
+      <label><input type="radio" name="optradio" val='4' ><div id="4">Option 4</div></label>
+    </div>
+  </form>
+
+<div id="msg"></div>
+  <button  class="btn btn-info" id="check">Submit</button>
+  <button class="btn btn-success " id="close">Continue</button>
+
+</div>
+<script type="text/javascript">
+
+
+
+var Q = Quintus({imagePath:"/assets/",dataPath:"/assets/",audioPath:"/assets/",development:true})
+        .include("Audio,Sprites, Scenes, Input, 2D, Anim, Touch, UI,TMX")
+        .setup("myGame")
+        .controls(true).touch()
+
+var final_score=0,
+    level_score=0,
+    temp_score=0,
+    level=0,
+    temp_level=0,
+    startx,starty,initial=1;
+    var canvas =document.getElementById('myGame');
+
+Q.Sprite.extend("Player",{
+
+  init: function(p) {
+   
+    this._super(p, {
+      sheet: "main",
+      sprite: "player",
+       jumpSpeed: -600,
+       speed: 200 ,
+       stage:0,
+        standingPoints: [ [8,30],[-8,30],[-8,-30],[8,-30]],
+    //  duckingPoints : [ [ -16, 44], [ -23, 35 ], [-23,-48], [23,-10], [23, 35 ], [ 16, 44 ]],
+      frame: 1,
+       type: Q.SPRITE_PLAYER,
+      collisionMask: Q.SPRITE_DEFAULT | Q.SPRITE_ENEMY
+
+    });
+  this.p.points = this.p.standingPoints;
+
+
+    this.add('2d, platformerControls,animation');
+    this.on("hit.sprite",function(collision) {
+
+                if(collision.obj.isA("Door")) {
+                  initial=1;
+                  final_score=level_score+200;
+                  level_score=0;
+            Q.stageScene("endGame",1, { label: "You Won!" }); 
+            this.destroy();
+            
+          
+      
+          }
+        });
+
+  },
+   step: function(dt) {
+            if(Q.inputs['right']) {
+      this.play("run_right");
+    } else if(this.p.vx < 0) {
+      this.play("run_left");
+    } else {
+      this.play("stand");
+    }
+
+    if(this.p.vy > 1300) {
+      this.stage.unfollow();
+        Q.audio.play("<%= asset_path('hit(1).mp3') %>");
+        Q.stageScene("endGame",2, { label: "You Died" }); 
+      this.destroy();  
+
+    }
+        },
+
+});
+Q.Sprite.extend("Door",{
+  init: function(p){
+    this._super(p,{
+      sheet:'door',
+      collisionMask: Q.SPRITE_PLAYER
+    });
+  }
+});
+Q.Sprite.extend("Enemy", {
+  init: function(p) {
+
+    this._super(p,{
+      sheet: p.sprite,
+      vx: 150,
+      type: Q.SPRITE_ENEMY,
+      collisionMask: Q.SPRITE_DEFAULT |Q.SPRITE_ENEMY 
+    });
+
+    this.add("2d, aiBounce, animation");
+    this.on("bump.left,bump.right,bump.bottom",function(collision) {
+      if(collision.obj.isA("Player")) { 
+        Q.audio.play("<%= asset_path('hit(1).mp3') %>");
+                  Q.stageScene("endGame",2, { label: "You Died" });   
+                collision.obj.destroy();
+      }
+    });
+      this.on("bump.top",function(collision) {
+      if(collision.obj.isA("Player")) { 
+        Q.audio.play("<%= asset_path('hit.mp3') %>");
+        this.destroy(); 
+        collision.obj.p.vy = -300; 
+        level_score+=100;
+         Q.stageScene("score",1, { 
+  label: "score: "+level_score
+});
+ // alert("x="+collision.obj.p.x+"  y="+collision.obj.p.y);
+      }
+    });
+  },
+  step: function(dt) {
+        if(this.p.vx > 0) {
+          this.p.flip="x";
+          this.play("walk");
+        } else if(this.p.vx < 0) {
+          this.p.flip="";
+          this.play("walk");
+        }
+    },
+});
+Q.Enemy.extend("Snail", {
+  init: function(p) {
+    this._super(p,{
+    //  w: 55,
+      //h: 34
+    });
+  }
+
+});
+Q.Enemy.extend("Fly", {
+  init: function(p) {
+    this._super(p,{
+     w: 55,
+      h: 34
+    });
+  }
+
+});
+Q.Enemy.extend("Slime", {
+  init: function(p) {
+    this._super(p,{
+     w: 55,
+      h: 36
+    });
+  }
+
+});
+var cnt=0,temp;
+
+// Q.Sprite.extend("Pole",{
+//   init:function(p){
+//     this._super(p,{
+//       sheet:p.sprite,
+//       frame:1,
+//       scale:1.2,
+//        collisionMask: Q.SPRITE_PLAYER,
+//     });
+//      this.add('2d,animation');
+//     this.on("bump.left,bump.right,bump.top",function(collision){ 
+//   if(collision.obj.isA("Player"))
+//   { initial=0;
+//     final_score+=level_score;
+//      startx=collision.obj.p.x;
+//   starty=collision.obj.p.y;
+//     this.play("open");
+//      if(cnt==0 || temp!=p.flag_no )
+//         { cnt++;
+//           temp=p.flag_no;
+//           console.log("cnt="+cnt+"temp="+temp+"flag="+p.flag_no);
+//            Q.output(collision.obj.p.stage);
+//         }    
+   
+//   }
+// });
+       
+// }
+// });
+Q.Sprite.extend("Rocket",{
+  init:function(p){
+    this._super(p,{
+      sheet: p.sprite,
+      frame:0,
+      condition:false,
+       collisionMask: Q.SPRITE_PLAYER,
+    });
+     this.add('2d,animation');
+    this.on("bump.left,bump.right,bump.top",function(collision){ 
+  if(collision.obj.isA("Player"))
+  {        initial=0;
+            final_score+=level_score;
+           startx=collision.obj.p.x+130;
+           starty=collision.obj.p.y;
+           this.play("fly");
+  //p.rocket_no
+
+     this.p.condition=true;
+$('#b').show(function(){
+  $('.bubble').fadeIn(3000);
+   $('.bubble').delay( 5000 ).fadeOut(2000);
+
+   // Q.pauseGame();
+});
+$('#close_modal').click(function(){
+  $('#b').hide(); 
+  Q.unpauseGame();
+  canvas.focus();
+});  
+}
+});
+       
+},
+step:function(dt){
+  if(this.p.condition)
+  {
+    this.add('tween');
+     this
+        .animate({ x: this.p.x , y:  this.p.y-500 }, 5, Q.Easing.Linear);
+    if(this.p.y==-500)
+      Q.pauseGame();
+  }
+}
+});
+  Q.output=function(stage)
+  { 
+// var container = stage.insert(new Q.UI.Container({
+//       fill: "white",
+//       border: 15,
+//       stroke:'#0ee',
+//       shadow: 10,
+//       shadowColor: "rgba(0,0,0,0.5)",
+//       y: 500,
+//       x:  startx+500
+//     }));
+
+//     stage.insert(new Q.UI.Text({ 
+//       label: "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\n\n\n\n\n\n\n\n\n\n\n\n",
+//       color: "black",
+//       x: 0,
+//       y: 0
+//     }),container);
+//      container.fit(20,20);
+//     container.add("tween");
+
+//  container
+//         .animate({ x: startx+500 , y:  starty-300 }, 2, Q.Easing.Quadratic.InOut
+//           ,{ callback: function(){ 
+//           console.log("Callback")
+// $('#exampleModal').modal('show');
+//         } });
+       // .chain({ angle: 360 }, 1, { callback: function(){ console.log("Callback"); } });
+
+
+
+var rad={"q1":{"qt":"who created c++ ?","1":"Bjarne Stroustrup","2":"Neil Armstrong","3":"Dennis Ritchie","4":"Aishwarya","correct":"1"},
+          "q2":{"qt":"can computers out perform humans?","1":"yes!","2":"no!","3":"maybe?","4":"i dont know!","correct":"2"},
+          "q3":{"qt":"cout is used for which purpose?","1":"store information","2":"for taking input","3":"displaying ouput","4":"none of these","correct":"3"},
+          "q4":{"qt":"what do header files contain?","1":"previous programs","2":"predeclared function libraries","3":"output of the program","4":"all of these","correct":"2"}};
+
+ document.getElementById("t").innerHTML=rad["q"+cnt]["qt"];
+for( var i=1;i<5;i++)
+ document.getElementById(i).innerHTML=rad["q"+cnt][""+i];
+
+
+ var xi= window.innerWidth/2+150, yi= window.innerHeight/2;
+$('#e').popover({ html : true, 
+        content: function() {
+          return $('#but').html();
+        }
+      });
+ $('#e').css({'position':'absolute','top':yi,'right':xi}).popover('show');
+ 
+ console.log("cnt="+cnt);
+ $('#e').on('shown.bs.popover', function (e) { 
+      Q.pauseGame();
+ });
+closeb=0;
+ $('#check').click(function(){
+                
+                       if($('input[name=optradio]:checked').val()==rad["q"+cnt]["correct"])
+               {$("#msg").html('<i class="fa fa-check" style="font-size:30px;color:green"></i> CORRECT ANSWER');
+                closeb=1;
+                } 
+              else
+                { cnt--;
+               $("#msg").html('<i class="fa fa-close" style="font-size:30px;color:red"></i> WRONG ANSWER');
+               closeb=2;
+                }
+                $('#check').remove();
+                     });
+ $('#close').click(function(){
+            if(closeb==1)
+                     {
+                      $('#e').popover('hide');
+                       Q.unpauseGame();
+                       $('#myGame').focus();} 
+                       else if(closeb==2)
+                       {
+                        $('#e').popover('hide');
+                        Q.stageScene("level");
+                       }
+                        
+                     });
+
+  };
+
+Q.Sprite.extend("Coin",{
+  init:function(p){
+              this._super(p,{ 
+                sheet:p.sprite,
+                gravity:0,
+                collisionMask: Q.SPRITE_PLAYER,
+               });
+               this.add('2d,animation');
+              this.on("bump.left,bump.right,bump.top",function(collision){ 
+            if(collision.obj.isA("Player"))
+            { level_score+=50;
+              Q.audio.play('<%= asset_path('coin.mp3') %>');
+               this.destroy(); 
+                Q.stageScene("score",1, { 
+                label: "score: "+level_score});
+
+                               }
+          });
+                 
+         }
+});
+
+
+  Q.scene("score",function(stage) {
+  var label = stage.insert(new Q.UI.Text({
+    x: Q.width/2, 
+    y: 10,color:"#000099",
+    label: stage.options.label
+  }));
+  console.log("score");
+  var show=stage.insert(new Q.UI.Text({
+    x: startx, 
+    y: 300,color:"grey",
+    label: '+50'
+  }));
+  show.add("tween");
+//alert("hfhsfjslf");
+ show.animate({ x: startx, y:  starty-600 }, 1, Q.Easing.Quadratic.InOut)
+     .chain({ opacity: 0 }, 1, Q.Easing.Quadratic.In );
+  
+});
+
+
+Q.scene("level",function(stage) {
+if(initial)
+{
+  cnt=0,startx=400,starty=800;
+}
+//stage.insert(new Q.Repeater({ asset: "back.png",repeatY:true, speedX: 10, speedY: 0.5 })); 
+  Q.stageTMX("<%= asset_path('level.tmx') %>",stage);
+  var player = stage.insert(new Q.Player({x:startx,y:starty,stage:stage}));
+   stage.add("viewport").follow(player);
+stage.viewport.offsetX=-200;
+stage.viewport.offsetY=100;
+
+   canvas.focus();
+  Q.audio.play("<%= asset_path('intro.mp3') %>",{ loop: true });
+   Q.stageScene("score",1, { 
+  label: "score: "+final_score
+}); 
+
+
+});
+
+
+Q.scene('endGame',function(stage) {
+  //Q.audio.stop();
+      var container = stage.insert(new Q.UI.Container({
+        x: Q.width/2, y: Q.height/2, fill: "rgba(0,0,0,0.5)"
+      }));
+ 
+      var button = container.insert(new Q.UI.Button({ x: 0, y: 0, fill: "#CCCCCC",
+                                                      label: "Play Again" }))        
+      var label = container.insert(new Q.UI.Text({x:0, y: -10 - button.p.h, color: "#ffffff",
+                                                       label: stage.options.label }));
+       
+      button.on("click",function() {
+        Q.clearStages();
+        Q.stageScene('level');
+      });
+ 
+        container.fit(20);
+});
+
+Q.loadTMX( "<%= asset_path('level.tmx') %>,<%= asset_path('main.json') %>,<%= asset_path('main.png') %>,<%= asset_path('enemies.png') %>,<%= asset_path('enemies.json') %>,<%= asset_path('bird.json') %>,<%= asset_path('bird.png') %>,<%= asset_path('pole.json') %>,<%= asset_path('pole.png') %>,<%= asset_path('collectables.json') %>,<%= asset_path('collectables.png') %>,<%= asset_path('rocket.json') %>,<%= asset_path('rocket.png') %>,<%= asset_path('hit.mp3') %>,<%= asset_path('hit(1).mp3') %>,<%= asset_path('coin.mp3') %>,<%= asset_path('intro.mp3') %>", function() {
+  Q.compileSheets("door.png","door.json");
+  Q.compileSheets("main.png","main.json");
+ Q.compileSheets("<%= asset_path('enemies.png') %>","<%= asset_path('enemies.json') %>");
+ Q.compileSheets("pole.png","pole.json");
+ Q.compileSheets("<%= asset_path('collectables.png') %>","<%= asset_path('collectables.json') %>");
+ Q.compileSheets("<%= asset_path('rocket.png') %>","<%= asset_path('rocket.json') %>");
+        Q.animations('player', {
+        run_left: { frames: [11,12,13,14,15,16,17,18,19], next: 'stand_left', rate: 1/10},
+        run_right: { frames: [0,1,2,3,4,5,6,7,8,9], next: 'stand_right', rate: 1/10},
+        stand: { frames: [0]},
+        jump: { frames: [8], loop:false, rate: 1},
+    });
+         var EnemyAnimations = {
+      walk: { frames: [0,1], rate: 1/3, loop: true },
+      dead: { frames: [2], rate: 1/10 }
+    };
+    Q.animations("fly", EnemyAnimations);
+    Q.animations("slime", EnemyAnimations);
+    Q.animations("snail", EnemyAnimations);
+    Q.animations('pole',{
+        closed:{frames:[1],rate:1/10,flip: false},
+         open:{frames:[3,4,5,6,7,8,9,10,11],rate: 1/5, flip: false, loop: true }
+  });
+    Q.animations('rocket',{
+      fly:{frames:[0,1,2,3,4,5,6,7],rate: 1/8, flip: false, loop: true }
+  });
+  /* Q.animations("bird",{
+    fly:{frames:[0,1,2,3,4,5,6,7],rate:1/5,loop:true}
+   });
+  */
+  Q.stageScene("level");
+},{ progressCallback: function(loaded,total){
+  $('.bubble').hide();
+$('#b').hide();
+ var element = document.getElementById("loading");
+    element.style.width = Math.floor(loaded/total*100) + "%";
+   if (loaded == total) {
+      document.getElementById("loading").remove();
+    }
+}
+});
+
+
+
+</script>
 
 
 

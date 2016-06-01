@@ -1,0 +1,28 @@
+// Place all the styles related to the notes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+ 
+
+.notesa a:hover {
+   text-decoration:none;
+}  
+.notesa h3 
+{
+	color:black;
+}
+.char {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    top: -80px;
+  }
+ #grass
+{
+    height:100px;  
+    margin:auto;  
+    position: absolute;
+    background-image: image-url("GrassBlock.png");
+    background-size: 20px 20px;
+    background-repeat: repeat-x;
+
+}
