@@ -1,16 +1,23 @@
 
 <div id="removeongame" class="removeongame">
 <div class="col-md-10 col-md-offset-1">
-<% if params[:id] %>
-<% note_html = Note.friendly.find(params[:id]) %>
 
-<% else %>
-<% note_html = Note.friendly.find(params[:note_id]) %>
+
+<% @note.notearticles.each do |ar| %>
+<%= ar.content.html_safe %>
 <% end %>
-<div class="fr-view">
+<br/><br/><br/><br/>
+<% @note.noteapplets.each do |ap| %>
+<%= ap.content.html_safe %>
+<% end %>
 
-<%= note_html.file.html_safe %>
+<br/><br/><br/><br/>
 
-</div>
+<% @note.notequestions.each do |ex| %>
+<%= ex.correct_answer %>
+<% end %>
+
+
+
 </div>
 </div>

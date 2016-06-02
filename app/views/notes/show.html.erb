@@ -53,13 +53,7 @@
 <span class="glyphicon glyphicon-pencil"> </span> Edit 
 <% end %>
   <% end %>
-  <% if @note.description.to_s != 'insight' %>
-
-     <%= link_to  note_display_quiz_path(@note)  ,:class => 'btn btn-default btn-sm' , :remote => true  do %>
-<span class="glyphicon glyphicon-ok"></span> Quiz It! 
-      <% end %> 
-<% end %>
-
+ 
   
 </div>
 
@@ -128,16 +122,16 @@
 
                 <div class="media" id="loadsnoteinfo">
                     <a class="pull-left" href="#">
-    <%= attachment_image_tag(@note.user, :image, :fill, 130, 130 ,fallback: "deafult-pic-130.png") %>
+    <%= attachment_image_tag(@note.user, :image, :fill, 100, 100 ,fallback: "deafult-pic-100.png") %>
 
                     </a>
                     
                     <div class="media-body">
-                        <h2 class="media-heading">  <%= @note.name %>  <small>by 
+                        <h3 class="media-heading">  <%= @note.name %>  <small>by 
                           <%= @note.user.name %> (@<%= @note.user.username %>)</small>
 
 
-                        </h2>
+                        </h3>
 <b>labels : </b>
     <% intress = @note.prereq.to_s.split(',') %>
  <% for i in 0..(intress.count-1) %>     
@@ -164,12 +158,11 @@
 <div id='loading'>
      <div class="progress">
   <div class="progress-bar progress-bar-striped active" role="progressbar"
-  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:20%">
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:5%">
     loading...
   </div>
 </div>
     </div>
-
             <center><canvas id='myGame' width="1100" height="600"></canvas></center>
             
 
@@ -185,52 +178,7 @@
 </div>
 </div>
 
-<p class="bubble">message from a galaxy far far away (max: 80 characters/msg) .How you doin'?</p>
-
-      <div id='b' class='jumbotron col-sm-6'> 
- <p>
-Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
-
-All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
-
-The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
-Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
-
-All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
-
-The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
-Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
-
-All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
-
-The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
-     </p>
-      <div class="footer">
-        <button type="button" class="btn btn-default" id='close_modal' data-dismiss="modal">Close</button>
-      </div></div>
-    <a id="e" tabindex="0" data-toggle="popover" data-trigger="focus" data-html="true"   ></a>
-<div  id="but" class='jumbotron' style="display: none">
-  <form role="form">
-      <div class="well" id="t" style="background-color:lavender;"></div>
-      <div class="radio ">
-      <label><input type="radio" name="optradio" value='1' ><div id="1">Option 1</div></label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio" value='2'><div id="2">Option 2</div></label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio" value='3' ><div id="3">Option 3</div></label>
-    </div>
-<div class="radio ">
-      <label><input type="radio" name="optradio" val='4' ><div id="4">Option 4</div></label>
-    </div>
-  </form>
-
-<div id="msg"></div>
-  <button  class="btn btn-info" id="check">Submit</button>
-  <button class="btn btn-success " id="close">Continue</button>
-
-</div>
+      
 <script type="text/javascript">
 
 
@@ -295,7 +243,6 @@ Q.Sprite.extend("Player",{
 
     if(this.p.vy > 1300) {
       this.stage.unfollow();
-        Q.audio.play("<%= asset_path('hit(1).mp3') %>");
         Q.stageScene("endGame",2, { label: "You Died" }); 
       this.destroy();  
 
@@ -324,14 +271,12 @@ Q.Sprite.extend("Enemy", {
     this.add("2d, aiBounce, animation");
     this.on("bump.left,bump.right,bump.bottom",function(collision) {
       if(collision.obj.isA("Player")) { 
-        Q.audio.play("<%= asset_path('hit(1).mp3') %>");
                   Q.stageScene("endGame",2, { label: "You Died" });   
                 collision.obj.destroy();
       }
     });
       this.on("bump.top",function(collision) {
       if(collision.obj.isA("Player")) { 
-        Q.audio.play("<%= asset_path('hit.mp3') %>");
         this.destroy(); 
         collision.obj.p.vy = -300; 
         level_score+=100;
@@ -380,35 +325,6 @@ Q.Enemy.extend("Slime", {
 
 });
 var cnt=0,temp;
-
-// Q.Sprite.extend("Pole",{
-//   init:function(p){
-//     this._super(p,{
-//       sheet:p.sprite,
-//       frame:1,
-//       scale:1.2,
-//        collisionMask: Q.SPRITE_PLAYER,
-//     });
-//      this.add('2d,animation');
-//     this.on("bump.left,bump.right,bump.top",function(collision){ 
-//   if(collision.obj.isA("Player"))
-//   { initial=0;
-//     final_score+=level_score;
-//      startx=collision.obj.p.x;
-//   starty=collision.obj.p.y;
-//     this.play("open");
-//      if(cnt==0 || temp!=p.flag_no )
-//         { cnt++;
-//           temp=p.flag_no;
-//           console.log("cnt="+cnt+"temp="+temp+"flag="+p.flag_no);
-//            Q.output(collision.obj.p.stage);
-//         }    
-   
-//   }
-// });
-       
-// }
-// });
 Q.Sprite.extend("Rocket",{
   init:function(p){
     this._super(p,{
@@ -424,21 +340,12 @@ Q.Sprite.extend("Rocket",{
             final_score+=level_score;
            startx=collision.obj.p.x+130;
            starty=collision.obj.p.y;
+            console.log("hello");
+
            this.play("fly");
   //p.rocket_no
 
      this.p.condition=true;
-$('#b').show(function(){
-  $('.bubble').fadeIn(3000);
-   $('.bubble').delay( 5000 ).fadeOut(2000);
-
-   // Q.pauseGame();
-});
-$('#close_modal').click(function(){
-  $('#b').hide(); 
-  Q.unpauseGame();
-  canvas.focus();
-});  
 }
 });
        
@@ -456,85 +363,7 @@ step:function(dt){
 });
   Q.output=function(stage)
   { 
-// var container = stage.insert(new Q.UI.Container({
-//       fill: "white",
-//       border: 15,
-//       stroke:'#0ee',
-//       shadow: 10,
-//       shadowColor: "rgba(0,0,0,0.5)",
-//       y: 500,
-//       x:  startx+500
-//     }));
-
-//     stage.insert(new Q.UI.Text({ 
-//       label: "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\n\n\n\n\n\n\n\n\n\n\n\n",
-//       color: "black",
-//       x: 0,
-//       y: 0
-//     }),container);
-//      container.fit(20,20);
-//     container.add("tween");
-
-//  container
-//         .animate({ x: startx+500 , y:  starty-300 }, 2, Q.Easing.Quadratic.InOut
-//           ,{ callback: function(){ 
-//           console.log("Callback")
-// $('#exampleModal').modal('show');
-//         } });
-       // .chain({ angle: 360 }, 1, { callback: function(){ console.log("Callback"); } });
-
-
-
-var rad={"q1":{"qt":"who created c++ ?","1":"Bjarne Stroustrup","2":"Neil Armstrong","3":"Dennis Ritchie","4":"Aishwarya","correct":"1"},
-          "q2":{"qt":"can computers out perform humans?","1":"yes!","2":"no!","3":"maybe?","4":"i dont know!","correct":"2"},
-          "q3":{"qt":"cout is used for which purpose?","1":"store information","2":"for taking input","3":"displaying ouput","4":"none of these","correct":"3"},
-          "q4":{"qt":"what do header files contain?","1":"previous programs","2":"predeclared function libraries","3":"output of the program","4":"all of these","correct":"2"}};
-
- document.getElementById("t").innerHTML=rad["q"+cnt]["qt"];
-for( var i=1;i<5;i++)
- document.getElementById(i).innerHTML=rad["q"+cnt][""+i];
-
-
  var xi= window.innerWidth/2+150, yi= window.innerHeight/2;
-$('#e').popover({ html : true, 
-        content: function() {
-          return $('#but').html();
-        }
-      });
- $('#e').css({'position':'absolute','top':yi,'right':xi}).popover('show');
- 
- console.log("cnt="+cnt);
- $('#e').on('shown.bs.popover', function (e) { 
-      Q.pauseGame();
- });
-closeb=0;
- $('#check').click(function(){
-                
-                       if($('input[name=optradio]:checked').val()==rad["q"+cnt]["correct"])
-               {$("#msg").html('<i class="fa fa-check" style="font-size:30px;color:green"></i> CORRECT ANSWER');
-                closeb=1;
-                } 
-              else
-                { cnt--;
-               $("#msg").html('<i class="fa fa-close" style="font-size:30px;color:red"></i> WRONG ANSWER');
-               closeb=2;
-                }
-                $('#check').remove();
-                     });
- $('#close').click(function(){
-            if(closeb==1)
-                     {
-                      $('#e').popover('hide');
-                       Q.unpauseGame();
-                       $('#myGame').focus();} 
-                       else if(closeb==2)
-                       {
-                        $('#e').popover('hide');
-                        Q.stageScene("level");
-                       }
-                        
-                     });
-
   };
 
 Q.Sprite.extend("Coin",{
@@ -548,7 +377,6 @@ Q.Sprite.extend("Coin",{
               this.on("bump.left,bump.right,bump.top",function(collision){ 
             if(collision.obj.isA("Player"))
             { level_score+=50;
-              Q.audio.play('<%= asset_path('coin.mp3') %>');
                this.destroy(); 
                 Q.stageScene("score",1, { 
                 label: "score: "+level_score});
@@ -591,7 +419,6 @@ if(initial)
    stage.add("viewport").follow(player);
 stage.viewport.offsetX=-200;
 stage.viewport.offsetY=100;
-
    canvas.focus();
   Q.audio.play("<%= asset_path('intro.mp3') %>",{ loop: true });
    Q.stageScene("score",1, { 
@@ -654,9 +481,7 @@ Q.loadTMX( "<%= asset_path('level.tmx') %>,<%= asset_path('main.json') %>,<%= as
   */
   Q.stageScene("level");
 },{ progressCallback: function(loaded,total){
-  $('.bubble').hide();
-$('#b').hide();
- var element = document.getElementById("loading");
+  var element = document.getElementById("loading");
     element.style.width = Math.floor(loaded/total*100) + "%";
    if (loaded == total) {
       document.getElementById("loading").remove();

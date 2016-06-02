@@ -22,19 +22,6 @@ class NotesController < ApplicationController
 
 
 
-def display_quiz
- @note = Note.friendly.find(params[:note_id])
- @questions_hash = ""
-
-end
-
-def display_quiz_result
-@note = Note.friendly.find(params[:note_id])
- @questions_hash = ""
-end
-
-
-
 def discover 
   @passion = Passion.new
   @allpassion = Passion.all
@@ -47,9 +34,13 @@ def add_passion
 
 end
 
-def add_quiz
-
-
+def html_view
+ 
+ if params[:id]
+  @note = Note.friendly.find(params[:id])
+  else
+  @note = Note.friendly.find(params[:note_id])
+ end  
 end
 
 
@@ -131,7 +122,7 @@ end
   def show
    @note = Note.friendly.find(params[:id])
    @questions_hash = ''
-
+  
 
   end
 
