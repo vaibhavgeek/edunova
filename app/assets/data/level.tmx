@@ -25264,21 +25264,12 @@
   </properties>
   <object id="489" gid="216" x="14803.7" y="771" width="70" height="110"/>
  </objectgroup>
-
  <objectgroup name="rocket">
-  <object id="281" gid="227" x="1200.67" y="938.333" width="96" height="156">
-   <properties>
-    <property name="rocket_no" value="1"/>
-   </properties>
-  </object>
-
-
   <object id="281" gid="227" x="1878.67" y="938.333" width="96" height="156">
    <properties>
     <property name="rocket_no" value="1"/>
    </properties>
   </object>
-
   <object id="290" gid="227" x="6001.33" y="734" width="96" height="156">
    <properties>
     <property name="rocket_no" value="2"/>
@@ -25303,5 +25294,3 @@
   <object id="497" gid="227" x="3067" y="584" width="96" height="156"/>
  </objectgroup>
 </map>
-
-

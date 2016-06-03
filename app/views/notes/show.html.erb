@@ -163,7 +163,27 @@
   </div>
 </div>
     </div>
-            <center><canvas id='myGame' width="1100" height="600"></canvas></center>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+            <center><canvas id='myGame' width="1100" height="630"></canvas></center>
             
 
 </div>
@@ -171,7 +191,9 @@
 <%= render 'html_view'  %>
 <% end %>
 </div>
-
+<div id="loadcontent" class="panel col-md-6 "><% @note.notearticles.each do |ar| %>
+<%= ar.content.html_safe %>
+<% end %></div>
   <div id="comments" class="col-lg-8" >
 </div>
 </div>
@@ -179,6 +201,22 @@
 </div>
 
       
+      <script type="text/javascript">
+
+  var timer = setInterval( showDiv, 600);
+
+
+  function showDiv() {
+    
+   console.log("Hello")
+   clearInterval(timer);
+
+
+  }
+
+</script>
+
+
 <script type="text/javascript">
 
 
@@ -192,6 +230,7 @@ var final_score=0,
     level_score=0,
     temp_score=0,
     level=0,
+    cosnsto = 0 ,
     temp_level=0,
     startx,starty,initial=1;
     var canvas =document.getElementById('myGame');
@@ -227,7 +266,7 @@ Q.Sprite.extend("Player",{
             this.destroy();
             
           
-      
+        
           }
         });
 
@@ -336,13 +375,17 @@ Q.Sprite.extend("Rocket",{
      this.add('2d,animation');
     this.on("bump.left,bump.right,bump.top",function(collision){ 
   if(collision.obj.isA("Player"))
-  {        initial=0;
+  {        initial=0;            
             final_score+=level_score;
            startx=collision.obj.p.x+130;
            starty=collision.obj.p.y;
-            console.log("hello");
+            this.play("fly");
+            if (cosnsto == 0)
+            {
+              $('#myModal').modal('show');
+              Q.pauseGame();
 
-           this.play("fly");
+            }
   //p.rocket_no
 
      this.p.condition=true;
@@ -420,7 +463,6 @@ if(initial)
 stage.viewport.offsetX=-200;
 stage.viewport.offsetY=100;
    canvas.focus();
-  Q.audio.play("<%= asset_path('intro.mp3') %>",{ loop: true });
    Q.stageScene("score",1, { 
   label: "score: "+final_score
 }); 
