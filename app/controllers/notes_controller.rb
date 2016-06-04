@@ -36,13 +36,26 @@ end
 
 def html_view
  
- if params[:id]
+  if params[:id]
   @note = Note.friendly.find(params[:id])
   else
   @note = Note.friendly.find(params[:note_id])
- end  
-end
+  end  
 
+
+  @note.notearticles.each do |ar|
+ 
+  end
+
+  @note.notequestions.each do |ar|
+
+  end
+ 
+  @note.noteapplets.each do |ar|
+
+  end
+
+end
 
   def new
   	@note = Note.new

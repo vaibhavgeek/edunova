@@ -1,23 +1,32 @@
 
 <div id="removeongame" class="removeongame">
 <div class="col-md-10 col-md-offset-1">
+<center>
+<div class="btn-group" role="group" aria-label="...">
+  <button type="button" class="btn btn-default">Widgets:-</button>
+  <button type="button" class="btn btn-default">#1</button>
+  <button type="button" class="btn btn-default">#2</button>
+  <button type="button" class="btn btn-default">#3</button>
 
-
-<% @note.notearticles.each do |ar| %>
-<%= ar.content.html_safe %>
-<% end %>
-<br/><br/><br/><br/>
-<% @note.noteapplets.each do |ap| %>
-<%= ap.content.html_safe %>
-<% end %>
-
-<br/><br/><br/><br/>
-
+</div>
+</center>
+<br/>
 <% @note.notequestions.each do |ex| %>
+
+<h3><%= ex.question_text %> </h3>
+      
+
+    <label><%= radio_button_tag 'option', "option1" %><%= ex.option1 %> </label><br/>
+     <label><%= radio_button_tag 'option', "option2" %><%= ex.option2 %></label> <br/>
+     <label> <%= radio_button_tag 'option' , "option3" %><%= ex.option3 %></label> <br/>
+     <label> <%= radio_button_tag 'option' , "option4" %><%= ex.option4 %> </label>
+<br/>
+<%= link_to "Submit" ,'#' , :class => 'btn btn-primary' %>
 <%= ex.correct_answer %>
+
 <% end %>
 
-
-
+      
+    
 </div>
 </div>
