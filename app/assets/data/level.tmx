@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="25" tilewidth="70" tileheight="70" nextobjectid="501">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="25" tilewidth="70" tileheight="70" nextobjectid="514">
  <tileset firstgid="1" name="tiles" tilewidth="70" tileheight="70" spacing="2">
   <image source="../images/tiles.png" width="914" height="936"/>
   <tile id="15">
@@ -4123,14 +4123,14 @@
    <tile gid="150"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="81"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="81"/>
+   <tile gid="69"/>
+   <tile gid="45"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="81"/>
+   <tile gid="69"/>
+   <tile gid="45"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -5132,7 +5132,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="16"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="85"/>
@@ -6122,7 +6122,6 @@
    <tile gid="0"/>
    <tile gid="150"/>
    <tile gid="0"/>
-   <tile gid="0"/>
    <tile gid="81"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -6131,10 +6130,11 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="81"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="117"/>
+   <tile gid="104"/>
+   <tile gid="104"/>
+   <tile gid="104"/>
+   <tile gid="92"/>
    <tile gid="97"/>
    <tile gid="85"/>
    <tile gid="0"/>
@@ -25125,36 +25125,15 @@
   <object id="292" gid="218" x="6973.33" y="765.333" width="72" height="72"/>
   <object id="295" gid="220" x="8057.33" y="765.333" width="72" height="72"/>
   <object id="302" gid="218" x="11328" y="634.667" width="72" height="72"/>
-  <object id="494" gid="220" x="1125.33" y="904" width="72" height="72"/>
   <object id="495" gid="220" x="474.667" y="560" width="72" height="72"/>
  </objectgroup>
  <objectgroup name="coins">
-  <object id="303" gid="178" x="1078.33" y="893.667" width="70" height="70"/>
-  <object id="305" gid="178" x="1154.33" y="893.667" width="70" height="70"/>
-  <object id="311" gid="178" x="1227.67" y="889.667" width="70" height="70"/>
-  <object id="312" gid="178" x="1074.33" y="817.667" width="70" height="70"/>
-  <object id="313" gid="178" x="1157" y="817.667" width="70" height="70"/>
-  <object id="314" gid="178" x="1221" y="823" width="70" height="70"/>
-  <object id="315" gid="178" x="831.667" y="711" width="70" height="70"/>
-  <object id="316" gid="178" x="802.333" y="637.667" width="70" height="70"/>
-  <object id="317" gid="178" x="762.333" y="567" width="70" height="70"/>
-  <object id="318" gid="178" x="687.667" y="548.333" width="70" height="70"/>
   <object id="319" gid="178" x="562.333" y="284.333" width="70" height="70"/>
   <object id="320" gid="178" x="582.333" y="239" width="70" height="70"/>
   <object id="321" gid="178" x="601" y="191" width="70" height="70"/>
   <object id="322" gid="178" x="642.333" y="171" width="70" height="70"/>
   <object id="323" gid="178" x="687.667" y="175" width="70" height="70"/>
   <object id="324" gid="178" x="718.333" y="212.333" width="70" height="70"/>
-  <object id="325" gid="178" x="742.333" y="248.333" width="70" height="70"/>
-  <object id="326" gid="178" x="757" y="287" width="70" height="70"/>
-  <object id="327" gid="178" x="791.667" y="268.333" width="70" height="70"/>
-  <object id="328" gid="178" x="810.333" y="223" width="70" height="70"/>
-  <object id="329" gid="178" x="826.333" y="179" width="70" height="70"/>
-  <object id="330" gid="178" x="853" y="153.667" width="70" height="70"/>
-  <object id="331" gid="178" x="897" y="161.667" width="70" height="70"/>
-  <object id="332" gid="178" x="931.667" y="193.667" width="70" height="70"/>
-  <object id="333" gid="178" x="950.333" y="239" width="70" height="70"/>
-  <object id="334" gid="178" x="967.667" y="283" width="70" height="70"/>
   <object id="335" gid="178" x="1479.67" y="800.333" width="70" height="70"/>
   <object id="336" gid="178" x="1482.33" y="851" width="70" height="70"/>
   <object id="338" gid="178" x="1486.33" y="903" width="70" height="70"/>
@@ -25255,6 +25234,8 @@
   <object id="492" gid="178" x="9023.67" y="587" width="70" height="70"/>
   <object id="499" gid="178" x="7287" y="762" width="70" height="70"/>
   <object id="500" gid="178" x="7694" y="762" width="70" height="70"/>
+  <object id="503" gid="178" x="746" y="249" width="70" height="70"/>
+  <object id="504" gid="178" x="760" y="288" width="70" height="70"/>
  </objectgroup>
  <objectgroup name="end">
   <properties>
@@ -25292,5 +25273,6 @@
   </object>
   <object id="496" gid="227" x="7476" y="784" width="96" height="156"/>
   <object id="497" gid="227" x="3067" y="584" width="96" height="156"/>
+  <object id="501" gid="227" x="1104" y="435" width="96" height="156"/>
  </objectgroup>
 </map>

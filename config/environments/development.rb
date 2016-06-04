@@ -25,8 +25,8 @@ address: "smtp.gmail.com",
 port: "587",
 domain: "gmail.com",
 authentication: "plain",
-user_name: "vaibhavblogger@gmail.com",
-password: "F1inindia"
+user_name: "aish.96jain@gmail.com",
+password: "jain1996"
 }
 
   # Print deprecation notices to the Rails logger.
