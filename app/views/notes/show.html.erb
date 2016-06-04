@@ -375,6 +375,7 @@ Q.Sprite.extend("Rocket",{
     this._super(p,{
       sheet: p.sprite,
       frame:0,
+      scale:1.2,
       condition:false,
        collisionMask: Q.SPRITE_PLAYER,
     });
@@ -386,7 +387,10 @@ Q.Sprite.extend("Rocket",{
            startx=collision.obj.p.x+130;
            starty=collision.obj.p.y;
             this.play("fly");
-            $('#b').show();
+            var pause=0;
+            $('#b').show(function(){
+              setTimeout(function(){ if(!pause) Q.pauseGame(); }, 2000);
+            });
            $('#close_modal').click(function(){
   $('#b').hide(); 
   Q.unpauseGame();
