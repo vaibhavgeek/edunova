@@ -12,16 +12,21 @@
 </center>
 <br/>
 <% @note.notequestions.each do |ex| %>
-
+<div class="well col-md-8 col-md-offset-2">
 <h3><%= ex.question_text %> </h3>
-      
+      <div class="col-md-10">
+<ul class="list-group">
 
-    <label><%= radio_button_tag 'option', "option1" %><%= ex.option1 %> </label><br/>
-     <label><%= radio_button_tag 'option', "option2" %><%= ex.option2 %></label> <br/>
-     <label> <%= radio_button_tag 'option' , "option3" %><%= ex.option3 %></label> <br/>
-     <label> <%= radio_button_tag 'option' , "option4" %><%= ex.option4 %> </label>
-<br/>
-<%= link_to "Submit" ,'#' , :class => 'btn btn-primary' %>
+    <li class="list-group-item">
+     <%= radio_button_tag 'option', "option1" %><%= ex.option1 %> </li>
+      <li class="list-group-item"><%= radio_button_tag 'option', "option2" %><%= ex.option2 %></li> 
+      <li class="list-group-item"><%= radio_button_tag 'option' , "option3" %><%= ex.option3 %></li>
+     <li class="list-group-item"> <%= radio_button_tag 'option' , "option4" %><%= ex.option4 %></li> 
+</ul>
+<%= link_to "Submit" ,'#' , :class => 'btn btn-primary pull-right' %>
+
+</div> 
+
 <%= ex.correct_answer %>
 
 <% end %>

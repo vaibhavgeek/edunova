@@ -1,40 +1,7 @@
-p.bubblemessage {
-  top: 240px;
-   left: 60px; 
-  position: absolute;
-  z-index:15;
- padding:5px;
-  text-align: center;
-  line-height: 50px;
-  background-color: #fff;
-  border: 8px solid #666;
-  -webkit-border-radius: 30px;
-  animation-timing-function: ease-in;
-  box-shadow: 2px 2px 4px #888;
+.questions .list-group-item 
+{
+  width:400px;
 }
-p.bubblemessage:before {
-  content: ' ';
-  position: absolute;
-  width: 0;
-  height: 0;
-  right: 30px;
-  top: 110px;
-  border: 25px solid;
-  border-color: #666 #666 transparent transparent;
-}
-
-  p.bubblemessage:after {
-     content: ' ';
-  position: absolute;
-  width: 0;
-  height: 0;
-  right: 36px;
-  top: 110px;
-  border: 15px solid;
-  border-color: #fff #fff transparent transparent ;
-
-}
-
 #loadcontent
 {
   display:none;
@@ -316,3 +283,57 @@ hr.style {
 }
 
 /* This is comments design */
+#b{
+   position: absolute;
+  
+   width:650px;
+   top: 200px;
+   right: 0px;
+   bottom: 0;
+   left: 500px;
+   z-index:10;
+   border:20px ;
+   overflow-y: auto;
+    -webkit-animation-name: animatetop;  
+    -webkit-animation-duration: 2s;
+}
+@-webkit-keyframes animatetop {
+    from {top: 300px; opacity: 0} 
+    to {top: 200px; opacity: 1}
+    }
+p.bubble {
+  top: 430px;
+   left: 30px; 
+  position: absolute;
+  z-index:9000;
+ padding:5px;
+  text-align: center;
+  line-height: 32px;
+  background-color: #fff;
+  border: 8px solid #666;
+  -webkit-border-radius: 30px;
+  animation-timing-function: ease-in;
+  box-shadow: 2px 2px 4px #888;
+}
+p.bubble:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: 30px;
+  top: 76px;
+  border: 25px solid;
+  border-color: #666 #666 transparent transparent;
+}
+  p.bubble:after {
+     content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: 36px;
+  top: 76px;
+  border: 15px solid;
+  border-color: #fff #fff transparent transparent ;
+
+}
+

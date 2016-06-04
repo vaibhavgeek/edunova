@@ -158,14 +158,40 @@
 <div id='loading'>
      <div class="progress">
   <div class="progress-bar progress-bar-striped active" role="progressbar"
-  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:5%">
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
     loading...
   </div>
 </div>
     </div>
 
+
+<div id='b' class='jumbotron col-sm-6'> 
+ <p>
+Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
+
+All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
+
+The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
+Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
+
+All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
+
+The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
+Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
+
+All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
+
+The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
+     </p>
+      <div class="footer">
+        <button type="button" class="btn btn-default" id='close_modal' data-dismiss="modal">Close</button>
+      </div></div>
+
             <center><canvas id='myGame' width="1100" height="630"></canvas></center>
-            
+          <p class="bubble">
+          Hello, You are on a mission to save the humans from enemies. <br/>
+          You have to free all the rockets and save the humans
+           <button id='close_x' class="btn pull-right"><i class="fa fa-times" aria-hidden="true"></i></button></p>  
 
 </div>
 <% else %>
@@ -197,8 +223,12 @@
 
 
 <script type="text/javascript">
+var messages = [ "Hello, You are on a mission to save the humans from enemies. " , "" , ""];
 
-
+$('#close_x').click(function(){
+  $('.bubble').hide();
+  canvas.focus();
+})
 
 var Q = Quintus({imagePath:"/assets/",dataPath:"/assets/",audioPath:"/assets/",development:true})
         .include("Audio,Sprites, Scenes, Input, 2D, Anim, Touch, UI,TMX")
@@ -359,12 +389,13 @@ Q.Sprite.extend("Rocket",{
            startx=collision.obj.p.x+130;
            starty=collision.obj.p.y;
             this.play("fly");
-            if (cosnsto == 0)
-            {
-              $('#myModal').modal('show');
-              Q.pauseGame();
-
-            }
+            $('#b').show();
+           $('#close_modal').click(function(){
+  $('#b').hide(); 
+  Q.unpauseGame();
+  pause=1;
+  canvas.focus();
+}); 
   //p.rocket_no
 
      this.p.condition=true;
@@ -503,6 +534,7 @@ Q.loadTMX( "<%= asset_path('level.tmx') %>,<%= asset_path('main.json') %>,<%= as
   Q.stageScene("level");
 },{ progressCallback: function(loaded,total){
   var element = document.getElementById("loading");
+  $('#b').hide();
     element.style.width = Math.floor(loaded/total*100) + "%";
    if (loaded == total) {
       document.getElementById("loading").remove();
