@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grit: MyText
+  speed: MyText
+  consistency: MyText
+  passion: MyText
+  user_id: 1
+
+two:
+  grit: MyText
+  speed: MyText
+  consistency: MyText
+  passion: MyText
+  user_id: 1

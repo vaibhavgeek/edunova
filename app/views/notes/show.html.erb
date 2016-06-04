@@ -166,29 +166,16 @@
 
 <div id='b' class='jumbotron col-sm-6'> 
  <p>
-Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
-
-All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
-
-The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
-Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
-
-All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
-
-The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
-Up until this point this guide has covered the building blocks of the engine, but not really given you something that is targeted at building a specific type of game.
-
-All the basic pieces: the engine Core, Sprites, Scenes, Animation and Audio are more or less game-type agnostic: you could use them to build a 2D platformer just as easily as a puzzle game. And while Quintus would help you structure your game, it wouldn't provide all that much of a boost in development speed as you would need to still build a fair number of pieces from scratch.
-
-The 2D module aims to solve that by providing a number of specific pieces designed to take the pain out of building simple 2D games. It provides three main pieces to make this happen: a viewport that allows you to move around the stage, a Q.TileLayer class that makes it easy to work with tiled backgrounds and a 2d (notice the lower case d) component that adds default movement behavior to sprites.
+ <% @note.notearticles.each do |art| %>
+<%= art.content.html_safe %>
+ <% end %>
      </p>
       <div class="footer">
         <button type="button" class="btn btn-default" id='close_modal' data-dismiss="modal">Close</button>
       </div></div>
 
             <center><canvas id='myGame' width="1100" height="630"></canvas></center>
-          <p class="bubble">message from a galaxy far far away (max: 80 characters/msg) <button id='close_x' class="btn"><i class="fa fa-times" aria-hidden="true"></i></button><br/>How you doin'? 
-fgfgdfgfdgfdgdgfdgdf gfgf</p>  
+          <p class="bubble">Hello @<%= current_user.username %>, you have to rescue the trapped <button id='close_x' class="btn"><i class="fa fa-times" aria-hidden="true"></i></button><br/>humans from the evil aliens by releasing the rockets</p>  
 
 </div>
 <% else %>
@@ -387,9 +374,11 @@ Q.Sprite.extend("Rocket",{
            starty=collision.obj.p.y;
             this.play("fly");
             var pause=0;
+            
             $('#b').show(function(){
               setTimeout(function(){ if(!pause) Q.pauseGame(); }, 2000);
             });
+
            $('#close_modal').click(function(){
   $('#b').hide(); 
   Q.unpauseGame();
