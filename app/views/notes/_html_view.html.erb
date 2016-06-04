@@ -12,21 +12,24 @@
 </center>
 <br/>
 <% @note.notequestions.each do |ex| %>
-
+<div class="col-md-8 col-md-offset-2 questions">
+<div class="well">
 <h3><%= ex.question_text %> </h3>
       
-
-    <label><%= radio_button_tag 'option', "option1" %><%= ex.option1 %> </label><br/>
-     <label><%= radio_button_tag 'option', "option2" %><%= ex.option2 %></label> <br/>
-     <label> <%= radio_button_tag 'option' , "option3" %><%= ex.option3 %></label> <br/>
-     <label> <%= radio_button_tag 'option' , "option4" %><%= ex.option4 %> </label>
-<br/>
-<%= link_to "Submit" ,'#' , :class => 'btn btn-primary' %>
+<ul class="list-group">
+    <label><li class="list-group-item"  onclick  = '$(".questions .active").removeClass("active");$(this).addClass("active");' ><%= radio_button_tag 'option', "option1" %> <%= ex.option1 %> </li> </label>
+     <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'><%= radio_button_tag 'option', "option2" %> <%= ex.option2 %></li></label>
+      <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'> <%= radio_button_tag 'option' , "option3" %> <%= ex.option3 %></li></label> 
+      <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'> <%= radio_button_tag 'option' , "option4" %> <%= ex.option4 %> </li></label>
+     </ul>
+<%= link_to "Submit" ,'#' , :class => 'btn btn-primary pull-right' %>
+<br/><br/>
+</div>
+</div>
 <%= ex.correct_answer %>
 
 <% end %>
 
       
-    
 </div>
 </div>
