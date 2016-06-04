@@ -4,16 +4,16 @@ development:
   database: edunova
   pool: 5
   host: localhost
-  username: postgres
-  password: vaibhavgeek   
+  username: Dell-pc
+  password: rainbow   
 
 test: &TEST
   adapter: postgresql
   encoding: utf8
   database: edunova
   pool: 5
-  username: postgres
-  password: vaibhavgeek
+  username: Dell-pc
+  password: rainbow
 
 production:
   adapter: postgresql
