@@ -41,21 +41,57 @@ def html_view
   else
   @note = Note.friendly.find(params[:note_id])
   end  
+  
+  activities = []
+
+activities += Notearticle.where(:note_id => @note.id).all.map do |art|
+  Activity.new(art.content, nil ,nil , nil , nil , nil , nil , nil , nil, art.created_at , 'article')
+end
+  
+activities += Notequestion.where(:note_id => @note.id).all.map do |quest|
+  Activity.new(nil, quest.question_text, quest.option1 , quest.option2 , quest.option3 ,quest.option4 , quest.correct_answer, quest.solution_explain , quest.hint , quest.created_at , 'question')
+end
 
 
-  @note.notearticles.each do |ar|
+activities += Noteapplet.where(:note_id => @note.id).all.map do |app|
+  Activity.new(app.content, nil ,nil , nil , nil , nil , nil , nil , nil, app.created_at , 'applet')
+end
+
+# descending sort by 'date' field
+# 10 most recent elements across all models
+@widgets = activities.sort_by(&:created_at)
+@cnt = 0
+end
+
+def display_widgets
  
-  end
+  if params[:id]
+  @note = Note.friendly.find(params[:id])
+  else
+  @note = Note.friendly.find(params[:note_id])
+  end  
+  
+  activities = []
 
-  @note.notequestions.each do |ar|
+activities += Notearticle.where(:note_id => @note.id).all.map do |art|
+  Activity.new(art.content, nil ,nil , nil , nil , nil , nil , nil , nil, art.created_at , 'article')
+end
+  
+activities += Notequestion.where(:note_id => @note.id).all.map do |quest|
+  Activity.new(nil, quest.question_text, quest.option1 , quest.option2 , quest.option3 ,quest.option4 , quest.correct_answer, quest.solution_explain , quest.hint , quest.created_at , 'question')
+end
 
-  end
- 
-  @note.noteapplets.each do |ar|
 
-  end
+activities += Noteapplet.where(:note_id => @note.id).all.map do |app|
+  Activity.new(app.content, nil ,nil , nil , nil , nil , nil , nil , nil, app.created_at , 'applet')
+end
+
+# descending sort by 'date' field
+# 10 most recent elements across all models
+@widgets = activities.sort_by(&:created_at)
 
 end
+
 
   def new
   	@note = Note.new
@@ -222,3 +258,5 @@ end
 
   
 end
+
+class Activity < Struct.new(:content, :question_text, :option1 , :option2 , :option3 , :option4 , :correct_answer , :solution_explain ,:hint , :created_at , :type); end

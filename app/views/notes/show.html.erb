@@ -175,7 +175,7 @@
       </div></div>
 
             <center><canvas id='myGame' width="1100" height="630"></canvas></center>
-          <p class="bubble">Hello @<%= current_user.username %>, you have to rescue the trapped <button id='close_x' class="btn"><i class="fa fa-times" aria-hidden="true"></i></button><br/>humans from the evil aliens by releasing the rockets</p>  
+          <p class="bubble"> <button id='close_x' class="btn"><i class="fa fa-times" aria-hidden="true"></i></button></p>  
 
 </div>
 <% else %>
@@ -193,25 +193,27 @@
 
       
 
-
-   <script type="text/javascript">
-
-  function showDiv() {
-    
-   var timer = setInterval( showDiv, 600);   
-   clearInterval(timer);
-
-  }
-
-</script>
-
-
 <script type="text/javascript">
+no_rockets=8;
+function message(msg_no)
+{
+  var msg=["hey <%= current_user.username %>! Your aim is to rescue thetrapped humans<br>  from the evil aliens by launching the rockets. Good luck!","Aliens tried to restrict you from reading the note <br>. Read the widget thoroughly before continuing! "," hint"," You are doing a great job <%= current_user.username %> ! Only " +no_rockets+ " left to be rescued!"];
+ //$('.bubble').innerHTML=msg[1];
 
-$('#close_x').click(function(){
+  $('.bubble').fadeIn(function(){
+    if(msg_no!=3)
+ $('.bubble').html(msg[msg_no]);
+   $('.bubble').delay( 5000 ).fadeOut(2000);
+
+ //else
+  ////////////////////  hint for questions
+  });
+  $('#close_x').click(function(){
   $('.bubble').hide();
   canvas.focus();
-})
+});
+}
+
 
 var Q = Quintus({imagePath:"/assets/",dataPath:"/assets/",audioPath:"/assets/",development:true})
         .include("Audio,Sprites, Scenes, Input, 2D, Anim, Touch, UI,TMX")
@@ -370,16 +372,21 @@ Q.Sprite.extend("Rocket",{
   if(collision.obj.isA("Player"))
   {        initial=0;            
             final_score+=level_score;
-           startx=collision.obj.p.x+130;
+           startx=collision.obj.p.x+160;
            starty=collision.obj.p.y;
             this.play("fly");
             var pause=0;
-            
             $('#b').show(function(){
-              setTimeout(function(){ if(!pause) Q.pauseGame(); }, 2000);
+              
+              $('#close_modal').hide();
+              setTimeout(function(){ if(!pause) 
+                {
+                  Q.pauseGame();
+                 $('#close_modal').show(); }
+                   }, 2000);
             });
-
            $('#close_modal').click(function(){
+            message(1);
   $('#b').hide(); 
   Q.unpauseGame();
   pause=1;
@@ -454,6 +461,7 @@ Q.scene("level",function(stage) {
 if(initial)
 {
   cnt=0,startx=400,starty=800;
+    message(0);
 }
 //stage.insert(new Q.Repeater({ asset: "back.png",repeatY:true, speedX: 10, speedY: 0.5 })); 
   Q.stageTMX("<%= asset_path('level.tmx') %>",stage);
@@ -520,10 +528,11 @@ Q.loadTMX( "<%= asset_path('level.tmx') %>,<%= asset_path('main.json') %>,<%= as
     fly:{frames:[0,1,2,3,4,5,6,7],rate:1/5,loop:true}
    });
   */
+
   Q.stageScene("level");
 },{ progressCallback: function(loaded,total){
   var element = document.getElementById("loading");
-  $('#b').hide();
+  $('#b').hide();$('.bubble').hide();
     element.style.width = Math.floor(loaded/total*100) + "%";
    if (loaded == total) {
       document.getElementById("loading").remove();
@@ -534,7 +543,5 @@ Q.loadTMX( "<%= asset_path('level.tmx') %>,<%= asset_path('main.json') %>,<%= as
 
 
 </script>
-
-
 
 

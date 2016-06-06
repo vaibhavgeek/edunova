@@ -11,7 +11,6 @@
 
 			<% if fol.follower.id != current_user.id %>
 					<div class="col-md-4">
-					<div class="well" style="margin:4px;">
 					<%= link_to '@'+fol.follower.username , profile_path(fol.follower) %> 
 					<b><%= fol.follower.name %></b>	<br/>
 					<table>
@@ -39,7 +38,7 @@
 	</center>
 
 
-</div>
+
 </div>
 <% end %>
 

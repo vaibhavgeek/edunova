@@ -1,6 +1,7 @@
 .questions label
 {
   display:block !important;
+  cursor: pointer !important;
 }
 
 #loadcontent
@@ -309,7 +310,7 @@ p.bubble {
   z-index:9000;
  padding:5px;
   text-align: center;
-  line-height: 32px;
+  line-height: 33px;
   background-color: #fff;
   border: 8px solid #666;
   -webkit-border-radius: 30px;

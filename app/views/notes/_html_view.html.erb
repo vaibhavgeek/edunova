@@ -1,292 +1,32 @@
 
+
+
 <div id="removeongame" class="removeongame">
 <div class="col-md-10 col-md-offset-1">
 <center>
 <div class="btn-group" role="group" aria-label="...">
-  <button type="button" class="btn btn-default">Widgets:-</button>
-  <button type="button" class="btn btn-default">#1</button>
-  <button type="button" class="btn btn-default">#2</button>
-  <button type="button" class="btn btn-default">#3</button>
+  <button type="button" class="btn btn-default"> <span class="badge" style="margin-top:13px;margin-bottom:9px;">Widgets:- </span></button>
+  <% @widgets.each do |wid| %>
+  <% @cnt += 1 %>
+
+<%= link_to note_display_widgets_path(:note_id => @note , :level_load =>@cnt) , :class => 'btn btn-default' , :remote => true do %>
+
+  #<%= @cnt %> <br/><label class="label label-success"> <%= wid.type %>  </span>
+
+
+  <% end %>
+
+  
+  <% end %>
 
 </div>
 </center>
 <br/>
-<% if @note.id == 43 %>
-
-<iframe width="900px" srcdoc="
-      <!doctype html>
-      <html>
-        <head>
-          <script>
-            (function () {
-              window.addEventListener('DOMContentLoaded', function () {
-                window.parent.postMessage(JSON.stringify({
-                  type: 'jotted-dom-ready'
-                }), '*')
-              })
-            }())
-          </script>
-
-          <style>.button_container {
-  text-align: right;
-}
-
-.resetbutton {
-  background-color: yellow;
-}
-
-.drawing_surface {
-  height: 90%;
-}</style>
-        </head>
-        <body>
-          <html style=&quot;height: 100%; overflow:hidden&quot;>
- <head>
-   <script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.3.0/svg.min.js&quot;></script>
- </head>
- <body style=&quot;height: 100%&quot;>
-   <div id=&quot;drawing&quot; class=&quot;drawing_surface&quot; />
-   <div class=button_container>
-     <button class=&quot;resetbutton&quot; onclick=&quot;startGame()&quot;>Reset Game</button>
-   </div>
- </body>
-</html>
-
-
-          <!--
-            Jotted:
-            Empty script tag prevents malformed HTML from breaking the next script.
-          -->
-          <script></script>
-          <script>/* create an svg drawing */
-var draw = SVG('drawing') 
-var message_svg = null;
-
-var total_blocks = 16;
-var total_rows = 1;
-var total_cols = 16;
-var start_x = 0;
-var start_y = 0;
-var square_size = 50;
-var square_gap = 3;
-var square_radius = 5;
-
-var current_x = start_x;
-var current_y = start_y
-var is_game_on = false;
-var selected_number = null;
-
-var blocks = [
-];
-
-function setMessageText(message_text, color) {
-  message_svg.plain(message_text);
-  var textBBox = message_svg.bbox();
-  
-  // Center-align text
-  message_svg.x(draw.bbox().width/2 - textBBox.width/2);
-}
-
-function createTextInBlock(row, col, block_text) {
-  var text_svg = draw.plain(block_text).font({ size: 18, family: 'Verdana' });
-  var textBBox = text_svg.bbox();
-
-  var block_data = blocks[row][col];
-  
-  // Center-align text
-  text_svg.x(block_data.x + square_size/2 - textBBox.width/2);
-  text_svg.y(block_data.y + square_size/2 - textBBox.height/2);
-  
-  return text_svg;
-}
-
-function drawBlockDisabledLine(row, col){
-  var block_data = blocks[row][col];
-  var line = draw.rect(square_size-8, 2).attr(
-    { x: block_data.x+4, 
-     y: block_data.y + (square_size/2), 
-     fill: &quot;black&quot;
-  }); 
-  //block.radius(square_radius);
-}
-
-function handleBlockClicked(block_clicked) {
-  if (!is_game_on) {
-    return;
-  }
-  
-  var block_data = blocks[block_clicked.row_index][block_clicked.col_index];
-  if (!block_data.enabled) {
-    return;
-  }
-  
-  block_data.enabled = false;
-  
-  if (block_data.block_number === selected_number) {
-    // Success.
-    is_game_on = false;
-    setMessageText(&quot;✔ Yes! That's my number!&quot;);
-    block_data.square_svg.attr({fill: &quot;#CAF797&quot;});
-    return;
-  }
-  
-  if (block_data.block_number < selected_number) {
-    // Target Number is greater than 
-    // the current number
-    // All numbers below this (including this number)
-    // are not part of search anymore.
-    
-    for (var i = 0; i < block_data.row_index; i++) {
-      for (var j = 0; j < total_cols; j++) {
-        var current_block = blocks[i][j];
-        current_block.enabled = false;
-        current_block.square_svg.attr({fill: &quot;#C0C0C0&quot;});
-        drawBlockDisabledLine(i, j);
-      }
-    }
-     
-    for (var j = 0; j < block_data.col_index; j++) {
-      var current_block = blocks[block_data.row_index][j]
-      current_block.enabled = false;
-      current_block.square_svg.attr({fill: &quot;#C0C0C0&quot;});
-      drawBlockDisabledLine(block_data.row_index, j);
-      
-    }
-    
-    block_data.square_svg.attr({fill: &quot;#7E7E7E&quot;});
-    drawBlockDisabledLine(block_data.row_index, block_data.col_index);
-    setMessageText(&quot;My number is higher than &quot; + block_data.block_number + &quot;. Guess higher →&quot;);
-    
-    return;
-  }
-  
-  if (block_data.block_number > selected_number) {
-    // Target Number is less than 
-    // the current number
-    // All numbers below this (including this number)
-    // are not part of search anymore.
-    
-    block_data.square_svg.attr({fill: &quot;#7E7E7E&quot;});
-    drawBlockDisabledLine(block_data.row_index, block_data.col_index);
-    
-    for (var j = block_data.col_index+1; j < total_cols; j++) {
-      var current_block = blocks[block_data.row_index][j]
-      current_block.enabled = false;
-      current_block.square_svg.attr({fill: &quot;#C0C0C0&quot;});
-      drawBlockDisabledLine(block_data.row_index, j);
-    }
-    
-    for (var i = block_data.row_index + 1; i < total_rows; i++) {
-      for (var j = 0; j < total_cols; j++) {
-        var current_block = blocks[i][j];
-        current_block.enabled = false;
-        current_block.square_svg.attr({fill: &quot;#C0C0C0&quot;});
-        drawBlockDisabledLine(i, j);
-      }
-    }
-    
-    setMessageText(&quot;My number is lower than &quot; + block_data.block_number + &quot;. Guess lower ←&quot;);
-  }
-}
-
-function drawBoard() {
-  draw.clear();
-  var current_x = start_x;
-  var current_y = start_y
-  var color = &quot;#CCFFFF&quot;
-  var counter = 1;
-
-  for (var i = 0; i < total_rows; i++) {
-    current_x = start_x;
-    blocks.push([]);
-    block_row = blocks[i];
-    for (var j = 0; j < total_cols; j++) {
-
-      block_row.push({});
-      block_data = block_row[j];
-
-      var block = draw.rect(square_size, square_size).attr({ x: current_x, y: current_y, fill: color});
-      block.radius(square_radius);
-
-      block.row_index = i;
-      block.col_index = j;
-
-      block.click(function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        handleBlockClicked(this);
-      });
-
-      block_data.enabled = true;
-      block_data.row_index = i;
-      block_data.col_index = j;
-      block_data.x = current_x;
-      block_data.y = current_y;
-      block_data.size = square_size;
-      block_data.square_svg = block;
-
-
-      // Create Text Object
-      block_data.block_number = counter;
-      text_svg = createTextInBlock(i, j, counter);
-      counter++;
-
-      text_svg.row_index = i;
-      text_svg.col_index = j;
-      text_svg.click(function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        handleBlockClicked(this);
-      });
-
-      block_data.text_svg = text_svg;
-
-      current_x += square_size + square_gap;
-
-    }
-
-    current_y += square_size + square_gap;
-  }
-  
-  message_svg = draw.plain(&quot;Hello&quot;).font({ size: 22, family: 'Verdana', fill: &quot;green&quot; });
-  message_svg.y(current_y + square_size/2);
-  
-  draw.viewbox(0, 0, draw.bbox().width, draw.bbox().height);
-}
-
-function startGame() {
-  selected_number = Math.floor((Math.random() * total_blocks) + 1);
-  drawBoard();
-  is_game_on = true;
-  setMessageText(&quot;Guess my number&quot;);
-}
-
-startGame();;
-
-</script>
-        </body>
-      </html>
-    "></iframe>
-<% end %>
-
-<% @note.notequestions.each do |ex| %>
-<div class="col-md-8 col-md-offset-2 questions">
-<div class="well">
-<h3><%= ex.question_text %> </h3>
-      
-<ul class="list-group">
-    <label><li class="list-group-item"  onclick  = '$(".questions .active").removeClass("active");$(this).addClass("active");' ><%= radio_button_tag 'option', "option1" %> <%= ex.option1 %> </li> </label>
-     <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'><%= radio_button_tag 'option', "option2" %> <%= ex.option2 %></li></label>
-      <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'> <%= radio_button_tag 'option' , "option3" %> <%= ex.option3 %></li></label> 
-      <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'> <%= radio_button_tag 'option' , "option4" %> <%= ex.option4 %> </li></label>
-     </ul>
-<%= link_to "Submit" ,'#' , :class => 'btn btn-primary pull-right' %>
-<br/><br/>
+<div id ="loadnot">
+<% params[:level_load] = 1%>
+<%= render 'notes/widgets/note_popup' %>
 </div>
-</div>
-<%= ex.correct_answer %>
 
-<% end %>
 
       
 </div>

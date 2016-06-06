@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/about_us'
   put 'home/mark_as_read'
-  get 'notes/openlibrary'
-  get 'notes/search_results_videos'  
+  #get 'notes/openlibrary'
+  #get 'notes/search_results_videos'  
  
-  get 'notes/new_note_add_article'
-  get 'notes/new_note_add_applet'
-  get 'notes/new_note_add_quiz'
+#  get 'notes/new_note_add_article'
+ # get 'notes/new_note_add_applet'
+  #get 'notes/new_note_add_quiz'
 
   # get 'notes/explore'
   # get 'notes/discover'
@@ -73,10 +73,10 @@ devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_call
       resources :notes do
         get 'html_view'
         get 'game_view'
-        post 'auto_save_note'
+       # post 'auto_save_note'
         get 'comment_view'
-        get 'display_quiz'
-        post 'display_quiz_result'
+        get 'display_widgets'
+        #post 'display_quiz_result'
         get 'load_level/:query' , to: 'notes#load_level' , :as => 'button_top_level'
         put 'next_level/:query', to: 'notes#next_level' , :as => 'update_level'
         resources :comments

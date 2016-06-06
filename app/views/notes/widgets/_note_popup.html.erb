@@ -1,5 +1,32 @@
- <p>
- <% @note.notearticles.each do |art| %>
-<%= art.content.html_safe %>
- <% end %>
-     </p>
+<% @toload =  @widgets[params[:level_load].to_i - 1] %>
+<% if @toload.type == 'article' %>
+<%= @toload.content.html_safe %>
+
+<% elsif @toload.type == 'applet' %>
+<iframe width="900px" srcdoc="<%= @toload.content %>"> </iframe>
+
+<% elsif @toload.type == 'question' %>
+
+<div class="col-md-8 col-md-offset-2 questions">
+<div class="well">
+<h3><%= @toload.question_text %> </h3>
+      
+<ul class="list-group">
+    <label><li class="list-group-item"  onclick  = '$(".questions .active").removeClass("active");$(this).addClass("active");' ><%= radio_button_tag 'option', "option1" %> <%= @toload.option1 %> </li> </label>
+     <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'><%= radio_button_tag 'option', "option2" %> <%= @toload.option2 %></li></label>
+      <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'> <%= radio_button_tag 'option' , "option3" %> <%= @toload.option3 %></li></label> 
+      <label><li class="list-group-item"  onclick  =  '$(".questions .active").removeClass("active");$(this).addClass("active");'> <%= radio_button_tag 'option' , "option4" %> <%= @toload.option4 %> </li></label>
+     </ul>
+<%= link_to "Submit" ,'#' , :class => 'btn btn-primary pull-right' %>
+<br/><br/>
+</div>
+</div>
+
+
+<% end %>
+
+
+
+
+     
+
