@@ -9,6 +9,7 @@
   <% @widgets.each do |wid| %>
   <% @cnt += 1 %>
 
+<<<<<<< HEAD
 <%= link_to note_display_widgets_path(:note_id => @note , :level_load =>@cnt) , :class => 'btn btn-default' , :remote => true do %>
 
   #<%= @cnt %> <br/><label class="label label-success"> <%= wid.type %>  </span>
@@ -26,6 +27,28 @@
 <% params[:level_load] = 1%>
 <%= render 'notes/widgets/note_popup' %>
 </div>
+=======
+</div>
+</center>
+<br/>
+<% @note.notequestions.each do |ex| %>
+<div class="well col-md-8 col-md-offset-2">
+<h3><%= ex.question_text %> </h3>
+      <div class="col-md-10">
+<ul class="list-group">
+
+    <li class="list-group-item">
+     <%= radio_button_tag 'option', "option1" %><%= ex.option1 %> </li>
+      <li class="list-group-item"><%= radio_button_tag 'option', "option2" %><%= ex.option2 %></li> 
+      <li class="list-group-item"><%= radio_button_tag 'option' , "option3" %><%= ex.option3 %></li>
+     <li class="list-group-item"> <%= radio_button_tag 'option' , "option4" %><%= ex.option4 %></li> 
+</ul>
+<%= link_to "Submit" ,'#' , :class => 'btn btn-primary pull-right' %>
+
+</div> 
+
+<%= ex.correct_answer %>
+>>>>>>> origin/master
 
 
       
