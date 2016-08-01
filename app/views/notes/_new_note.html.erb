@@ -19,7 +19,7 @@
              Title
         <%= naw.text_field :name , :class => 'form-control'  %>
          Note from author <br>
-    <%= naw.text_area :note_from_author , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell users wether the note requires any prerequisites and what is purpose for creating this note." , :class => 'form-control' %>
+    <%= naw.text_area :note_from_author , :"data-toggle" => "tooltip" , :"data-html" => "true" , :"data-placement" => "left" , :title => "tell users whether the note requires any prerequisites and what is purpose for creating this note." , :class => 'form-control' %>
               
     
     
@@ -74,7 +74,7 @@ Add widget to Note:-    <br/> <br/>
     
 
 
-        <%= naw.submit "Create Note" , {:class => 'btn btn-primary btn-lg pull-right'} %>
+        <%= naw.submit "Create Note" , {:class => 'btn btn-primary btn-lg pull-right sub'} %>
 
   <% end %>
  </div>
@@ -114,5 +114,14 @@ $('#prerequisites').on('tokenfield:createtoken', function (event) {
             event.preventDefault();
     });
 });
+
+$('.sub').click(function(){
+  var div_val=$("#editor_jotted").html();
+console.log(div_val);
+        document.getElementById("formtext").value =div_val;
+        console.log("fffffffffffffff="+document.getElementById("formtext").value );
+    
+    
+  });
 
 </script>

@@ -1,9 +1,65 @@
 <div class="applet-wrap"> 
   <%= f.label :"Add Applet" %> <br/>
 
-    <%= f.text_area :content , cols: "20", rows: "6" , :class => 'form-control' , :placeholder => 'Type in your SVG/Javascript code here.' %>
-
+    <%= f.text_area :content , cols: "20", rows: "6" , :class => 'form-control',:id => 'formtext' , :placeholder => 'Type in your SVG/Javascript code here.',:style =>'display:none;' %>
+    <div class="editor_jotted"></div>
+<button id='enter' onclick="getContent()">entre</button>
   <%= link_to_remove_association "Remove Applet", f , {wrapper_class: 'applet-wrap' ,  :class => 'btn btn-danger'} %>
    <br/> <br/> 
 </div>
 
+<script>
+  new Jotted(document.querySelector('.editor_jotted'), {
+    files: [{
+      type: 'html',
+       content: "<h1>HTML Content</h1>"
+     // url: 'index.html'
+    },
+    {
+      type: 'css',
+       content: "body{ \n color:black; \n}"
+    },{
+      type: 'js',
+       content: "console.log('hello world!') ;"
+    }],
+
+      showBlank:true,
+      plugins: [
+    'stylus',
+    {
+      name: 'codemirror',
+      options: {
+        lineNumbers: true
+      }
+    }
+  ]
+
+  });
+
+  function getContent(){
+var div_val=$("#editor_jotted").html();
+console.log(div_val);
+        document.getElementById("formtext").value =div_val;
+        console.log("fffffffffffffff="+document.getElementById("formtext").value );
+    }
+    
+
+    /*
+    RUBY
+    ====
+
+    str=' "<head><title>dhfdjhfj</title></head><style>body{color:blue}</style>"'
+    css=str.split('<style>')[1].split('</style>')[0] 
+    css.split.join(' ')  <----removing \r\n from the obtained string
+    body=str.split('<body>')[1].split('</body>')[0]
+
+    puts "<style> #{css} </style>"
+
+    problems
+    1> remove enter button and store data in db at the time of create note
+    2> adding more than one applets
+
+
+    */
+
+ </script>
