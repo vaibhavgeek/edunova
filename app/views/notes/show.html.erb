@@ -200,11 +200,10 @@
 no_rockets=8;
 function message(msg_no)
 {
-  var msg=["hey <%= current_user.username %>! Your aim is to rescue thetrapped humans<br>  from the evil aliens by launching the rockets. Good luck!","Aliens tried to restrict you from reading the note <br>. Read the widget thoroughly before continuing! "," hint"," You are doing a great job <%= current_user.username %> ! Only " +no_rockets+ " left to be rescued!"];
+  var msg=["hey @<%= current_user.username %>! Your aim is to rescue the trapped humans<br>  from the evil aliens by launching the rockets. Good luck!","Aliens tried to restrict you from reading the note <br>. Read the widget thoroughly before continuing! "," hint"," You are doing a great job <%= current_user.username %> ! Only " +no_rockets+ " left to be rescued!"];
  //$('.bubble').innerHTML=msg[1];
-=======
 var messages = [ "Hello, You are on a mission to save the humans from enemies. " , "" , ""];
->>>>>>> origin/master
+
 
   $('.bubble').fadeIn(function(){
     if(msg_no!=3)

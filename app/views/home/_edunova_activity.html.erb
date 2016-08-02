@@ -16,10 +16,10 @@
     <h4 class="list-group-item-heading"><%= note.name %> <% if note.description.to_s == "insight" %><span style="background-color: #337AB7;" class="badge pull-right">Insight Note</span> <% end %>
 </h4>
     <p class="list-group-item-text">
-    	 by <b> @<%= note.user.username %> </b> <span class="pull-right"> <span class="badge"><%= note.get_upvotes.size %> votes </span>
+    	 by <b> @<%= note.user.username %> </b> <span class="pull-right"> <span class="badge"><%= pluralize(note.get_upvotes.size,'vote') %> </span>
 
-<span class="badge"><%= note.comments.count %> 
-    	  posts </span> </span>
+<span class="badge"><%= pluralize(note.comments.count,'post') %> 
+    	   </span> </span>
 
 
     </p>

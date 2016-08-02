@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
-ruby "2.2.3"
+ruby "2.1.5"
 
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
 gem "cocoon"
 
-
+gem 'codemirror-rails'
 gem 'medium-editor-rails'
 gem 'redcarpet'
 gem 'friendly_id'

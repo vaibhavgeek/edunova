@@ -24,6 +24,12 @@
 //= require quintus_tmx
 //= require jquery_ujs
 
+//= require jotted
+//= require codemirror
+//= require codemirror/modes/xml
+//= require codemirror/modes/htmlmixed
+//= require codemirror/modes/javascript
+
 //= require bootstrap
 
 //= require medium-editor

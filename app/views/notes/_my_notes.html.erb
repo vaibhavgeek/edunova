@@ -51,9 +51,9 @@
 	<% end %>
 	<p class="list-group-item-text">
 
-    	 <span class="pull-right"> &nbsp;<span class="badge"><%= note.get_upvotes.size %> votes </span>
-<span class="badge"><%= note.comments.count %> 
-    	  posts </span> </span>
+    	 <span class="pull-right"> &nbsp;<span class="badge"><%= pluralize(note.get_upvotes.size,'vote') %>  </span>
+<span class="badge"><%= pluralize(note.comments.count,'post') %> 
+    	   </span> </span>
 
 <% if note.description.to_s == "insight" %><span style="background-color: #337AB7;" class="badge pull-right">insight note</span> <% end %>
 
