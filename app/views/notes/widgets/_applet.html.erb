@@ -3,7 +3,6 @@
 
     <%= f.text_area :content , cols: "20", rows: "6" , :class => 'form-control',:id => 'formtext' , :placeholder => 'Type in your SVG/Javascript code here.',:style =>'display:none;' %>
     <div class="editor_jotted"></div>
-<button id='enter' onclick="getContent()">entre</button>
   <%= link_to_remove_association "Remove Applet", f , {wrapper_class: 'applet-wrap' ,  :class => 'btn btn-danger'} %>
    <br/> <br/> 
 </div>
@@ -35,14 +34,12 @@
   ]
 
   });
-
-  function getContent(){
-var div_val=$("#editor_jotted").html();
+$('form').submit(function(){
+  var div_val=$(".editor_jotted").html();
 console.log(div_val);
         document.getElementById("formtext").value =div_val;
         console.log("fffffffffffffff="+document.getElementById("formtext").value );
-    }
-    
+      });
 
     /*
     RUBY
