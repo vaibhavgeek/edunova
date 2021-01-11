@@ -181,7 +181,7 @@ GEM
     rake (11.1.2)
     rdoc (4.2.2)
       json (~> 1.4)
-    redcarpet (3.3.4)
+    redcarpet (3.5.1)
     refile (0.6.2)
       mime-types
       rest-client (~> 1.8)
