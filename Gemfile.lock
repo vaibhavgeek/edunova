@@ -146,7 +146,7 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.4)
     pg (0.18.4-x86-mingw32)
-    rack (1.6.4)
+    rack (1.6.13)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
